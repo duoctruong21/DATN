@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5NgazZ02MSWxX5uZ56uG37VxLgkKXXF/51tqx5ge+kE=",
+  "Hash": "fyfzIBzJ6Qz59zpMIFgx7Ik038ATUyeFYQB2lRGODsE=",
   "Source": "WebMusic",
   "BasePath": "_content/WebMusic",
   "Mode": "Default",
@@ -1122,6 +1122,23 @@
       "OriginalItemSpec": "wwwroot\\file song\\z4246799668275_2b6cc2be16ab833cd32ddb423fea6f2a.jpg"
     },
     {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\1.jpeg",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/1.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\1.jpeg"
+    },
+    {
       "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\1_19tmLBmVPfbohCvb7HgJFg.png",
       "SourceId": "WebMusic",
       "SourceType": "Discovered",
@@ -1205,6 +1222,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Untitled-1.png"
+    },
+    {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\json\\music-52086-cc10d803791e.json",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "json/music-52086-cc10d803791e.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\json\\music-52086-cc10d803791e.json"
     }
   ]
 }
