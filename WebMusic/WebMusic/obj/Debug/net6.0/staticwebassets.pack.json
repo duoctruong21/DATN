@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\file song\\Alan_Walker_-_Sing_Me_To_SleepMP3_160K.mp3",
+      "PackagePath": "staticwebassets\\file song\\Alan_Walker_-_Sing_Me_To_SleepMP3_160K.mp3"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\file song\\Arial-Font.jpg",
+      "PackagePath": "staticwebassets\\file song\\Arial-Font.jpg"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\file song\\Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3",
+      "PackagePath": "staticwebassets\\file song\\Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\file song\\Ngu Mot Minh (tinh rat tinh) - HIEUTHUHAI, Negav, Kewtiie - NhacHay360.mp3",
+      "PackagePath": "staticwebassets\\file song\\Ngu Mot Minh (tinh rat tinh) - HIEUTHUHAI, Negav, Kewtiie - NhacHay360.mp3"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\file song\\z4246799668275_2b6cc2be16ab833cd32ddb423fea6f2a.jpg",
+      "PackagePath": "staticwebassets\\file song\\z4246799668275_2b6cc2be16ab833cd32ddb423fea6f2a.jpg"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\1_19tmLBmVPfbohCvb7HgJFg.png",
+      "PackagePath": "staticwebassets\\images\\1_19tmLBmVPfbohCvb7HgJFg.png"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Muon Roi Ma Sao Con - Son Tung M-TP - NhacHay360.mp3",
+      "PackagePath": "staticwebassets\\images\\Muon Roi Ma Sao Con - Son Tung M-TP - NhacHay360.mp3"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Untitled-1.png",
+      "PackagePath": "staticwebassets\\images\\Untitled-1.png"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\hieuthuhai.png",
+      "PackagePath": "staticwebassets\\images\\hieuthuhai.png"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\mtp.jpg",
+      "PackagePath": "staticwebassets\\images\\mtp.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebMusic.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.WebMusic.props",
+      "PackagePath": "build\\WebMusic.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.WebMusic.props",
+      "PackagePath": "buildMultiTargeting\\WebMusic.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.WebMusic.props",
+      "PackagePath": "buildTransitive\\WebMusic.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
