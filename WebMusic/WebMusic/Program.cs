@@ -78,15 +78,12 @@ app.UseCors(option => option.AllowAnyHeader()
             .AllowAnyOrigin()
 );
 
-
-
 app.UseHttpsRedirection();
 app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.MapControllers();
-
 
 
 

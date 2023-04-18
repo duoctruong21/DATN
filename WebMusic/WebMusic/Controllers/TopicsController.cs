@@ -15,13 +15,13 @@ namespace WebMusic.Controllers
     public class TopicsController : ControllerBase
     {
         private readonly MusicWebContext _context;
-        private readonly ConnectFirebase _connectFirebase;
+        private readonly UploadFile uploadFile;
 
 
         public TopicsController(MusicWebContext context)
         {
             _context = context;
-            _connectFirebase = new ConnectFirebase("music-52086.appspot.com");
+            uploadFile = new UploadFile("music-52086.appspot.com");
         }
 
         // GET: api/Topics
@@ -95,9 +95,8 @@ namespace WebMusic.Controllers
           }
           if(topic.FileImg != null)
             {
-                /*_ = UploadFile.Uploadfile(topic.FileImg);*/
-
-                topic.TopicImg = await _connectFirebase.UploadImageAsync(topic.FileImg);
+                /*_ = UploadFile.Uploadfile(topic.FileImg);*/   
+                topic.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
                 
             }
             _context.Topics.Add(topic);

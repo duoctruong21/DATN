@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\file song\\z4246799668275_2b6cc2be16ab833cd32ddb423fea6f2a.jpg"
     },
     {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\1.jpeg",
+      "PackagePath": "staticwebassets\\images\\1.jpeg"
+    },
+    {
       "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\1_19tmLBmVPfbohCvb7HgJFg.png",
       "PackagePath": "staticwebassets\\images\\1_19tmLBmVPfbohCvb7HgJFg.png"
     },
@@ -39,6 +43,10 @@
     {
       "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\mtp.jpg",
       "PackagePath": "staticwebassets\\images\\mtp.jpg"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\json\\music-52086-cc10d803791e.json",
+      "PackagePath": "staticwebassets\\json\\music-52086-cc10d803791e.json"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebMusic.Microsoft.AspNetCore.StaticWebAssets.props",
