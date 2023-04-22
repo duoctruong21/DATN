@@ -1,0 +1,20 @@
+html {
+    font-family: Sono;
+}
+
+button svg{
+    color: #fff !important;
+}
+
+.none{
+    display: none !important;
+}
+
+// app.jsx
+.app__main {
+    position: relative;
+    top: 62px;
+    left: 300px;
+    height: calc(100vh - 62px);
+    width: calc(100vw - 300px);
+}

@@ -1,0 +1,73 @@
+.indexPlaysong{
+    height: inherit;
+    &__wapper {
+        height: 100%;
+        background-color: black;
+        box-sizing: border-box;
+
+    }
+
+    &__main{
+
+        &__block{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &__img{
+                margin-top: 100px;
+                width: 350px;
+                height: 350px;
+                object-fit: cover;
+                border-radius: 50%;
+                animation: image-spin infinite 15s linear;
+            }
+
+            &__info{
+                color: #fff;
+                margin-top: 20px;
+                & h2{
+                    font-size: 25px;
+                    font-weight: 500;
+                }
+
+                & p{
+                    margin-top: 10px;
+                    font-size: 20px;
+                    text-align: center;
+                }
+            }
+        }
+
+        &__playsong{
+            position: absolute;
+            width: 100%;
+            bottom: 30px;
+            
+        }
+    }
+}
+
+
+@keyframes image-spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.rhap_container {
+    background-color: #000;
+}
+
+.rhap_time{
+    color: #fff;
+}
+
+.rhap_progress-bar,
+.rhap_volume-indicator {
+    background-color: #fff;
+}
+

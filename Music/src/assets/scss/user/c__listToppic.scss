@@ -1,0 +1,100 @@
+.listtopic {
+    width: inherit;
+    position: relative;
+    box-sizing: border-box;
+    &__wapper{
+        display: flex;
+        justify-content: center;
+        padding: 0 20px;
+        
+    }
+
+    &__main{
+        width: inherit;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        overflow-y: scroll;
+        overflow: hidden;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        & li{
+            width: 400px;
+            padding: 20px 10px 20px 10px;
+            opacity: 1;
+            & a{
+                display: block;
+                height: inherit;
+                border-radius: 30px;
+                overflow: hidden;
+                & img{
+                    width: 380px;
+                    cursor: pointer;
+                }
+            }
+            &.active {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__directional{
+        display: flex;
+        box-sizing: border-box;
+        // display: flex;
+        justify-content: space-between;
+        & li {
+            & button {
+                cursor: pointer;
+                border: none;
+                border-radius: 50%;
+                width: 80px;
+                height: 80px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(255,255,255,0.5);
+                & svg {
+                    border-radius: 50%;
+                    padding: 20px;
+                    width: 40px;
+                    height: 40px;
+                    color: #fff;
+                }
+            } 
+
+            &:first-child{
+                position: absolute;
+                top: 33%;
+                left: 0;
+            }
+            &:last-child{
+                position: absolute;
+                top: 33%;
+                right: 0;
+            }
+        }
+
+    }
+
+    &:hover{
+        .listtopic__directional {
+            display: flex;
+        }
+    }
+}
+
+
+@keyframes moves {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
