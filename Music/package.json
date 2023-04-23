@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "audio-metadata": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-h5-audio-player": "^3.8.6",
+    "react-paginate": "^8.2.0",
     "react-router-dom": "^6.10.0",
-    "sass": "^1.62.0"
+    "sass": "^1.62.0",
+    "wavesurfer.js": "^6.6.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

@@ -1,0 +1,59 @@
+.singerinfo{
+
+    &__wapper{
+
+        &__main{
+            padding-top: 40px;
+            display: flex;
+            &__info{
+                width: calc(40%);
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+                
+                & img{
+                    width: 400px;
+                }
+                & h2 {
+                    padding-top: 10px;
+                    color: #fff;
+                    font-weight: 700;
+                    font-size: 25px;
+                }
+                & p {
+                    box-sizing: border-box;
+                    display: block;
+                    padding: 10px 40px;
+                    width: 100%;
+                    font-size: 20px;
+                    color: #fff;
+                    text-align: left;
+                }
+
+            }
+            &__song{
+                flex-grow: 2;
+                &__title{
+                    display: flex;
+                    justify-content: center;
+                    & h2 {
+                    color: #fff;
+                    }
+                }
+
+                &__seemore{
+                    text-align: right;
+                    & a{
+                        box-sizing: border-box;
+                        display: block;
+                        text-decoration: none;
+                        color: #fff;
+                        padding: 10px 20px;
+
+                    }
+                }
+            }
+        }
+    }
+}

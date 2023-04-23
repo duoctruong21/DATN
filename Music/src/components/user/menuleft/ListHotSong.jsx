@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import SongBar from "./SongBar";
 import ReactPaginate from "react-paginate";
-import "../../../assets/scss/user/c__librarysong.scss";
+import ListSongItem from "./ListSongItem";
+import "../../../assets/scss/user/c__listhotsong.scss";
 import Footer from "./Footer";
 
-function LibrarySong() {
+function ListHotSong() {
   const [pageNumber, setPageNumber] = useState(0);
   const songsPerPage = 5;
   const pagesVisited = pageNumber * songsPerPage;
@@ -15,24 +16,19 @@ function LibrarySong() {
 
   const songs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
-    <div className="librarysong">
-      <div className="librarysong__wapper">
-        <div className="librarysong__wapper__main">
-          <p>Song</p>
-          <p>Album</p>
-          <p>Setting</p>
-        </div>
-      </div>
-      <div className="librarysong__wapper__song">
+    <div className="listhotsong">
+      <div className="listhotsong__wapper">
         {songs
           .slice(pagesVisited, pagesVisited + songsPerPage)
           .map((song, index) => (
-            <div key={index}>
-              <SongBar />
+            <div
+              className="listhotsong__song"
+              key={index}>
+              <ListSongItem />
             </div>
           ))}
       </div>
-      <div className="librarysong__wapper__page">
+      <div className="listhotsong__page">
         <ReactPaginate
           previousLabel={"<"}
           nextLabel={">"}
@@ -45,9 +41,9 @@ function LibrarySong() {
           activeClassName={"paginationActive"}
         />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
-export default LibrarySong;
+export default ListHotSong;

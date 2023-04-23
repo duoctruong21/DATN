@@ -8,16 +8,16 @@ function menuLeft() {
         <div className="menuleft__main">
           <ul className="menuleft__list">
             <li>
-              <a href="#">Home</a>
+              <a href="/home">Home</a>
             </li>
             <li>
-              <a href="#">Your library</a>
+              <a href="/your-library">Your library</a>
             </li>
             <li>
-              <a href="#">History</a>
+              <a href="/your-history">History</a>
             </li>
             <li>
-              <a href="#">Top song</a>
+              <a href="/top-song">Top song</a>
             </li>
           </ul>
         </div>

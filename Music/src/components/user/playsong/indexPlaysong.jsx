@@ -1,7 +1,7 @@
 import React from "react";
-import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
+
 import "../../../assets/scss/user/c__indexPlaysong.scss";
+import PlaySong from "../menuleft/PlaySong";
 
 function indexPlaysong() {
   return (
@@ -18,9 +18,7 @@ function indexPlaysong() {
               <p>The night</p>
             </div>
           </div>
-          <div className="indexPlaysong__main__playsong">
-            <AudioPlayer src="https://firebasestorage.googleapis.com/v0/b/music-52086.appspot.com/o/fileMp3%2F04db3bdc-eddf-4baa-b270-19e6b01cbe75.mp3?alt=media&token=9f674e88-ebdc-46db-b905-389baec58048" />
-          </div>
+          <PlaySong />
         </div>
       </div>
     </div>

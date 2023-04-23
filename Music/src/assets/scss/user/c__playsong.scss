@@ -1,0 +1,19 @@
+.playsong{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 40;
+}
+
+.rhap_container {
+    background: linear-gradient(to bottom right, #b2b4bc, #9d8981, #485460, #345553, #35215e);
+}
+
+.rhap_time {
+    color: #fff;
+}
+
+.rhap_progress-bar,
+.rhap_volume-indicator {
+    background-color: #fff;
+}

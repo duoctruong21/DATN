@@ -1,0 +1,18 @@
+.album{
+    &__wapper{
+        &__main{
+            &__info{
+                box-sizing: border-box;
+                padding: 20px 0;
+                & h2{
+                    color: #fff;
+                    text-align: center;
+                    font-size: 30px;
+                }
+            }
+            &__page{
+                width: 100%;
+            }
+        }
+    }
+}

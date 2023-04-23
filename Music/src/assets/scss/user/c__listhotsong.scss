@@ -1,0 +1,12 @@
+.listhotsong {
+    &__wapper{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    &__song{
+        box-sizing: border-box;
+        margin: 0 10px 0 10px;
+    }
+}

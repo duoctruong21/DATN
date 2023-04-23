@@ -1,5 +1,10 @@
 html {
     font-family: Sono;
+    // background-color: #000;
+    background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
 }
 
 button svg{
@@ -11,10 +16,39 @@ button svg{
 }
 
 // app.jsx
+.app{
+    box-sizing: border-box;
+}
+
 .app__main {
+    box-sizing: border-box;
     position: relative;
     top: 62px;
     left: 300px;
-    height: calc(100vh - 62px);
     width: calc(100vw - 300px);
 }
+
+.paginationBttns {
+    display: flex;
+    justify-content: center;
+
+    & li{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+
+.paginationActive {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    color: #000000;
+}
+

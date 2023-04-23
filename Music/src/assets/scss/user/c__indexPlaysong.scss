@@ -1,5 +1,5 @@
 .indexPlaysong{
-    height: inherit;
+    height: 100vh;
     &__wapper {
         height: 100%;
         background-color: black;
@@ -43,7 +43,6 @@
             position: absolute;
             width: 100%;
             bottom: 30px;
-            
         }
     }
 }
@@ -58,16 +57,5 @@
     }
 }
 
-.rhap_container {
-    background-color: #000;
-}
 
-.rhap_time{
-    color: #fff;
-}
-
-.rhap_progress-bar,
-.rhap_volume-indicator {
-    background-color: #fff;
-}
 

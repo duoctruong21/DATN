@@ -1,4 +1,5 @@
 .menuleft {
+    box-sizing: border-box;
     max-width: 300px;
     width: 100%;
     height: 100vh;
@@ -6,7 +7,7 @@
     z-index: 10;
     border-right: 1px solid #fff;
     &__wapper{
-        background-color: rgba(0,0,0,1);
+        // background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
         height: 100%;
     }
 
@@ -21,11 +22,12 @@
         margin-top: 62px;
         & li{
             width: 100%;
-            padding: 25px 10px;
             box-sizing: border-box;
             cursor: pointer;
             & a{
+                box-sizing: border-box;
                 display: block;
+                padding: 25px 10px;
                 text-decoration: none;
                 color: #fff;
                 font-size: 20px;

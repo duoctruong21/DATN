@@ -16,19 +16,14 @@ import SongInfo from "./components/user/menuleft/SongInfo.jsx";
 import Album from "./components/user/menuleft/Album.jsx";
 import Register from "./components/user/menutop/resgister.jsx";
 import Login from "./components/user/menutop/login.jsx";
-import Screen from "./Screen.jsx";
 
-function App() {
+function Screen() {
   return (
-    <div className="app">
+    <div className="Screen">
       <Routes>
         <Route
           path="/login"
           element={<Login />}
-        />
-        <Route
-          path="/register"
-          element={<Register />}
         />
       </Routes>
       <MenuTop />
@@ -40,7 +35,7 @@ function App() {
           element={<IndexPlaysong />}
         />
       </Routes>
-      <div className="app__main">
+      <div className="Screen__main">
         <Routes>
           <Route
             path="/home"
@@ -84,4 +79,4 @@ function App() {
   );
 }
 
-export default App;
+export default Screen;
