@@ -1,14 +1,15 @@
 html {
     font-family: Sono;
     // background-color: #000;
-    background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
+    background: linear-gradient(to bottom right, #7e87a3, #87bcff, #5193b6, #5aa9a5, #a589e0);
+        height: 100vh;
     &::-webkit-scrollbar {
         width: 0px;
     }
 }
 
 button svg{
-    color: #fff !important;
+    color: #fff;
 }
 
 .none{

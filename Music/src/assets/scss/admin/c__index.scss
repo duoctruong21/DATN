@@ -1,0 +1,82 @@
+.index{
+
+    &__wapper{
+        
+        &__main{
+            padding: 0 20px;
+            &__header{
+                padding: 0 50px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                & h2 {
+                    padding: 20px 15px;
+                    font-size: 30px;
+                }
+                & a {
+                    display: block;
+                    padding: 10px 15px;
+                    font-size: 25px;
+                    text-decoration: none;
+                    background-color: #4debb1;
+                    color: #fff;
+                    border-radius: 50px;
+                }
+            }
+
+            &__table{
+                & table {
+                    box-sizing: border-box;
+                    width: 100%;
+
+                    & thead {
+                        width: inherit;
+                        & tr {
+                            text-align: left;
+                            & th {
+                                padding: 20px 0;
+
+                                &:last-child {
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                    & tbody {
+                        width: inherit;
+                        & tr {
+                            text-align: left;
+                            & td {
+                                padding: 20px 0;
+
+                                & img {
+                                    width: 50px;
+                                }
+
+                                & a {
+                                    box-sizing: border-box;
+                                    text-decoration: none;
+                                    color: #fff;
+                                    padding: 20px 15px;
+                                    border-radius: 50px;
+                                }
+
+                                &:last-child {
+                                    display: block;
+                                    text-align: center;
+                                    & a:last-child {
+                                        background-color: #ff1313;
+                                    }
+                                    & a:first-child{
+                                        background-color: #4db6eb;
+                                        margin-right: 15px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,62 @@
+.add {
+
+    &__wapper{
+
+        &__main{
+
+            &__title{
+                padding: 20px 40px;
+                font-size: 35px;
+            }
+            &__form{
+                padding: 0 40px;
+                &__control{
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 0;
+                    font-size: 20px;
+                    
+                    & label {
+                        display: block;
+                        width: 200px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        font-size: 20px;
+                        outline: none;
+                        font-family: Sono;
+                    }
+                }
+                &__confirm{
+                    display: flex;
+                    justify-content: end;
+                    & button {
+                        padding: 10px 20px;
+                        font-size: 20px;
+                        font-family: Sono;
+                        border: none;
+                        border-radius: 30px;
+                        color: #000;
+                    }
+                    & a{
+                        display: block;
+                        text-decoration: none;
+                        color: #000;
+                        padding: 10px 20px;
+                        border-radius: 30px;
+                        background-color: #fff;
+                        font-size: 20px;
+                        margin-right: 10px;
+                    }
+                }   
+
+                & .ck.ck-editor, .css-b62m3t-container {
+                    box-sizing: border-box;
+                    max-width: 986px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

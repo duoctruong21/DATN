@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SongBar from "./SongBar";
 import ReactPaginate from "react-paginate";
+import SongBar from "./SongBar";
 import "../../../assets/scss/user/c__album.scss";
 import Footer from "./Footer";
 

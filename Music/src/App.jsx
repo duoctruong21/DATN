@@ -16,7 +16,18 @@ import SongInfo from "./components/user/menuleft/SongInfo.jsx";
 import Album from "./components/user/menuleft/Album.jsx";
 import Register from "./components/user/menutop/resgister.jsx";
 import Login from "./components/user/menutop/login.jsx";
-import Screen from "./Screen.jsx";
+import IndexTopic from "./components/admin/topic/indexTopic.jsx";
+import IndexSong from "./components/admin/song/IndexSong.jsx";
+import IndexSinger from "./components/admin/singer/IndexSinger.jsx";
+import IndexAlbum from "./components/admin/album/indexAlbum.jsx";
+import AddTopic from "./components/admin/topic/addTopic.jsx";
+import EditTopic from "./components/admin/topic/EditTopic.jsx";
+import AddAlbum from "./components/admin/album/AddAlbum.jsx";
+import EditAlbum from "./components/admin/album/editAlbum.jsx";
+import AddSinger from "./components/admin/singer/addSinger.jsx";
+import AddSong from "./components/admin/song/addSong.jsx";
+import EditSinger from "./components/admin/singer/editSinger.jsx";
+import EditSong from "./components/admin/song/EditSong.jsx";
 
 function App() {
   return (
@@ -77,6 +88,54 @@ function App() {
           <Route
             path="/infomation-album"
             element={<Album />}
+          />
+          <Route
+            path="/admin/topic"
+            element={<IndexTopic />}
+          />
+          <Route
+            path="/admin/song"
+            element={<IndexSong />}
+          />
+          <Route
+            path="/admin/singer"
+            element={<IndexSinger />}
+          />
+          <Route
+            path="/admin/album"
+            element={<IndexAlbum />}
+          />
+          <Route
+            path="/admin/topic/add"
+            element={<AddTopic />}
+          />
+          <Route
+            path="/admin/topic/edit"
+            element={<EditTopic />}
+          />
+          <Route
+            path="/admin/album/edit"
+            element={<EditAlbum />}
+          />
+          <Route
+            path="/admin/album/add"
+            element={<AddAlbum />}
+          />
+          <Route
+            path="/admin/singer/add"
+            element={<AddSinger />}
+          />
+          <Route
+            path="/admin/singer/edit"
+            element={<EditSinger />}
+          />
+          <Route
+            path="/admin/song/add"
+            element={<AddSong />}
+          />
+          <Route
+            path="/admin/song/edit"
+            element={<EditSong />}
           />
         </Routes>
       </div>
