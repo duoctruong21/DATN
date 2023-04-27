@@ -26,6 +26,7 @@ public partial class Song
     public DateTime? ModifiedDate { get; set; }
 
     public int? IdSinger { get; set; }
+    public int? IdAlbum { get; set; }
 
     public string? Filesong { get; set; }
 
@@ -36,8 +37,6 @@ public partial class Song
     public virtual ICollection<UserWithSong> UserWithSongs { get; set; } = new List<UserWithSong>();
 
     public virtual ICollection<Album> IdAlbums { get; set; } = new List<Album>();
-
-
     public IFormFile? FileImgs { get; set; }
     public IFormFile? FileMp3 { get; set; }
 }

@@ -15,10 +15,12 @@ namespace WebMusic.Controllers
     public class SongsController : ControllerBase
     {
         private readonly MusicWebContext _context;
+        private readonly UploadFile uploadFile;
 
         public SongsController(MusicWebContext context)
         {
             _context = context;
+            uploadFile = new UploadFile();
         }
 
         // GET: api/Songs
@@ -53,15 +55,22 @@ namespace WebMusic.Controllers
         // PUT: api/Songs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSong(int id, Song song)
+        public async Task<IActionResult> PutSong(int id,[FromForm] Song song)
         {
             if (id != song.Id)
             {
                 return BadRequest();
             }
 
+            if (song.FileImgs != null)
+            {
+                song.Fileimg = await uploadFile.UploadImageAsync(song.FileImgs);
+            }
+            if (song.FileMp3 != null)
+            {
+                song.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
             _context.Entry(song).State = EntityState.Modified;
-
+            }
             try
             {
                 await _context.SaveChangesAsync();
@@ -92,13 +101,11 @@ namespace WebMusic.Controllers
           }
           if(song.FileImgs != null)
             {
-                _ = UploadFile.Uploadfile(song.FileImgs);
-                song.Fileimg = "/images/" + song.FileImgs.FileName;
+                song.Fileimg = await uploadFile.UploadImageAsync(song.FileImgs);
             }
           if(song.FileMp3 != null)
             {
-                _ = UploadFile.Uploadfile(song.FileMp3);
-                song.Filesong = "/images/" + song.FileMp3.FileName;
+                song.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
             }
             _context.Songs.Add(song);
             await _context.SaveChangesAsync();

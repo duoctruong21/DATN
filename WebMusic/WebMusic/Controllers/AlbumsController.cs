@@ -15,10 +15,14 @@ namespace WebMusic.Controllers
     public class AlbumsController : ControllerBase
     {
         private readonly MusicWebContext _context;
+        private readonly UploadFile uploadFile;
+
 
         public AlbumsController(MusicWebContext context)
         {
             _context = context;
+            uploadFile = new UploadFile();
+
         }
 
         // GET: api/Albums
@@ -92,8 +96,8 @@ namespace WebMusic.Controllers
           }
           if(album.FileImg != null)
             {
-                _ = UploadFile.Uploadfile(album.FileImg);
-                album.AlbumImg = "/images/" + album.FileImg.FileName;
+
+                album.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
             }
             _context.Albums.Add(album);
             await _context.SaveChangesAsync();

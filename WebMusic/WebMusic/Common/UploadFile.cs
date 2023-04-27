@@ -15,9 +15,9 @@ namespace WebMusic.Common
     {
         private readonly FirebaseStorage _firebaseStorage;
 
-        public UploadFile(string name)
+        public UploadFile()
         {
-            _firebaseStorage = new FirebaseStorage(name);
+            _firebaseStorage = new FirebaseStorage("music-52086.appspot.com");
         }
 
         public static async Task Uploadfile(IFormFile img)
@@ -41,8 +41,19 @@ namespace WebMusic.Common
             // Tạo tên file
             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
 
+            // lấy chuỗi
+
             // Tạo đường dẫn lưu trữ trên Firebase
-            var storagePath = $"images/{fileName}";
+            var storagePath ="";
+            if (file.ContentType.Equals("audio/mpeg"))
+            {
+                storagePath = $"fileMp3/{fileName}";
+            }
+            else
+            {
+                storagePath = $"images/{fileName}";
+
+            }
 
             // Upload ảnh lên Firebase
             var uploadTask = _firebaseStorage.Child(storagePath).PutAsync(streams);

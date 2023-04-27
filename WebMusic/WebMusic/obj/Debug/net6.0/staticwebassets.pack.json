@@ -29,12 +29,28 @@
       "PackagePath": "staticwebassets\\images\\1_19tmLBmVPfbohCvb7HgJFg.png"
     },
     {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3",
+      "PackagePath": "staticwebassets\\images\\Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\DoToc2.jpg",
+      "PackagePath": "staticwebassets\\images\\DoToc2.jpg"
+    },
+    {
       "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Muon Roi Ma Sao Con - Son Tung M-TP - NhacHay360.mp3",
       "PackagePath": "staticwebassets\\images\\Muon Roi Ma Sao Con - Son Tung M-TP - NhacHay360.mp3"
     },
     {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Ngu Mot Minh (tinh rat tinh) - HIEUTHUHAI, Negav, Kewtiie - NhacHay360.mp3",
+      "PackagePath": "staticwebassets\\images\\Ngu Mot Minh (tinh rat tinh) - HIEUTHUHAI, Negav, Kewtiie - NhacHay360.mp3"
+    },
+    {
       "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Untitled-1.png",
       "PackagePath": "staticwebassets\\images\\Untitled-1.png"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\domixi.png",
+      "PackagePath": "staticwebassets\\images\\domixi.png"
     },
     {
       "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\hieuthuhai.png",
@@ -45,8 +61,8 @@
       "PackagePath": "staticwebassets\\images\\mtp.jpg"
     },
     {
-      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\json\\music-52086-cc10d803791e.json",
-      "PackagePath": "staticwebassets\\json\\music-52086-cc10d803791e.json"
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg",
+      "PackagePath": "staticwebassets\\images\\z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebMusic.Microsoft.AspNetCore.StaticWebAssets.props",

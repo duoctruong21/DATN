@@ -15,10 +15,12 @@ namespace WebMusic.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly MusicWebContext _context;
+        private readonly UploadFile uploadFile;
 
         public CategoriesController(MusicWebContext context)
         {
             _context = context;
+            uploadFile = new UploadFile();
         }
 
         // GET: api/Categories
@@ -92,8 +94,7 @@ namespace WebMusic.Controllers
           }
           if(category.FileImg != null)
             {
-                _ = UploadFile.Uploadfile(category.FileImg);
-                category.CategoryImg = "/images/" + category.FileImg.FileName;
+                category.CategoryImg = await uploadFile.UploadImageAsync(category.FileImg);
             }
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
