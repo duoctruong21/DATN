@@ -15,10 +15,12 @@ namespace WebMusic.Controllers
     public class SingersController : ControllerBase
     {
         private readonly MusicWebContext _context;
+        private readonly UploadFile uploadFile;
 
         public SingersController(MusicWebContext context)
         {
             _context = context;
+            uploadFile = new UploadFile();
         }
 
         // GET: api/Singers
@@ -92,8 +94,7 @@ namespace WebMusic.Controllers
           }
           if(singer.FileImgs != null)
             {
-                _ = UploadFile.Uploadfile(singer.FileImgs);
-                singer.Fileimg = "/images/" +singer.FileImgs.FileName;
+                singer.Fileimg = await uploadFile.UploadImageAsync(singer.FileImgs);
             }
             _context.Singers.Add(singer);
             await _context.SaveChangesAsync();

@@ -21,17 +21,17 @@ namespace WebMusic.Controllers
         public TopicsController(MusicWebContext context)
         {
             _context = context;
-            uploadFile = new UploadFile("music-52086.appspot.com");
+            uploadFile = new UploadFile();
         }
 
         // GET: api/Topics
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Topic>>> GetTopics()
         {
-          if (_context.Topics == null)
-          {
-              return NotFound();
-          }
+            if (_context.Topics == null)
+            {
+                return NotFound();
+            }
             return await _context.Topics.ToListAsync();
         }
 
@@ -39,10 +39,10 @@ namespace WebMusic.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Topic>> GetTopic(int id)
         {
-          if (_context.Topics == null)
-          {
-              return NotFound();
-          }
+            if (_context.Topics == null)
+            {
+                return NotFound();
+            }
             var topic = await _context.Topics.FindAsync(id);
 
             if (topic == null)
@@ -53,10 +53,11 @@ namespace WebMusic.Controllers
             return topic;
         }
 
+
         // PUT: api/Topics/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTopic(int id, Topic topic)
+        public async Task<IActionResult> PutTopic(int id,[FromForm] Topic topic)
         {
             if (id != topic.Id)
             {
@@ -64,6 +65,13 @@ namespace WebMusic.Controllers
             }
 
             _context.Entry(topic).State = EntityState.Modified;
+            if (topic.FileImg != null)
+            {
+                /*_ = UploadFile.Uploadfile(topic.FileImg);*/
+                topic.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
+
+            }
+            topic.ModifiedDate = DateTime.Now;
 
             try
             {
@@ -89,16 +97,18 @@ namespace WebMusic.Controllers
         [HttpPost]
         public async Task<ActionResult<Topic>> PostTopic([FromForm] Topic topic)
         {
-          if (_context.Topics == null)
-          {
-              return Problem("Entity set 'MusicWebContext.Topics'  is null.");
-          }
-          if(topic.FileImg != null)
+            if (_context.Topics == null)
             {
-                /*_ = UploadFile.Uploadfile(topic.FileImg);*/   
-                topic.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
-                
+                return Problem("Entity set 'MusicWebContext.Topics'  is null.");
             }
+            if (topic.FileImg != null)
+            {
+                /*_ = UploadFile.Uploadfile(topic.FileImg);*/
+                topic.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
+
+            }
+            topic.CreatedDate = DateTime.Now;
+            topic.ModifiedDate = DateTime.Now;
             _context.Topics.Add(topic);
             await _context.SaveChangesAsync();
 

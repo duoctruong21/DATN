@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fyfzIBzJ6Qz59zpMIFgx7Ik038ATUyeFYQB2lRGODsE=",
+  "Hash": "d7GI+QHBh00ZKIHNu+G51ZJ0TFgJPmNw2dVkn+We9LI=",
   "Source": "WebMusic",
   "BasePath": "_content/WebMusic",
   "Mode": "Default",
@@ -1156,6 +1156,57 @@
       "OriginalItemSpec": "wwwroot\\images\\1_19tmLBmVPfbohCvb7HgJFg.png"
     },
     {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3"
+    },
+    {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\domixi.png",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/domixi.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\domixi.png"
+    },
+    {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\DoToc2.jpg",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/DoToc2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\DoToc2.jpg"
+    },
+    {
       "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\hieuthuhai.png",
       "SourceId": "WebMusic",
       "SourceType": "Discovered",
@@ -1207,6 +1258,23 @@
       "OriginalItemSpec": "wwwroot\\images\\Muon Roi Ma Sao Con - Son Tung M-TP - NhacHay360.mp3"
     },
     {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Ngu Mot Minh (tinh rat tinh) - HIEUTHUHAI, Negav, Kewtiie - NhacHay360.mp3",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/Ngu Mot Minh (tinh rat tinh) - HIEUTHUHAI, Negav, Kewtiie - NhacHay360.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Ngu Mot Minh (tinh rat tinh) - HIEUTHUHAI, Negav, Kewtiie - NhacHay360.mp3"
+    },
+    {
       "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Untitled-1.png",
       "SourceId": "WebMusic",
       "SourceType": "Discovered",
@@ -1224,12 +1292,12 @@
       "OriginalItemSpec": "wwwroot\\images\\Untitled-1.png"
     },
     {
-      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\json\\music-52086-cc10d803791e.json",
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg",
       "SourceId": "WebMusic",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
       "BasePath": "_content/WebMusic",
-      "RelativePath": "json/music-52086-cc10d803791e.json",
+      "RelativePath": "images/z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1238,7 +1306,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\json\\music-52086-cc10d803791e.json"
+      "OriginalItemSpec": "wwwroot\\images\\z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg"
     }
   ]
 }

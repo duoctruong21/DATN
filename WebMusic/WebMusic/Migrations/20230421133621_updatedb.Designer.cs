@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebMusic.models.ef;
 
@@ -11,9 +12,11 @@ using WebMusic.models.ef;
 namespace WebMusic.Migrations
 {
     [DbContext(typeof(MusicWebContext))]
-    partial class MusicWebContextModelSnapshot : ModelSnapshot
+    [Migration("20230421133621_updatedb")]
+    partial class updatedb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
