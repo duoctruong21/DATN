@@ -27,10 +27,10 @@ namespace WebMusic.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-          if (_context.Songs == null)
-          {
-              return NotFound();
-          }
+            if (_context.Songs == null)
+            {
+                return NotFound();
+            }
             return await _context.Songs.ToListAsync();
         }
 
@@ -38,10 +38,10 @@ namespace WebMusic.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Song>> GetSong(int id)
         {
-          if (_context.Songs == null)
-          {
-              return NotFound();
-          }
+            if (_context.Songs == null)
+            {
+                return NotFound();
+            }
             var song = await _context.Songs.FindAsync(id);
 
             if (song == null)
@@ -55,7 +55,7 @@ namespace WebMusic.Controllers
         // PUT: api/Songs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSong(int id,[FromForm] Song song)
+        public async Task<IActionResult> PutSong(int id, [FromForm] Song song)
         {
             if (id != song.Id)
             {
@@ -69,7 +69,12 @@ namespace WebMusic.Controllers
             if (song.FileMp3 != null)
             {
                 song.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
-            _context.Entry(song).State = EntityState.Modified;
+                _context.Entry(song).State = EntityState.Modified;
+                if (song.CreatedDate == null)
+                {
+                    song.CreatedDate = DateTime.Now;
+                }
+                song.ModifiedDate = DateTime.Now;
             }
             try
             {
@@ -95,18 +100,21 @@ namespace WebMusic.Controllers
         [HttpPost]
         public async Task<ActionResult<Song>> PostSong([FromForm] Song song)
         {
-          if (_context.Songs == null)
-          {
-              return Problem("Entity set 'MusicWebContext.Songs'  is null.");
-          }
-          if(song.FileImgs != null)
+            if (_context.Songs == null)
+            {
+                return Problem("Entity set 'MusicWebContext.Songs'  is null.");
+            }
+            if (song.FileImgs != null)
             {
                 song.Fileimg = await uploadFile.UploadImageAsync(song.FileImgs);
             }
-          if(song.FileMp3 != null)
+            if (song.FileMp3 != null)
             {
                 song.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
             }
+            song.CreatedDate = DateTime.Now;
+            song.ModifiedDate = DateTime.Now;
+
             _context.Songs.Add(song);
             await _context.SaveChangesAsync();
 

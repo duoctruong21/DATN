@@ -27,10 +27,10 @@ namespace WebMusic.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Singer>>> GetSingers()
         {
-          if (_context.Singers == null)
-          {
-              return NotFound();
-          }
+            if (_context.Singers == null)
+            {
+                return NotFound();
+            }
             return await _context.Singers.ToListAsync();
         }
 
@@ -38,10 +38,10 @@ namespace WebMusic.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Singer>> GetSinger(int id)
         {
-          if (_context.Singers == null)
-          {
-              return NotFound();
-          }
+            if (_context.Singers == null)
+            {
+                return NotFound();
+            }
             var singer = await _context.Singers.FindAsync(id);
 
             if (singer == null)
@@ -55,7 +55,7 @@ namespace WebMusic.Controllers
         // PUT: api/Singers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSinger(int id, Singer singer)
+        public async Task<IActionResult> PutSinger(int id, [FromForm] Singer singer)
         {
             if (id != singer.Id)
             {
@@ -63,6 +63,16 @@ namespace WebMusic.Controllers
             }
 
             _context.Entry(singer).State = EntityState.Modified;
+            var items = _context.Singers.Where(x => x.Id == id);
+            if (singer.FileImgs != null)
+            {
+                singer.Fileimg = await uploadFile.UploadImageAsync(singer.FileImgs);
+            }
+            if (singer.CreatedDate == null)
+            {
+                singer.CreatedDate = DateTime.Now;
+            }
+            singer.ModifiedDate = DateTime.Now;
 
             try
             {
@@ -88,14 +98,16 @@ namespace WebMusic.Controllers
         [HttpPost]
         public async Task<ActionResult<Singer>> PostSinger([FromForm] Singer singer)
         {
-          if (_context.Singers == null)
-          {
-              return Problem("Entity set 'MusicWebContext.Singers'  is null.");
-          }
-          if(singer.FileImgs != null)
+            if (_context.Singers == null)
+            {
+                return Problem("Entity set 'MusicWebContext.Singers'  is null.");
+            }
+            if (singer.FileImgs != null)
             {
                 singer.Fileimg = await uploadFile.UploadImageAsync(singer.FileImgs);
             }
+            singer.CreatedDate = DateTime.Now;
+            singer.ModifiedDate = DateTime.Now;
             _context.Singers.Add(singer);
             await _context.SaveChangesAsync();
 
@@ -115,6 +127,16 @@ namespace WebMusic.Controllers
             {
                 return NotFound();
             }
+            var songs = _context.Songs.Where(x => x.IdSinger == id);
+            foreach (var song in songs)
+            {
+                if (song.IdSinger == id)
+                {
+                    song.IdSinger = null;
+                    _context.Songs.Update(song);
+                }
+            }
+            _context.SaveChanges();
 
             _context.Singers.Remove(singer);
             await _context.SaveChangesAsync();
