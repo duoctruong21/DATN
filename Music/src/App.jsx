@@ -110,11 +110,11 @@ function App() {
             element={<AddTopic />}
           />
           <Route
-            path="/admin/topic/edit"
+            path="/admin/topic/edit/:id"
             element={<EditTopic />}
           />
           <Route
-            path="/admin/album/edit"
+            path="/admin/album/edit/:id"
             element={<EditAlbum />}
           />
           <Route
@@ -126,7 +126,7 @@ function App() {
             element={<AddSinger />}
           />
           <Route
-            path="/admin/singer/edit"
+            path="/admin/singer/edit/:id"
             element={<EditSinger />}
           />
           <Route
@@ -134,7 +134,7 @@ function App() {
             element={<AddSong />}
           />
           <Route
-            path="/admin/song/edit"
+            path="/admin/song/edit/:id"
             element={<EditSong />}
           />
         </Routes>

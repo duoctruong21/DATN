@@ -1,17 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import "../../../assets/scss/admin/c__index.scss";
+import axios from "axios";
+import Footer from "../../user/menuleft/Footer";
+import { useNavigate } from "react-router-dom";
 
 function IndexTopic() {
+  const [Topics, setTopics] = useState([]); // create variable useSate to save data in urltopic
+  const urlTopic = "https://localhost:7122/api/Topics"; // create url variable save api link
+  // get data from link api
+  useEffect(() => {
+    axios
+      .get(urlTopic)
+      .then((response) => {
+        setTopics(response.data); // save data from api to setTopics
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+  // pagedlist
   const [pageNumber, setPageNumber] = useState(0);
-  const songsPerPage = 5;
+  const songsPerPage = 6;
   const pagesVisited = pageNumber * songsPerPage;
-  const pageCount = Math.ceil(10 / songsPerPage);
+  const pageCount = Math.ceil(Topics.length / songsPerPage);
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
+  // Delete item
+  const [isDeleting, setIsDeleting] = useState(false);
+  const handleDelete = async (id) => {
+    const result = confirm("do you want to delete this item ?");
+    if(result) {
+      setIsDeleting(true);
+      try {
+        await axios.delete(`${urlTopic}/${id}`);
+        setTopics(Topics.filter((topic) => topic.id !== id));
+        setIsDeleting(false);
+        history("/admin/topic");
+      } catch (error) {
+        console.log(error);
+        setIsDeleting(false);
+      }
+    }
+  };
 
-  const songs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <div className="index">
       <div className="index__wapper">
@@ -37,9 +70,8 @@ function IndexTopic() {
               </thead>
               <tbody>
                 {/* data, you can use for loop to set */}
-                {songs
-                  .slice(pagesVisited, pagesVisited + songsPerPage)
-                  .map((song, index) => (
+                {Topics.slice(pagesVisited, pagesVisited + songsPerPage).map(
+                  (topic, index) => (
                     <tr key={index}>
                       <td>
                         <input
@@ -48,22 +80,27 @@ function IndexTopic() {
                           id=""
                         />
                       </td>
-                      <td>1</td>
-                      <td>The night</td>
+                      <td>{index + 1}</td>
+                      <td>{topic.topicName}</td>
                       <td>
                         <img
-                          src="https://photo-zmp3.zmdcdn.me/banner/d/a/8/8/da888d3aaa65f746ac409949bd9e6463.jpg"
+                          src={topic.topicImg}
                           alt=""
                         />
                       </td>
-                      <td>20-02-2023</td>
-                      <td>23-04-2023</td>
+                      <td>{topic.createdDate}</td>
+                      <td>{topic.modifiedDate}</td>
                       <td>
-                        <a href="/admin/topic/edit">Edit</a>
-                        <a href="#">Delete</a>
+                        <a href={`/admin/topic/edit/${topic.id}`}>Edit</a>
+                        <button
+                          disabled={isDeleting}
+                          onClick={() => handleDelete(topic.id)}>
+                          {isDeleting ? "Deleting..." : "Delete"}
+                        </button>
                       </td>
                     </tr>
-                  ))}
+                  )
+                )}
               </tbody>
             </table>
             <div className="index__wapper__main__table__page">
@@ -82,6 +119,7 @@ function IndexTopic() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

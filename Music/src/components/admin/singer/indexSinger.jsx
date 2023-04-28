@@ -1,17 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import "../../../assets/scss/admin/c__index.scss";
+import axios from "axios";
 
 function IndexSinger() {
+  const singerUrl = "https://localhost:7122/api/Singers";
+  const [Singers, setSingers] = useState([])
+
+  useEffect(()=>{
+    axios.get(singerUrl).then((response)=>{
+      setSingers(response.data)
+    }).catch((error)=>{
+      console.log(error)
+    })
+  })
+  // pagedlist
   const [pageNumber, setPageNumber] = useState(0);
   const songsPerPage = 5;
   const pagesVisited = pageNumber * songsPerPage;
-  const pageCount = Math.ceil(10 / songsPerPage);
+  const pageCount = Math.ceil(Singers.length / songsPerPage);
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
+  // delete
+  const [isDeleting, setIsDeleting] = useState(false)
+  const handleDelete = async (id)=>{
+    const result = confirm('do you want to delete this item?')
+    if(result){
+      setIsDeleting(true)
+      try{
+        await axios.delete(`${singerUrl}/${id}`).then(()=>{
+          setIsDeleting(false)
+          alert("delete success");
+        })
+      }catch(error){
+        console.log(error)
+        setIsDeleting(false)
+      }
+    }
+  }
 
-  const songs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <div className="index">
       <div className="index__wapper">
@@ -37,9 +65,8 @@ function IndexSinger() {
               </thead>
               <tbody>
                 {/* data, you can use for loop to set */}
-                {songs
-                  .slice(pagesVisited, pagesVisited + songsPerPage)
-                  .map((song, index) => (
+                {Singers.slice(pagesVisited, pagesVisited + songsPerPage).map(
+                  (singer, index) => (
                     <tr key={index}>
                       <td>
                         <input
@@ -48,22 +75,27 @@ function IndexSinger() {
                           id=""
                         />
                       </td>
-                      <td>1</td>
-                      <td>The night</td>
+                      <td>{index + 1}</td>
+                      <td>{singer.singerName}</td>
                       <td>
                         <img
-                          src="https://photo-zmp3.zmdcdn.me/banner/d/a/8/8/da888d3aaa65f746ac409949bd9e6463.jpg"
+                          src={singer.fileimg}
                           alt=""
                         />
                       </td>
-                      <td>20-02-2023</td>
-                      <td>23-04-2023</td>
+                      <td>{singer.createdDate}</td>
+                      <td>{singer.modifiedDate}</td>
                       <td>
-                        <a href="/admin/singer/edit">Edit</a>
-                        <a href="#">Delete</a>
+                        <a href={`/admin/singer/edit/${singer.id}`}>Edit</a>
+                        <button
+                          disabled={isDeleting}
+                          onClick={() => handleDelete(singer.id)}>
+                          {isDeleting ? "Deleting..." : "Delete"}
+                        </button>
                       </td>
                     </tr>
-                  ))}
+                  )
+                )}
               </tbody>
             </table>
             <div className="index__wapper__main__table__page">
