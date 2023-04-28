@@ -29,10 +29,10 @@ namespace WebMusic.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Album>>> GetAlbums()
         {
-          if (_context.Albums == null)
-          {
-              return NotFound();
-          }
+            if (_context.Albums == null)
+            {
+                return NotFound();
+            }
             return await _context.Albums.ToListAsync();
         }
 
@@ -40,10 +40,10 @@ namespace WebMusic.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Album>> GetAlbum(int id)
         {
-          if (_context.Albums == null)
-          {
-              return NotFound();
-          }
+            if (_context.Albums == null)
+            {
+                return NotFound();
+            }
             var album = await _context.Albums.FindAsync(id);
 
             if (album == null)
@@ -57,7 +57,7 @@ namespace WebMusic.Controllers
         // PUT: api/Albums/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum(int id, Album album)
+        public async Task<IActionResult> PutAlbum(int id, [FromForm] Album album)
         {
             if (id != album.Id)
             {
@@ -65,6 +65,15 @@ namespace WebMusic.Controllers
             }
 
             _context.Entry(album).State = EntityState.Modified;
+            if (album.FileImg != null)
+            {
+                album.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
+            }
+            if (album.CreatedDate == null)
+            {
+                album.CreatedDate = DateTime.Now;
+            }
+            album.ModifiedDate = DateTime.Now;
 
             try
             {
@@ -90,15 +99,17 @@ namespace WebMusic.Controllers
         [HttpPost]
         public async Task<ActionResult<Album>> PostAlbum([FromForm] Album album)
         {
-          if (_context.Albums == null)
-          {
-              return Problem("Entity set 'MusicWebContext.Albums'  is null.");
-          }
-          if(album.FileImg != null)
+            if (_context.Albums == null)
             {
-
+                return Problem("Entity set 'MusicWebContext.Albums'  is null.");
+            }
+            if (album.FileImg != null)
+            {
                 album.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
             }
+            album.CreatedDate = DateTime.Now;
+            album.ModifiedDate = DateTime.Now;
+
             _context.Albums.Add(album);
             await _context.SaveChangesAsync();
 
@@ -118,7 +129,17 @@ namespace WebMusic.Controllers
             {
                 return NotFound();
             }
+            var items = _context.Songs.Where(x => x.IdAlbum == id);
+            foreach (var item in items)
+            {
+                if (item.IdAlbum == id)
+                {
+                    item.IdAlbum = null;
+                    _context.Songs.Update(item);
+                }
 
+            }
+            _context.SaveChanges();
             _context.Albums.Remove(album);
             await _context.SaveChangesAsync();
 

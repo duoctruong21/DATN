@@ -27,10 +27,10 @@ namespace WebMusic.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-          if (_context.Categories == null)
-          {
-              return NotFound();
-          }
+            if (_context.Categories == null)
+            {
+                return NotFound();
+            }
             return await _context.Categories.ToListAsync();
         }
 
@@ -38,10 +38,10 @@ namespace WebMusic.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
-          if (_context.Categories == null)
-          {
-              return NotFound();
-          }
+            if (_context.Categories == null)
+            {
+                return NotFound();
+            }
             var category = await _context.Categories.FindAsync(id);
 
             if (category == null)
@@ -55,7 +55,7 @@ namespace WebMusic.Controllers
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> PutCategory(int id, [FromForm] Category category)
         {
             if (id != category.Id)
             {
@@ -63,6 +63,15 @@ namespace WebMusic.Controllers
             }
 
             _context.Entry(category).State = EntityState.Modified;
+            if (category.FileImg != null)
+            {
+                category.CategoryImg = await uploadFile.UploadImageAsync(category.FileImg);
+            }
+            if (category.CreatedDate == null)
+            {
+                category.CreatedDate = DateTime.Now;
+            }
+            category.ModifiedDate = DateTime.Now;
 
             try
             {
@@ -88,14 +97,16 @@ namespace WebMusic.Controllers
         [HttpPost]
         public async Task<ActionResult<Category>> PostCategory([FromForm] Category category)
         {
-          if (_context.Categories == null)
-          {
-              return Problem("Entity set 'MusicWebContext.Categories'  is null.");
-          }
-          if(category.FileImg != null)
+            if (_context.Categories == null)
+            {
+                return Problem("Entity set 'MusicWebContext.Categories'  is null.");
+            }
+            if (category.FileImg != null)
             {
                 category.CategoryImg = await uploadFile.UploadImageAsync(category.FileImg);
             }
+            category.CreatedDate = DateTime.Now;
+            category.ModifiedDate = DateTime.Now;
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
