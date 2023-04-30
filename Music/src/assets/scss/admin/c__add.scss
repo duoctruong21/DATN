@@ -27,6 +27,9 @@
                         outline: none;
                         font-family: Sono;
                     }
+                    .ck.ck-toolbar>.ck-toolbar__items {
+                        z-index: 0;
+                    }
                 }
                 &__confirm{
                     display: flex;

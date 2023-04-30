@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import "../../../assets/scss/admin/c__index.scss";
 import axios from "axios";
+import Footer from "../../user/menuleft/Footer";
 
 function IndexSong() {
   const songUrl = "https://localhost:7122/api/Songs";
@@ -60,6 +61,7 @@ function IndexSong() {
                   <th>STT</th>
                   <th>Title</th>
                   <th>Image</th>
+                  <th style={{textAlign:"center"}}>Mp3</th>
                   <th>Created date</th>
                   <th>Modified date</th>
                   <th>Manage</th>
@@ -81,9 +83,14 @@ function IndexSong() {
                       <td>{song.songName}</td>
                       <td>
                         <img
-                          src={song.filesong}
+                          src={song.fileimg}
                           alt=""
                         />
+                      </td>
+                      <td>
+                        <audio controls>
+                          <source src={song.filesong} />
+                        </audio>
                       </td>
                       <td>{song.createdDate}</td>
                       <td>{song.modifiedDate}</td>
@@ -116,6 +123,7 @@ function IndexSong() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

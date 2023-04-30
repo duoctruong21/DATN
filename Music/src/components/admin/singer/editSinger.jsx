@@ -8,7 +8,7 @@ import axios from "axios";
 function EditSinger() {
   const { id } = useParams();
   const singerUrl = `https://localhost:7122/api/Singers/${id}`;
-  const history = useNavigate()
+  const history = useNavigate();
 
   const [idSinger, setIdSinger] = useState("");
   const [title, setTitle] = useState("");
@@ -23,7 +23,7 @@ function EditSinger() {
       setContents(singerData.singerDescription);
       setImage(singerData.fileimg);
     });
-  },[id]);
+  }, [id]);
 
   // ckeditor
   const [Contents, setContents] = useState("");
@@ -32,27 +32,30 @@ function EditSinger() {
     setContents(data);
   }
 
-  // edit item 
-  const UpdateSinger = async (event)=>{
-    event.preventDefault()
-    const singerData = new FormData()
-    singerData.append("id",idSinger)
-    singerData.append("singerName", title)
-    singerData.append("singerDescription", Contents)
-    singerData.append("fileImgs", event.target.elements.image.files[0])
+  // edit item
+  const UpdateSinger = async (event) => {
+    event.preventDefault();
+    const singerData = new FormData();
+    singerData.append("id", idSinger);
+    singerData.append("singerName", title);
+    singerData.append("singerDescription", Contents);
+    singerData.append("fileImgs", event.target.elements.image.files[0]);
     singerData.append("fileimg", image);
-    
-    await axios.put(singerUrl,singerData,{
-      headers:{
-        "Content-Type":"multipart/fromdata"
-      }
-    }).then(()=>{
-      alert('update success')
-      history("/admin/singer")
-    }).catch((error)=>{
-      console.log(error)
-    })
-  }
+
+    await axios
+      .put(singerUrl, singerData, {
+        headers: {
+          "Content-Type": "multipart/fromdata",
+        },
+      })
+      .then(() => {
+        alert("update success");
+        history("/admin/singer");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="edit">
