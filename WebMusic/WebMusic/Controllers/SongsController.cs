@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
 using WebMusic.models.ef;
+using WebMusic.Models;
 
 namespace WebMusic.Controllers
 {
@@ -145,5 +146,23 @@ namespace WebMusic.Controllers
         {
             return (_context.Songs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
+        //get item song 
+        /*public async Task<ActionResult<IEnumerable<SongItem>>> GetItem()
+        {
+            List<SongItem> items = await (
+                from song in _context.Songs
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join album in _context.Albums on song.IdAlbum equals album.Id
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = album.AlbumName,
+                    fileImg = song.Fileimg
+                }).ToListAsync();
+            return items;
+        }*/
     }
 }
