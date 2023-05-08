@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
-using WebMusic.models.ef;
+using WebMusic.Models.Data;
+using WebMusic.Models.EF;
 
 namespace WebMusic.Controllers
 {
@@ -55,25 +56,26 @@ namespace WebMusic.Controllers
         // PUT: api/Singers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSinger(int id, [FromForm] Singer singer)
+        public async Task<IActionResult> PutSinger(int id, [FromForm] Singers singer)
         {
             if (id != singer.Id)
             {
                 return BadRequest();
             }
-
-            _context.Entry(singer).State = EntityState.Modified;
-            var items = _context.Singers.Where(x => x.Id == id);
-            if (singer.FileImgs != null)
+            var item = _context.Singers.Find(id);
+            _context.Entry(item).State = EntityState.Modified;
+            if (singer.FileImg != null)
             {
-                singer.Fileimg = await uploadFile.UploadImageAsync(singer.FileImgs);
+                item.Fileimg = await uploadFile.UploadImageAsync(singer.FileImg);
             }
-            if (singer.CreatedDate == null)
+            if (item.CreatedDate == null)
             {
-                singer.CreatedDate = DateTime.Now;
+                item.CreatedDate = DateTime.Now;
             }
-            singer.ModifiedDate = DateTime.Now;
-
+            item.SingerName = singer.SingerName;
+            item.SingerDescription = singer.SingerDescription;
+            item.ModifiedDate = DateTime.Now;
+            item.Alias = item.SingerName != null ? FormatAlias.RemoveDiacritics(item.SingerName):"";
             try
             {
                 await _context.SaveChangesAsync();
@@ -96,22 +98,25 @@ namespace WebMusic.Controllers
         // POST: api/Singers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Singer>> PostSinger([FromForm] Singer singer)
+        public async Task<ActionResult<Singer>> PostSinger([FromForm] Singers singer)
         {
             if (_context.Singers == null)
             {
                 return Problem("Entity set 'MusicWebContext.Singers'  is null.");
             }
-            if (singer.FileImgs != null)
+            Singer item = new Singer();
+            if (singer.FileImg != null)
             {
-                singer.Fileimg = await uploadFile.UploadImageAsync(singer.FileImgs);
+                item.Fileimg = await uploadFile.UploadImageAsync(singer.FileImg);
             }
-            singer.CreatedDate = DateTime.Now;
-            singer.ModifiedDate = DateTime.Now;
-            _context.Singers.Add(singer);
+            item.SingerName = singer.SingerName;
+            item.SingerDescription = singer.SingerDescription;
+            item.CreatedDate = DateTime.Now;
+            item.ModifiedDate = DateTime.Now;
+            item.Alias = item.SingerName != null ? FormatAlias.RemoveDiacritics(item.SingerName) : "";
+            _context.Singers.Add(item);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSinger", new { id = singer.Id }, singer);
+            return CreatedAtAction("GetSinger", new { id = item.Id }, item);
         }
 
         // DELETE: api/Singers/5

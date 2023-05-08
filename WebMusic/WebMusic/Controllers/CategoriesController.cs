@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
-using WebMusic.models.ef;
+using WebMusic.Models.EF;
 
 namespace WebMusic.Controllers
 {
@@ -54,8 +54,8 @@ namespace WebMusic.Controllers
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, [FromForm] Category category)
+        [HttpPut("{id}/{FileImg}")]
+        public async Task<IActionResult> PutCategory([FromRoute] int id, [FromForm] Category category, [FromRoute] IFormFile FileImg)
         {
             if (id != category.Id)
             {
@@ -63,9 +63,9 @@ namespace WebMusic.Controllers
             }
 
             _context.Entry(category).State = EntityState.Modified;
-            if (category.FileImg != null)
+            if (FileImg != null)
             {
-                category.CategoryImg = await uploadFile.UploadImageAsync(category.FileImg);
+                category.CategoryImg = await uploadFile.UploadImageAsync(FileImg);
             }
             if (category.CreatedDate == null)
             {
@@ -94,16 +94,16 @@ namespace WebMusic.Controllers
 
         // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory([FromForm] Category category)
+        [HttpPost("{FileImg}")]
+        public async Task<ActionResult<Category>> PostCategory([FromForm] Category category, [FromRoute] IFormFile FileImg)
         {
             if (_context.Categories == null)
             {
                 return Problem("Entity set 'MusicWebContext.Categories'  is null.");
             }
-            if (category.FileImg != null)
+            if (FileImg != null)
             {
-                category.CategoryImg = await uploadFile.UploadImageAsync(category.FileImg);
+                category.CategoryImg = await uploadFile.UploadImageAsync(FileImg);
             }
             category.CreatedDate = DateTime.Now;
             category.ModifiedDate = DateTime.Now;
@@ -139,3 +139,4 @@ namespace WebMusic.Controllers
         }
     }
 }
+*/

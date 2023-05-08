@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebMusic.models.ef;
+namespace WebMusic.Models.EF;
 
 public partial class Category
 {
@@ -20,6 +20,4 @@ public partial class Category
     public virtual ICollection<Album> IdAlbums { get; set; } = new List<Album>();
 
     public virtual ICollection<Topic> IdTopics { get; set; } = new List<Topic>();
-    public IFormFile? FileImg { get; set; }
-
 }

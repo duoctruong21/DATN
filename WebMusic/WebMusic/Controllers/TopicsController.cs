@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
-using WebMusic.models.ef;
+using WebMusic.Models.Data;
+using WebMusic.Models.EF;
 
 namespace WebMusic.Controllers
 {
@@ -57,22 +58,24 @@ namespace WebMusic.Controllers
         // PUT: api/Topics/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTopic(int id, [FromForm] Topic topic)
+        public async Task<IActionResult> PutTopic(int id, [FromForm] Topics topic)
         {
             if (id != topic.Id)
             {
                 return BadRequest();
             }
-
+            var item = await _context.Topics.FindAsync(id);
             _context.Entry(topic).State = EntityState.Modified;
             if (topic.FileImg != null)
             {
-                /*_ = UploadFile.Uploadfile(topic.FileImg);*/
-                topic.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
+                _ = UploadFile.Uploadfile(topic.FileImg);
+                item!.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
 
             }
-            topic.ModifiedDate = DateTime.Now;
-
+            item!.TopicName = topic.TopicName;
+            item!.TopicDescription = topic.TopicDescription;
+            item!.ModifiedDate = DateTime.Now;
+            item!.Alias = item.TopicName != null ? FormatAlias.RemoveDiacritics(item.TopicName) : "";
             try
             {
                 await _context.SaveChangesAsync();
@@ -95,24 +98,27 @@ namespace WebMusic.Controllers
         // POST: api/Topics
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Topic>> PostTopic([FromForm] Topic topic)
+        public async Task<ActionResult<Topic>> PostTopic([FromForm] Topics topic)
         {
             if (_context.Topics == null)
             {
                 return Problem("Entity set 'MusicWebContext.Topics'  is null.");
             }
+            var item = new Topic();
             if (topic.FileImg != null)
             {
-                /*_ = UploadFile.Uploadfile(topic.FileImg);*/
-                topic.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
+                _ = UploadFile.Uploadfile(topic.FileImg);
+                item.TopicImg = await uploadFile.UploadImageAsync(topic.FileImg);
 
             }
-            topic.CreatedDate = DateTime.Now;
-            topic.ModifiedDate = DateTime.Now;
-            _context.Topics.Add(topic);
+            item!.TopicName = topic.TopicName;
+            item!.TopicDescription = topic.TopicDescription;
+            item!.ModifiedDate = DateTime.Now;
+            item!.Alias = item.TopicName != null ? FormatAlias.RemoveDiacritics(item.TopicName) : "";
+            _context.Topics.Add(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTopic", new { id = topic.Id }, topic);
+            return CreatedAtAction("GetTopic", new { id = item.Id }, item);
         }
 
         // DELETE: api/Topics/5

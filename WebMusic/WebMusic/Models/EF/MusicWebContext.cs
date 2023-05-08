@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WebMusic.Models.EF;
 
-namespace WebMusic.models.ef;
+namespace WebMusic.Models.EF;
 
 public partial class MusicWebContext : DbContext
 {
@@ -45,7 +43,7 @@ public partial class MusicWebContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-CQUSV1J\\DUOCTRUONG;Initial Catalog=MusicWeb;Integrated Security=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-CQUSV1J\\DUOCTRUONG;Initial Catalog=MusicWeb;Integrated Security=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -59,6 +57,9 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.AlbumDescription).HasMaxLength(500);
             entity.Property(e => e.AlbumImg).HasMaxLength(300);
             entity.Property(e => e.AlbumName).HasMaxLength(100);
+            entity.Property(e => e.Alias)
+                .HasMaxLength(200)
+                .HasColumnName("alias");
             entity.Property(e => e.CreatedDate).HasColumnType("date");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
 
@@ -122,6 +123,9 @@ public partial class MusicWebContext : DbContext
             entity.ToTable("singer");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Alias)
+                .HasMaxLength(200)
+                .HasColumnName("alias");
             entity.Property(e => e.CreatedBy).HasMaxLength(100);
             entity.Property(e => e.CreatedDate).HasColumnType("date");
             entity.Property(e => e.Fileimg)
@@ -147,6 +151,9 @@ public partial class MusicWebContext : DbContext
             entity.ToTable("song");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Alias)
+                .HasMaxLength(200)
+                .HasColumnName("alias");
             entity.Property(e => e.CreatedBy).HasMaxLength(100);
             entity.Property(e => e.CreatedDate).HasColumnType("date");
             entity.Property(e => e.Fileimg)
@@ -155,6 +162,7 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.Filesong)
                 .HasMaxLength(500)
                 .HasColumnName("filesong");
+            entity.Property(e => e.IdAlbum).HasColumnName("idAlbum");
             entity.Property(e => e.IdSinger).HasColumnName("idSinger");
             entity.Property(e => e.LikeCount).HasColumnName("likeCount");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
@@ -165,6 +173,10 @@ public partial class MusicWebContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("songName");
             entity.Property(e => e.ViewCount).HasColumnName("viewCount");
+
+            entity.HasOne(d => d.IdAlbumNavigation).WithMany(p => p.Songs)
+                .HasForeignKey(d => d.IdAlbum)
+                .HasConstraintName("fk_idalbum");
 
             entity.HasOne(d => d.IdSingerNavigation).WithMany(p => p.Songs)
                 .HasForeignKey(d => d.IdSinger)
@@ -178,6 +190,9 @@ public partial class MusicWebContext : DbContext
             entity.ToTable("topic");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Alias)
+                .HasMaxLength(200)
+                .HasColumnName("alias");
             entity.Property(e => e.CreatedDate).HasColumnType("date");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
             entity.Property(e => e.TopicDescription).HasMaxLength(500);
@@ -238,16 +253,6 @@ public partial class MusicWebContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__UserWithS__idson__534D60F1");
         });
-
-        modelBuilder.Entity<Song>()
-        .Ignore(s => s.FileImgs)
-        .Ignore(s=>s.FileMp3);
-        modelBuilder.Entity<Album>()
-        .Ignore(s => s.FileImg);
-        modelBuilder.Entity<Category>()
-        .Ignore(s => s.FileImg);
-        modelBuilder.Entity<Topic>().Ignore(s => s.FileImg);
-        modelBuilder.Entity<Singer>().Ignore(s => s.FileImgs);
 
         OnModelCreatingPartial(modelBuilder);
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebMusic.models.ef;
+namespace WebMusic.Models.EF;
 
 public partial class Singer
 {
@@ -23,8 +23,7 @@ public partial class Singer
 
     public string? Fileimg { get; set; }
 
+    public string? Alias { get; set; }
+
     public virtual ICollection<Song> Songs { get; set; } = new List<Song>();
-
-    public IFormFile? FileImgs { get; set; }
-
 }

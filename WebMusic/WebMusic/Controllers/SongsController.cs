@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
-using WebMusic.models.ef;
+using WebMusic.Models.EF;
 using WebMusic.Models;
+using WebMusic.Models.Data;
 
 namespace WebMusic.Controllers
 {
@@ -56,27 +57,33 @@ namespace WebMusic.Controllers
         // PUT: api/Songs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSong(int id, [FromForm] Song song)
+        public async Task<IActionResult> PutSong(int id, [FromForm] Songs song)
         {
             if (id != song.Id)
             {
                 return BadRequest();
             }
-
-            if (song.FileImgs != null)
+            var item = await _context.Songs.FindAsync(id);
+            _context.Entry(song).State = EntityState.Modified;
+            if (song.FileImg != null)
             {
-                song.Fileimg = await uploadFile.UploadImageAsync(song.FileImgs);
+                item!.Fileimg = await uploadFile.UploadImageAsync(song.FileImg);
             }
             if (song.FileMp3 != null)
             {
-                song.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
-                _context.Entry(song).State = EntityState.Modified;
-                if (song.CreatedDate == null)
-                {
-                    song.CreatedDate = DateTime.Now;
-                }
-                song.ModifiedDate = DateTime.Now;
+                item!.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
             }
+            if (item!.CreatedDate == null)
+            {
+                item!.CreatedDate = DateTime.Now;
+            }
+            item!.ModifiedDate = DateTime.Now;
+            item!.SongName = song.SongName;
+            item!.SongDescription = song.SongDescription;
+            item!.Alias = item.SongName != null ? FormatAlias.RemoveDiacritics(item.SongName) : "";
+            item.LyricSong = song.LyricSong;
+            item.IdAlbum = song.IdAlbum;
+            item.IdSinger = song.IdSinger;
             try
             {
                 await _context.SaveChangesAsync();
@@ -99,27 +106,34 @@ namespace WebMusic.Controllers
         // POST: api/Songs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Song>> PostSong([FromForm] Song song)
+        public async Task<ActionResult<Song>> PostSong([FromForm] Songs song)
         {
             if (_context.Songs == null)
             {
                 return Problem("Entity set 'MusicWebContext.Songs'  is null.");
             }
-            if (song.FileImgs != null)
+            var item = new Song();
+            if (song.FileImg != null)
             {
-                song.Fileimg = await uploadFile.UploadImageAsync(song.FileImgs);
+                item.Fileimg = await uploadFile.UploadImageAsync(song.FileImg);
             }
             if (song.FileMp3 != null)
             {
-                song.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
+                item.Filesong = await uploadFile.UploadImageAsync(song.FileMp3);
             }
-            song.CreatedDate = DateTime.Now;
-            song.ModifiedDate = DateTime.Now;
+            item.CreatedDate = DateTime.Now;
+            item.ModifiedDate = DateTime.Now;
+            item.SongName = song.SongName;
+            item.SongDescription = song.SongDescription;
+            item.Alias = item.SongName != null ? FormatAlias.RemoveDiacritics(item.SongName) : "";
+            item.LyricSong = song.LyricSong;
+            item.IdAlbum = song.IdAlbum;
+            item.IdSinger = song.IdSinger;
 
-            _context.Songs.Add(song);
+            _context.Songs.Add(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSong", new { id = song.Id }, song);
+            return CreatedAtAction("GetSong", new { id = item.Id }, item);
         }
 
         // DELETE: api/Songs/5
@@ -146,23 +160,5 @@ namespace WebMusic.Controllers
         {
             return (_context.Songs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-
-
-        //get item song 
-        /*public async Task<ActionResult<IEnumerable<SongItem>>> GetItem()
-        {
-            List<SongItem> items = await (
-                from song in _context.Songs
-                join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id
-                select new SongItem
-                {
-                    songName = song.SongName,
-                    singerName = singer.SingerName,
-                    albumName = album.AlbumName,
-                    fileImg = song.Fileimg
-                }).ToListAsync();
-            return items;
-        }*/
     }
 }

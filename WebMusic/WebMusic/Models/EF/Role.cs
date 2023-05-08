@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebMusic.models.ef;
+namespace WebMusic.Models.EF;
 
 public partial class Role
 {
