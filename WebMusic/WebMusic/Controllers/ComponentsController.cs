@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
-using WebMusic.models.ef;
+using WebMusic.Models.EF;
 using WebMusic.Models;
 
 namespace WebMusic.Controllers
@@ -26,7 +26,7 @@ namespace WebMusic.Controllers
             try {
                 List<SongItem> items = await (
                 from song in _context.Songs
-                join singer in _context.Singers on song.IdSinger equals singer.Id 
+                join singer in _context.Singers on song.IdSinger equals singer.Id
                 join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
@@ -34,7 +34,13 @@ namespace WebMusic.Controllers
                     songName = song.SongName,
                     singerName = singer.SingerName,
                     albumName = albums.AlbumName,
-                    fileImg = song.Fileimg
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id
                 }).Take(5).ToListAsync();
                 return items;
             }

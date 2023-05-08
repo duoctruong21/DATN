@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebMusic.models.ef;
+namespace WebMusic.Models.EF;
 
 public partial class Topic
 {
@@ -17,8 +17,7 @@ public partial class Topic
 
     public DateTime? ModifiedDate { get; set; }
 
+    public string? Alias { get; set; }
+
     public virtual ICollection<Category> IdCategories { get; set; } = new List<Category>();
-
-    public IFormFile? FileImg { get; set; }
-
 }

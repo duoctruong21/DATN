@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
-using WebMusic.models.ef;
+using WebMusic.Models.Data;
+using WebMusic.Models.EF;
 
 namespace WebMusic.Controllers
 {
@@ -57,24 +58,26 @@ namespace WebMusic.Controllers
         // PUT: api/Albums/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum(int id, [FromForm] Album album)
+        public async Task<IActionResult> PutAlbum(int id, [FromForm] Albums album)
         {
             if (id != album.Id)
             {
                 return BadRequest();
             }
-
+            var item = await _context.Albums.FindAsync(id);
             _context.Entry(album).State = EntityState.Modified;
             if (album.FileImg != null)
             {
-                album.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
+                item!.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
             }
-            if (album.CreatedDate == null)
+            if (item!.CreatedDate == null)
             {
-                album.CreatedDate = DateTime.Now;
+                item!.CreatedDate = DateTime.Now;
             }
-            album.ModifiedDate = DateTime.Now;
-
+            item!.AlbumName = album.AlbumName;
+            item!.AlbumDescription = album.AlbumDescription;
+            item!.ModifiedDate = DateTime.Now;
+            item!.Alias = item.AlbumName != null ? FormatAlias.RemoveDiacritics(album.AlbumName!):"";
             try
             {
                 await _context.SaveChangesAsync();
@@ -97,23 +100,26 @@ namespace WebMusic.Controllers
         // POST: api/Albums
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Album>> PostAlbum([FromForm] Album album)
+        public async Task<ActionResult<Album>> PostAlbum([FromForm] Albums album)
         {
             if (_context.Albums == null)
             {
                 return Problem("Entity set 'MusicWebContext.Albums'  is null.");
             }
+            var item = new Album();
             if (album.FileImg != null)
             {
-                album.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
+                item.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
             }
-            album.CreatedDate = DateTime.Now;
-            album.ModifiedDate = DateTime.Now;
-
-            _context.Albums.Add(album);
+            item.CreatedDate = DateTime.Now;
+            item.ModifiedDate = DateTime.Now;
+            item!.AlbumName = album.AlbumName;
+            item!.AlbumDescription = album.AlbumDescription;
+            item!.Alias = item.AlbumName != null? FormatAlias.RemoveDiacritics(item.AlbumName!):"";
+            _context.Albums.Add(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAlbum", new { id = album.Id }, album);
+            return CreatedAtAction("GetAlbum", new { id = item.Id }, item);
         }
 
         // DELETE: api/Albums/5
