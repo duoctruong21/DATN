@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MRINgozSRggmdegtSnM8kwvBaeecrBZzktd7fnFnIio=",
+  "Hash": "IlUQIWDUtEBTi3qS0RvZWGsRMU+yVLROOCsumJg94GY=",
   "Source": "WebMusic",
   "BasePath": "_content/WebMusic",
   "Mode": "Default",
@@ -1154,6 +1154,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\1_19tmLBmVPfbohCvb7HgJFg.png"
+    },
+    {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Chay Ve Noi Phia Anh - Khac Viet - NhacHay360.mp3",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/Chay Ve Noi Phia Anh - Khac Viet - NhacHay360.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Chay Ve Noi Phia Anh - Khac Viet - NhacHay360.mp3"
     },
     {
       "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Do Toc 2 - Masew, Do Mixi, Phuc Du, Phao - NhacHay360.mp3",

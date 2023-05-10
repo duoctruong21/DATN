@@ -12,5 +12,6 @@
         public int? idSong { get; set; }
         public int? idSinger { get; set; }
         public int? idAlbum { get; set; }
+        public string? mp3 { get; set; }
     }
 }
