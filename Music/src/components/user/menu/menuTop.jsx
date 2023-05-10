@@ -21,10 +21,10 @@ function MenuTop() {
             </div>
             <ul className="menuTop__Main__block__login">
               <li>
-                <a href="#">Login</a>
+                <a href="/login">Login</a>
               </li>
               <li>
-                <a href="#">Register</a>
+                <a href="/register">Register</a>
               </li>
             </ul>
           </div>

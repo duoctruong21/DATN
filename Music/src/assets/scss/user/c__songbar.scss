@@ -1,8 +1,9 @@
 .songBar {
     box-sizing: border-box;
     height: 100px;
-    padding: 20px;
+    padding: 0 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 5px;
     &__wapper{
         display: flex;
         justify-content: space-between;
@@ -11,6 +12,7 @@
         &__index {
             color: #fff;
             padding: 0 10px 0 0;
+            width: 20px;
         }
         &__main{
             display: flex;
@@ -23,6 +25,8 @@
                 display: flex;
                 & img {
                     width: 100px;
+                    height: 100px;
+                    object-fit: cover;
                     margin-right: 10px;
                 }
 

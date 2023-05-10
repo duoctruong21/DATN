@@ -14,7 +14,7 @@ function EditSinger() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-
+  console.log(singerUrl)
   useEffect(() => {
     axios.get(singerUrl).then((response) => {
       const singerData = response.data;

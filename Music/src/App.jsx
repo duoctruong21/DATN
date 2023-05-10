@@ -28,8 +28,46 @@ import AddSinger from "./components/admin/singer/addSinger.jsx";
 import AddSong from "./components/admin/song/addSong.jsx";
 import EditSinger from "./components/admin/singer/editSinger.jsx";
 import EditSong from "./components/admin/song/EditSong.jsx";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  const urlSong = "https://localhost:7122/api/Songs";
+  const urlSinger = "https://localhost:7122/api/Singers";
+  const urlAlbum = "https://localhost:7122/api/Albums";
+  const [songs, setSong] = useState([]);
+  const [singers, setSinger] = useState([]);
+  const [albums, setAlbum] = useState([]);
+
+  useEffect(() => {
+    async function getSong() {
+      await axios
+        .get(urlSong)
+        .then((response) => {
+          setSong(response.data);
+        })
+        .catch((error) => console.log(error));
+    }
+    async function getSinger() {
+      await axios
+        .get(urlSinger)
+        .then((response) => {
+          setSinger(response.data);
+        })
+        .catch((error) => console.log(error));
+    }
+    async function getAlbum() {
+      await axios
+        .get(urlAlbum)
+        .then((response) => {
+          setAlbum(response.data);
+        })
+        .catch((error) => console.log(error));
+    }
+    getSinger();
+    getAlbum();
+    getSong();
+  }, []);
   return (
     <div className="app">
       <Routes>
@@ -53,6 +91,7 @@ function App() {
       </Routes>
       <div className="app__main">
         <Routes>
+          {/* user */}
           <Route
             path="/home"
             element={<Home />}
@@ -74,21 +113,18 @@ function App() {
             element={<ListTopsong />}
           />
           <Route
-            path="/infomation-singer"
+            path={`/singer/:alias`}
             element={<SingerInfo />}
           />
           <Route
-            path="/song-singer"
-            element={<ListSongSinger />}
-          />
-          <Route
-            path="/infomation-song"
+            path={`/song/:alias`}
             element={<SongInfo />}
           />
           <Route
-            path="/infomation-album"
+            path={`/album/:alias`}
             element={<Album />}
           />
+          {/* Admin */}
           <Route
             path="/admin/topic"
             element={<IndexTopic />}

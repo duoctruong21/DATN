@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../assets/scss/user/c__songInfo.scss";
 import SongBar from "./SongBar";
 import PlaySong from "./PlaySong";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function SongInfo() {
+  const { alias } = useParams();
+  const urlSong = `https://localhost:7122/song/${alias}`;
+  const [song, setSong] = useState([]);
+  axios
+    .get(urlSong)
+    .then((response) => setSong(response.data))
+    .catch((error) => console.log(error));
   return (
     <div className="songinfo">
       <div className="songinfo__wapper">
         <div className="songinfo__wapper__main">
-          <div className="songinfo__wapper__main__info">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/music-52086.appspot.com/o/images%2F0b5f9558-efae-4cf9-b0d2-c537ccb59e2d.jpg?alt=media&token=b94e0a54-3950-4304-847a-6958446dc190"
-              alt=""
-            />
-            <h2>
-              Độ tộc 2 | <a href="/album">Độ tộc</a>
-            </h2>
-            <p>
-              <a href="/infomation-singer">Độ mixi</a>,{" "}
-              <a href="/infomation-singer">Phúc Du</a>
-            </p>
-          </div>
+          {song.map((song, index) => (
+            <div className="songinfo__wapper__main__info">
+              <img
+                src={song.fileImg}
+                alt=""
+              />
+              <h2>
+                {song.songName} | <a href={`/album/${song.linkalbum}`}>{song.albumName}</a>
+              </h2>
+              <p>
+                {/* <a href="/infomation-singer">Độ mixi</a>,{" "} */}
+                <a href={`/singer/${song.linksinger}`}>{song.singerName}</a>
+              </p>
+            </div>
+          ))}
           <div className="songinfo__wapper__main__song">
             <div className="songinfo__wapper__main__song__title">
               <h2>Bài hát liên quan</h2>

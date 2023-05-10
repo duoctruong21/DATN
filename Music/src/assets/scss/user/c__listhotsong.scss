@@ -3,10 +3,11 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: left;
     }
     &__song{
         box-sizing: border-box;
         margin: 0 10px 0 10px;
+        
     }
 }

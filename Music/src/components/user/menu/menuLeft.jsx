@@ -6,9 +6,7 @@ function menuLeft() {
     <div className="menuleft">
       <div className="menuleft__wapper">
         <div className="menuleft__main">
-          <ul
-            className="menuleft__list"
-            style={{ display: "none" }}>
+          <ul className="menuleft__list">
             <li>
               <a href="/home">Home</a>
             </li>
@@ -22,7 +20,9 @@ function menuLeft() {
               <a href="/top-song">Top song</a>
             </li>
           </ul>
-          <ul className="menuleft__list">
+          <ul
+            className="menuleft__list"
+            style={{ display: "none" }}>
             <li>
               <a href="/admin/topic">Topic</a>
             </li>
