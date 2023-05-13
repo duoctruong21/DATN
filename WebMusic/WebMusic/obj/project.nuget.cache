@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gmpt8xkgDATjP1EL6fOaq0ie7CbcVjNuU6/7886DgDDHXBHbHQUinU8ZhUG8L6kcyMpMKATYb/uILF6Ku0AIZg==",
+  "dgSpecHash": "gFCamXHUMbsmi+5QhSKqfR44KLXu2eckg2x4TvRNIWkC3oICy812MiDsK3d68ncwUhQ7/Xx/CLC0E5/UMAqf5Q==",
   "success": true,
   "projectFilePath": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\WebMusic.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\DELL\\.nuget\\packages\\google.apis.auth\\1.60.0\\google.apis.auth.1.60.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\google.apis.core\\1.60.0\\google.apis.core.1.60.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\google.apis.storage.v1\\1.60.0.2742\\google.apis.storage.v1.1.60.0.2742.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\google.apis.youtube.v3\\1.60.0.3043\\google.apis.youtube.v3.1.60.0.3043.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\google.cloud.storage.v1\\4.4.0\\google.cloud.storage.v1.4.4.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\litedb\\4.1.4\\litedb.4.1.4.nupkg.sha512",
@@ -217,7 +218,19 @@
     "C:\\Users\\DELL\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\DELL\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\DELL\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\youtubesearch.dll\\1.1.0\\youtubesearch.dll.1.1.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'YoutubeSearch.dll 1.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "YoutubeSearch.dll",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
