@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IlUQIWDUtEBTi3qS0RvZWGsRMU+yVLROOCsumJg94GY=",
+  "Hash": "QzzvMS2sER3A0236ykSd2dq3oZPTlo7qK2ODaArWIpY=",
   "Source": "WebMusic",
   "BasePath": "_content/WebMusic",
   "Mode": "Default",
@@ -1241,6 +1241,23 @@
       "OriginalItemSpec": "wwwroot\\images\\hieuthuhai.png"
     },
     {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\leva-eternity-149473 (4).mp3",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/leva-eternity-149473 (4).mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\leva-eternity-149473 (4).mp3"
+    },
+    {
       "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\mtp.jpg",
       "SourceId": "WebMusic",
       "SourceType": "Discovered",
@@ -1460,6 +1477,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg"
+    },
+    {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\js\\client_secret_455567548019-0hnnvrmbjckfluridivcg97id3rsgfrm.apps.googleusercontent.com.json",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "js/client_secret_455567548019-0hnnvrmbjckfluridivcg97id3rsgfrm.apps.googleusercontent.com.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\client_secret_455567548019-0hnnvrmbjckfluridivcg97id3rsgfrm.apps.googleusercontent.com.json"
     }
   ]
 }

@@ -93,12 +93,20 @@
       "PackagePath": "staticwebassets\\images\\hieuthuhai.png"
     },
     {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\leva-eternity-149473 (4).mp3",
+      "PackagePath": "staticwebassets\\images\\leva-eternity-149473 (4).mp3"
+    },
+    {
       "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\mtp.jpg",
       "PackagePath": "staticwebassets\\images\\mtp.jpg"
     },
     {
       "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg",
       "PackagePath": "staticwebassets\\images\\z4288752334015_e92c96ea903b5fdc94881251c665993b.jpg"
+    },
+    {
+      "Id": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\js\\client_secret_455567548019-0hnnvrmbjckfluridivcg97id3rsgfrm.apps.googleusercontent.com.json",
+      "PackagePath": "staticwebassets\\js\\client_secret_455567548019-0hnnvrmbjckfluridivcg97id3rsgfrm.apps.googleusercontent.com.json"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.WebMusic.Microsoft.AspNetCore.StaticWebAssets.props",

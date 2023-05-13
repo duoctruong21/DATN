@@ -13,6 +13,7 @@
     <PackageReference Include="FirebaseAuthentication.net" Version="4.0.2" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.2.0" />
     <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.60.0.3043" />
     <PackageReference Include="Google.Cloud.Storage.V1" Version="4.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
@@ -29,6 +30,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="YoutubeSearch.dll" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

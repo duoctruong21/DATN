@@ -314,3 +314,5 @@ D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\CorePush.dll
 D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\Google.Apis.Storage.v1.dll
 D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\Google.Cloud.Storage.V1.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\YoutubeSearch.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\Google.Apis.YouTube.v3.dll
