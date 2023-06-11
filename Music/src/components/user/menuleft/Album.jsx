@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import SongBar from "./SongBar";
 import "../../../assets/scss/user/c__album.scss";
@@ -13,21 +13,26 @@ function Album() {
   const [songs, setSong] = useState([]);
   const [name, setName] = useState([])
   const [id, setId] = useState([]);
-  axios
-    .get(urlAlbum)
-    .then((response) => {
-      const dataSong = response.data
-      setId(dataSong.id)
-      setName(dataSong.albumName);})
-    .catch();
+  useEffect(()=>{
+    axios
+      .get(urlAlbum)
+      .then((response) => {
+        const dataSong = response.data;
+        setId(dataSong.id);
+        setName(dataSong.albumName);
+      })
+      .catch();
+  },[])
 
   const urlSongByAlbum = `https://localhost:7122/songbyalbum/${id}`;
-  axios
-    .get(urlSongByAlbum)
-    .then((response) => {
-      setSong(response.data);
-    })
-    .catch();
+  useEffect(()=>{
+    axios
+      .get(urlSongByAlbum)
+      .then((response) => {
+        setSong(response.data);
+      })
+      .catch();
+  })
 
   // phân trang
   const [pageNumber, setPageNumber] = useState(0);

@@ -1,9 +1,9 @@
 .login{
     position: relative;
-    z-index: 90;
+    z-index: 12;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
+    //background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
 
     &__wapper{
         display: flex;
@@ -11,10 +11,11 @@
         align-items: center;
         height: 100%;
         &__main{
-            background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
+            //background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
+            background: linear-gradient(to bottom right, #cdd1dd, #4d3970);
             padding: 10px 15px;
             border-radius: 4px;
-            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            box-shadow: rgba(219, 217, 217, 0.15) 1.95px 1.95px 2.6px;
             &__title{
                 padding: 25px 50px;
                 font-size: 40px;
@@ -45,14 +46,21 @@
                 }
                 & div {
                     text-align: right;
-                    & button{
-                        width: 20%;
+                    display: flex;
+                    justify-content: space-between;
+                    & button, a{
+                        text-decoration: none;
+                        color: #000;
                         font-size: 15px;
                         padding: 10px 5px;
                         font-family: Sono;
                         border-radius: 30px;
                         border: none;
                         background: linear-gradient(to bottom right, #cdd1dd, #4d3970);
+
+                        &:first-child{
+                            margin-right: 10px;
+                        }
                     }
                 }
             }
@@ -77,10 +85,10 @@
                     }
 
                     &:last-child{
-                        background: linear-gradient(to bottom right, #3961db, #ffffff);
+                        //background: linear-gradient(to bottom right, #3961db, #ffffff);
                     }
                     &:first-child{
-                        background: linear-gradient(to bottom right, #3961db, #42f26e, #eff54f, #fa3737);
+                        //background: linear-gradient(to bottom right, #3961db, #42f26e, #eff54f, #fa3737);
                     }
 
                     & p {

@@ -1,25 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../../assets/scss/user/c__songitem.scss";
+import ReactPaginate from 'react-paginate'
 
-function ListSongItem() {
+function ListSongItem(props) {
+  // get data
+  const [itemSong, setItemSong] = useState([]);
+  useEffect(() => {
+    setItemSong(props.dataSongItem);
+  }, [props.dataSongItem]);
+
+  // phân trang
+  const [pageNumber, setPageNumber] = useState(0);
+  const songsPerPage = 10;
+  const pagesVisited = pageNumber * songsPerPage;
+  const pageCount = Math.ceil(itemSong.length / songsPerPage);
+  const handlePageClick = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   return (
-    <div
-      href="#"
-      className="SongItem">
-      <div className="SongItem__item">
-        <img
-          src="https://photo-zmp3.zmdcdn.me/banner/2/9/e/6/29e6823f099b327ff1730e7f5de4f7d0.jpg"
-          alt=""
-        />
-        <div className="SongItem__item__info">
-          <a href="/infomation-song">Tên Bài hát</a>
-          <a href="/infomation-album">
-            <p>Tên album</p>
-          </a>
-          <a href="/infomation-singer">
-            <p>Tên ca sĩ</p>
-          </a>
-        </div>
+    <div>
+      <div className="ListSongItem">
+        {itemSong
+          .slice(pagesVisited, pagesVisited + songsPerPage)
+          .map((song, index) => (
+            <div
+              key={index}
+              href="#"
+              className="SongItem">
+              <div className="SongItem__item">
+                <img
+                  src={
+                    song.fileImg === ""
+                      ? "https://i.pinimg.com/564x/41/07/4b/41074b335e04b4432918ea6dd636b2be.jpg"
+                      : song.fileImg
+                  }
+                  alt={song.songName}
+                />
+                <div className="SongItem__item__info">
+                  <a href={`/song/${song.linksong}`}>{song.songName}</a>
+                  <a href={`/album/${song.linkalbum}`}>
+                    <p>{song.albumName}</p>
+                  </a>
+                  <a href={`/singer/${song.linksinger}`}>
+                    <p>{song.singerName}</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+      </div>
+      <div className="listtopsong__wapper__page">
+        {itemSong.length < 10 ? (
+          ""
+        ) : (
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
+        )}
       </div>
     </div>
   );

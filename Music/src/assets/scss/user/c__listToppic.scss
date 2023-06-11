@@ -32,6 +32,8 @@
                 overflow: hidden;
                 & img{
                     width: 380px;
+                    height: 213px;
+                    object-fit: cover;
                     cursor: pointer;
                 }
             }

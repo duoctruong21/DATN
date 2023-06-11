@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../../assets/scss/user/c__menuleft.scss";
 
 function menuLeft() {
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    
+  }, []);
+
   return (
     <div className="menuleft">
       <div className="menuleft__wapper">
@@ -10,9 +15,13 @@ function menuLeft() {
             <li>
               <a href="/home">Home</a>
             </li>
-            <li>
-              <a href="/your-library">Your library</a>
-            </li>
+            {token != null ? (
+              <li>
+                <a href="/your-library">Your library</a>
+              </li>
+            ) : (
+              ""
+            )}
             <li>
               <a href="/your-history">History</a>
             </li>

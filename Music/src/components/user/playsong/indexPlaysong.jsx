@@ -11,15 +11,20 @@ function indexPlaysong() {
           <div className="indexPlaysong__main__block">
             <img
               className="indexPlaysong__main__block__img"
-              src="https://firebasestorage.googleapis.com/v0/b/music-52086.appspot.com/o/images%2F0907502c-2e33-454a-8389-f2f06ca22751.png?alt=media&token=9b11e57b-fe40-4732-82a3-3b46116664f6"
+              src="https://r5---sn-npoeenl7.googlevideo.com/videogoodput?id=o-AImFaSAFnjEMk9zR9UygBu9PNc_Ztu_VecEQevTVmQ1y&source=goodput&range=0-4999&expire=1686371203&ip=123.21.88.138&ms=pm&mm=35&pl=24&nh=IgpwZjAyLnNpbjEwKg8xNDIuMjUwLjE2NS4yMDk&sparams=id,source,range,expire,ip,ms,mm,pl,nh&signature=6C6F584D97D27ABF6E11955A5C52C4F92465F3D3.6FADD233E2FDFA8974AEB08FA5FD6D2A28B08881&key=cms1"
             />
             <div className="indexPlaysong__main__block__info">
               <h2>Ngủ một mình | Hiếu thứ hai</h2>
               <p>The night</p>
             </div>
           </div>
-          <PlaySong />
         </div>
+        <audio controls>
+          <source
+            src="https://r5---sn-npoeenl7.googlevideo.com/videogoodput?id=o-AImFaSAFnjEMk9zR9UygBu9PNc_Ztu_VecEQevTVmQ1y&source=goodput&range=0-4999&expire=1686371203&ip=123.21.88.138&ms=pm&mm=35&pl=24&nh=IgpwZjAyLnNpbjEwKg8xNDIuMjUwLjE2NS4yMDk&sparams=id,source,range,expire,ip,ms,mm,pl,nh&signature=6C6F584D97D27ABF6E11955A5C52C4F92465F3D3.6FADD233E2FDFA8974AEB08FA5FD6D2A28B08881&key=cms1"
+            type="audio/mpeg"
+          />
+        </audio>
       </div>
     </div>
   );

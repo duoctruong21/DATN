@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../assets/scss/user/c__songInfo.scss";
 import SongBar from "./SongBar";
 import PlaySong from "./PlaySong";
@@ -9,10 +9,12 @@ function SongInfo() {
   const { alias } = useParams();
   const urlSong = `https://localhost:7122/song/${alias}`;
   const [song, setSong] = useState([]);
-  axios
-    .get(urlSong)
-    .then((response) => setSong(response.data))
-    .catch((error) => console.log(error));
+  useEffect(()=>{
+    axios
+      .get(urlSong)
+      .then((response) => setSong(response.data))
+      .catch((error) => console.log(error));
+  },[])
   return (
     <div className="songinfo">
       <div className="songinfo__wapper">
@@ -20,11 +22,16 @@ function SongInfo() {
           {song.map((song, index) => (
             <div className="songinfo__wapper__main__info">
               <img
-                src={song.fileImg}
+                src={
+                  song.fileImg != ""
+                    ? song.fileImg
+                    : "https://i.pinimg.com/564x/41/07/4b/41074b335e04b4432918ea6dd636b2be.jpg"
+                }
                 alt=""
               />
               <h2>
-                {song.songName} | <a href={`/album/${song.linkalbum}`}>{song.albumName}</a>
+                {song.songName}{" "}
+                <a href={`/album/${song.linkalbum}`}>{song.albumName}</a>
               </h2>
               <p>
                 {/* <a href="/infomation-singer">Độ mixi</a>,{" "} */}
@@ -37,11 +44,7 @@ function SongInfo() {
               <h2>Bài hát liên quan</h2>
             </div>
             <div className="songinfo__wapper__main__song__list">
-              <SongBar />
-              <SongBar />
-              <SongBar />
-              <SongBar />
-              <SongBar />
+              {/* <SongBar dataSongBar ={song}/> */}
             </div>
             {/* <div className="songinfo__wapper__main__song__seemore">
               <a href="/song-singer">See more</a>

@@ -1,12 +1,13 @@
 .menuTop {
     width: 100vw;
     position: fixed;
-    z-index: 9999;
-    border-bottom: 1px solid #fff;
+    z-index: 11;
+    background-color: #121212;
+    //border-bottom: 1px solid #fff;
     &__wapper{
         // background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
         box-sizing: border-box  ;
-        padding: 10px 20px;
+        padding: 20px 20px;
         width: inherit;
     }
 
@@ -23,6 +24,7 @@
                 font-size: 40px;
                 font-weight: 700;
                 color: #fff;
+                text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
             }
         }
 
@@ -48,10 +50,13 @@
                     box-sizing: border-box;
                 }
 
-                & a{
+                & button{
                     display: block;
                     position: absolute;
+                    background-color: rgba(0,0,0,0);
+                    border: 0;
                     right: 1px;
+                    cursor: pointer;
                     & svg {
                         width: 30px;
                         padding: 6px;

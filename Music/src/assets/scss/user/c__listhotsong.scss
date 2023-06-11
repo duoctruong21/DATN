@@ -4,6 +4,8 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: left;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
     &__song{
         box-sizing: border-box;

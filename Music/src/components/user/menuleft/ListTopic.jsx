@@ -1,29 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../../../assets/scss/user/c__listToppic.scss";
+import axios from "axios";
 
 function ListTopic() {
-  const [listItems, setListItems] = useState([
-    {
-      id: 1,
-      content:
-        "https://photo-zmp3.zmdcdn.me/banner/d/a/8/8/da888d3aaa65f746ac409949bd9e6463.jpg",
-    },
-    {
-      id: 2,
-      content:
-        "https://photo-zmp3.zmdcdn.me/banner/d/1/8/7/d187f7c347f245df7a694cae5d1477d2.jpg",
-    },
-    {
-      id: 3,
-      content:
-        "https://photo-zmp3.zmdcdn.me/banner/2/9/e/6/29e6823f099b327ff1730e7f5de4f7d0.jpg",
-    },
-    {
-      id: 4,
-      content:
-        "https://photo-zmp3.zmdcdn.me/banner/f/6/6/6/f666c4ebe57ef88d73ff6eea2f4b057d.jpg",
-    },
-  ]);
+  const [listItems, setListItems] = useState([]);
+  const url = "https://localhost:7122/albumTop6";
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => setListItems(response.data))
+      .catch();
+  }, []);
+  //console.log(listItems)
 
   const firstItemRef = useRef(null);
   const myListRef = useRef(null);
@@ -67,11 +55,11 @@ function ListTopic() {
           className="listtopic__main">
           {listItems.map((item, index) => (
             <li
-              key={item.id}
+              key={index}
               ref={index === 0 ? firstItemRef : null}>
               <a href="#">
                 <img
-                  src={item.content}
+                  src={item.albumImg}
                   alt=""
                 />
               </a>

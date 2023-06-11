@@ -4,21 +4,24 @@
 
         &__main{
             padding-top: 40px;
-            display: flex;
             &__info{
                 width: calc(40%);
                 display: flex;
+                box-sizing: border-box;
                 align-items: center;
-                flex-direction: column; 
+                padding: 0 20px; 
                 
                 & img{
-                    width: 400px;
+                    width: 150px;
+                    border-radius: 50%;
+                    object-fit: cover;
                 }
                 & h2 {
                     padding-top: 10px;
                     color: #fff;
                     font-weight: 700;
                     font-size: 25px;
+                    padding: 0 20px;
                 }
                 & p {
                     box-sizing: border-box;
@@ -42,10 +45,7 @@
                     }
                 }
 
-                &__list {
-                    
-                }
-
+                
                 &__seemore{
                     text-align: right;
                     & a{

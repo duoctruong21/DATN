@@ -30,6 +30,7 @@ import EditSinger from "./components/admin/singer/editSinger.jsx";
 import EditSong from "./components/admin/song/EditSong.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import SearchIndex from "./components/user/menuleft/SearchIndex.jsx";
 
 function App() {
   const urlSong = "https://localhost:7122/api/Songs";
@@ -38,6 +39,17 @@ function App() {
   const [songs, setSong] = useState([]);
   const [singers, setSinger] = useState([]);
   const [albums, setAlbum] = useState([]);
+
+  const token = localStorage.getItem("token");
+
+  const [Song, setSongs] = useState(songs[0]);
+  console.log(token);
+
+  const handleSetSong = (idSong) => {
+    const song = songs.find((song) => song.id === idSong);
+    if (!song) setSong(songs[0]);
+    else setSong(song);
+  };
 
   useEffect(() => {
     async function getSong() {
@@ -68,6 +80,16 @@ function App() {
     getAlbum();
     getSong();
   }, []);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  // Callback function để nhận dữ liệu từ component Login
+  const handleLogin = (userData) => {
+    // Xử lý logic đăng nhập
+    setIsLoggedIn(true);
+    setUserData(userData);
+  };
   return (
     <div className="app">
       <Routes>
@@ -82,7 +104,7 @@ function App() {
       </Routes>
       <MenuTop />
       <MenuLeft />
-      <PlaySong />
+
       <Routes>
         <Route
           path="/playsong"
@@ -95,6 +117,10 @@ function App() {
           <Route
             path="/home"
             element={<Home />}
+          />
+          <Route
+            path="/search/:content"
+            element={<SearchIndex />}
           />
           <Route
             path="/list-hot-song"

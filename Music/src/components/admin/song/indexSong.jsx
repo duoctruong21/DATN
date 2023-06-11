@@ -20,7 +20,7 @@ function IndexSong() {
   });
   //pagedlist
   const [pageNumber, setPageNumber] = useState(0);
-  const songsPerPage = 5;
+  const songsPerPage = 10;
   const pagesVisited = pageNumber * songsPerPage;
   const pageCount = Math.ceil(Songs.length / songsPerPage);
   const handlePageClick = ({ selected }) => {

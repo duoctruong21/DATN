@@ -1,7 +1,8 @@
 html {
     font-family: Sono;
-    // background-color: #000;
-    background: linear-gradient(to bottom right, #7e87a3, #87bcff, #5193b6, #5aa9a5, #a589e0);
+    background-color: #121212;
+    //background-color: #000000;
+    //background: linear-gradient(to bottom right, #7e87a3, #87bcff, #5193b6, #5aa9a5, #a589e0);
         height: 100vh;
     &::-webkit-scrollbar {
         width: 0px;
@@ -24,9 +25,10 @@ button svg{
 .app__main {
     box-sizing: border-box;
     position: relative;
-    top: 62px;
+    top: 72px;
     left: 300px;
     width: calc(100vw - 300px);
+    background-color: #121212;
 }
 
 .paginationBttns {

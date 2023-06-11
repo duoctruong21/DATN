@@ -1,7 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../../assets/scss/user/c__register.scss";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function Register() {
+
+  const history = useNavigate()
+
+  const [firstName, setFirstName] = useState([]);
+  const [lastName, setLastName] = useState([]);
+  const [gmail, setGmail] = useState([]);
+  const [password, setPassword] = useState([]);
+
+  const [user, setUer] = useState([]);
+
+  const url = "https://localhost:7122/api/UserWebMusics";
+
+  useEffect(()=>{
+    axios.get(url).then((response)=>{
+      setUer(response.data);
+    }).catch()
+  },[])
+
+  const register = (e) => {
+    e.preventDefault();
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      gmail: gmail,
+      password: password,
+    };
+    axios
+      .post(url, data)
+      .then((response) => {
+        response.data;
+        history('/home')
+      })
+      .catch();
+  };
   return (
     <div className="register">
       <div className="register__wapper">
@@ -10,30 +47,26 @@ function Register() {
             <h2>Music</h2>
           </div>
           <form
+            onSubmit={register}
             action="post"
             className="register__wapper__main__form">
             <div className="register__wapper__main__form__control">
-              <label htmlFor="fullname">FullName</label>
+              <label htmlFor="firstName">First Name</label>
               <input
-                type="fullname"
-                name="fullname"
-                id="fullname"
+                type="firstName"
+                name="firstName"
+                id="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
+
             <div className="register__wapper__main__form__control">
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="lastName">Last Name</label>
               <input
-                type="phone"
-                name="phone"
-                id="phone"
-              />
-            </div>
-            <div className="register__wapper__main__form__control">
-              <label htmlFor="address">Address</label>
-              <input
-                type="address"
-                name="address"
-                id="address"
+                type="lastName"
+                name="lastName"
+                id="lastName"
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
             <div className="register__wapper__main__form__control">
@@ -42,7 +75,16 @@ function Register() {
                 type="email"
                 name="email"
                 id="email"
+                onChange={(e) => setGmail(e.target.value)}
               />
+            </div>
+            <div className="register__wapper__main__form__control">
+              <label htmlFor="firstName"></label>
+              <p>
+                {user.map((user) =>
+                  user.gmail == gmail ? "Gmail này đã được sử dụng" : ""
+                )}
+              </p>
             </div>
             <div className="register__wapper__main__form__control">
               <label htmlFor="password">Password</label>
@@ -50,13 +92,18 @@ function Register() {
                 type="password"
                 name="password"
                 id="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div>
-              <button>register</button>
+              <a href="/home">Back</a>
+              <div>
+                <a href="/login">Login</a>
+                <button value="submit">register</button>
+              </div>
             </div>
             <div className="register__wapper__main__social">
-              <a href="#">
+              {/* <a href="#">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 488 512">
@@ -71,7 +118,7 @@ function Register() {
                   <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
                 </svg>
                 <p>register With FaceBook</p>
-              </a>
+              </a> */}
             </div>
           </form>
         </div>

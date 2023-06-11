@@ -1,0 +1,49 @@
+.ListSinger {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+    &__wapper{
+
+        &__main{
+
+            &__header{
+                font-size: 25px;
+                font-weight: 700;
+                color: #fff;
+                border-bottom: 1px solid #fff;
+            }
+
+            &__list{
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                &__item {
+                    display: block;
+                    max-width: calc((100vw / 6) - 50px);
+                    width: 100%;
+                    margin: 10px 13.5px;
+                    text-decoration: none;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    text-align: center;
+
+                    & img {
+                        width: 150px;
+                        height: 150px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+
+                    &__info{
+                        & a {
+                            text-decoration: none;
+                            color: #fff;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
