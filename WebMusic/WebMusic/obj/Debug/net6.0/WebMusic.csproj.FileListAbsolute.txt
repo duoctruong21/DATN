@@ -316,3 +316,16 @@ D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\Google.Apis.Storage
 D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\Google.Cloud.Storage.V1.dll
 D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\YoutubeSearch.dll
 D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\Google.Apis.YouTube.v3.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\HtmlAgilityPack.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\selenium-manager\linux\selenium-manager
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\selenium-manager\macos\selenium-manager
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\selenium-manager\windows\selenium-manager.exe
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\WebDriver.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\AngleSharp.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\NAudio.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\NAudio.Asio.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\NAudio.Core.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\NAudio.Midi.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\NAudio.Wasapi.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\NAudio.WinMM.dll
+D:\.Net\duoctruong21\DATN\WebMusic\WebMusic\bin\Debug\net6.0\YoutubeExplode.dll

@@ -35,6 +35,8 @@ public partial class Song
 
     public string? Alias { get; set; }
 
+    public string? Downloadsong { get; set; }
+
     public virtual Album? IdAlbumNavigation { get; set; }
 
     public virtual Singer? IdSingerNavigation { get; set; }

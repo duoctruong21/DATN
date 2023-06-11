@@ -6,6 +6,7 @@
         public string? singerName { get; set; }
         public string? albumName { get; set; }
         public string? fileImg { get; set; }
+        public string? fileImgSinger { get; set; }
         public string? linksong { get; set; }
         public string? linksinger { get; set; }
         public string? linkalbum { get; set; }

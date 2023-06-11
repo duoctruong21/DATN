@@ -72,6 +72,10 @@
               "target": "Package",
               "version": "[4.4.0, )"
             },
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.46, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.15, )"
@@ -82,7 +86,7 @@
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.15, )"
+              "version": "[6.0.16, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -108,9 +112,21 @@
               "target": "Package",
               "version": "[6.0.13, )"
             },
+            "NAudio": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.9.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "YoutubeExplode": {
+              "target": "Package",
+              "version": "[6.2.15, )"
             },
             "YoutubeSearch.dll": {
               "target": "Package",

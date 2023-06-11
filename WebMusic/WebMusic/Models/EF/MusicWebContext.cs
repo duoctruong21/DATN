@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebMusic.Models.Data;
 
 namespace WebMusic.Models.EF;
 
@@ -19,25 +21,13 @@ public partial class MusicWebContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
-    public virtual DbSet<Role> Roles { get; set; }
-
-    public virtual DbSet<RoleClaim> RoleClaims { get; set; }
-
     public virtual DbSet<Singer> Singers { get; set; }
 
     public virtual DbSet<Song> Songs { get; set; }
 
     public virtual DbSet<Topic> Topics { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
-
-    public virtual DbSet<UserClaim> UserClaims { get; set; }
-
-    public virtual DbSet<UserLogin> UserLogins { get; set; }
-
-    public virtual DbSet<UserRole> UserRoles { get; set; }
-
-    public virtual DbSet<UserToken> UserTokens { get; set; }
+    public virtual DbSet<UserWebMusic> UserWebMusics { get; set; }
 
     public virtual DbSet<UserWithSong> UserWithSongs { get; set; }
 
@@ -156,6 +146,9 @@ public partial class MusicWebContext : DbContext
                 .HasColumnName("alias");
             entity.Property(e => e.CreatedBy).HasMaxLength(100);
             entity.Property(e => e.CreatedDate).HasColumnType("date");
+            entity.Property(e => e.Downloadsong)
+                .HasMaxLength(200)
+                .HasColumnName("downloadsong");
             entity.Property(e => e.Fileimg)
                 .HasMaxLength(400)
                 .HasColumnName("fileimg");
@@ -219,19 +212,25 @@ public partial class MusicWebContext : DbContext
                     });
         });
 
-        modelBuilder.Entity<UserLogin>(entity =>
+        modelBuilder.Entity<UserWebMusic>(entity =>
         {
-            entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
-        });
+            entity.ToTable("UserWebMusic");
 
-        modelBuilder.Entity<UserRole>(entity =>
-        {
-            entity.HasKey(e => new { e.UserId, e.RoleId });
-        });
-
-        modelBuilder.Entity<UserToken>(entity =>
-        {
-            entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(100)
+                .HasColumnName("firstName");
+            entity.Property(e => e.Gmail)
+                .HasMaxLength(50)
+                .HasColumnName("gmail");
+            entity.Property(e => e.IsActive).HasColumnName("isActive");
+            entity.Property(e => e.LastName).HasMaxLength(50);
+            entity.Property(e => e.LinkAvatar)
+                .HasMaxLength(200)
+                .HasColumnName("linkAvatar");
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .HasColumnName("password");
         });
 
         modelBuilder.Entity<UserWithSong>(entity =>

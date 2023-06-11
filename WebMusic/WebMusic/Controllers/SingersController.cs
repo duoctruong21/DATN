@@ -35,6 +35,17 @@ namespace WebMusic.Controllers
             return await _context.Singers.ToListAsync();
         }
 
+        // GET: api/Singers
+        [HttpGet("/singerTop5")]
+        public async Task<ActionResult<IEnumerable<Singer>>> GetSingersTop5()
+        {
+            if (_context.Singers == null)
+            {
+                return NotFound();
+            }
+            return await _context.Singers.Take(5).ToListAsync();
+        }
+
         // GET: api/Singers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Singer>> GetSinger(int id)
@@ -75,7 +86,7 @@ namespace WebMusic.Controllers
             item.SingerName = singer.SingerName;
             item.SingerDescription = singer.SingerDescription;
             item.ModifiedDate = DateTime.Now;
-            item.Alias = item.SingerName != null ? FormatAlias.RemoveDiacritics(item.SingerName):"";
+            item.Alias = item.SingerName != null ? FormatAlias.RemoveDiacritics(item.SingerName) : "";
             try
             {
                 await _context.SaveChangesAsync();
@@ -104,6 +115,7 @@ namespace WebMusic.Controllers
             {
                 return Problem("Entity set 'MusicWebContext.Singers'  is null.");
             }
+
             Singer item = new Singer();
             if (singer.FileImg != null)
             {
