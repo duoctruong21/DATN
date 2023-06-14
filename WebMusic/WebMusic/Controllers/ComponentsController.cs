@@ -433,19 +433,31 @@ namespace WebMusic.Controllers
                     mp3 = song.Filesong
                 }).OrderByDescending(x => x.idSong).ToListAsync();
             var songs = _context.Songs.FirstOrDefault(x=>x.Alias.Contains(content));
-            var singers = _context.Singers.Find(songs.IdSinger); 
+            var singers = _context.Singers.Find(songs.IdSinger);
+            SongItem songplaying = new SongItem();
+            songplaying.songName = songs.SongName;
+            songplaying.mp3 = songs.Filesong;
+            songplaying.linksong = songs.Alias;
+            songplaying.idSinger = songs.IdSinger;
+            songplaying.singerName = _context.Singers.Find(songs.IdSinger).SingerName;
+            songplaying.fileImg = songs.Fileimg;
+            songplaying.idSong = songs.Id;
             List<int> list = await recommnend.recommendSystem(songs.Alias, items);
             List<SongItem> listsongrecomment = new List<SongItem>();
-            for (int i =0; i< list.Count; i++)
+            listsongrecomment.Add(songplaying);
+            for (int i =0; i< 10; i++)
             {
                 var item = _context.Songs.FirstOrDefault(x=>x.Id==list[i]);
-                if (item != null)
+                if (item != null && songs.Id != item.Id)
                 {
                     SongItem songitem = new SongItem();
                     songitem.songName = item!.SongName;
                     songitem.mp3 = item.Filesong;
                     songitem.linksong = item.Alias;
                     songitem.idSinger = item.IdSinger;
+                    songitem.singerName = _context.Singers.Find(item.IdSinger).SingerName;
+                    songitem.fileImg = item.Fileimg;
+                    songitem.idSong = item.Id;
                     listsongrecomment.Add(songitem);
                 }
                     

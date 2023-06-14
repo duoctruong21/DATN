@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WebMusic.Models.Data;
 
 namespace WebMusic.Models.EF;
 
@@ -19,7 +17,11 @@ public partial class MusicWebContext : DbContext
 
     public virtual DbSet<Album> Albums { get; set; }
 
+    public virtual DbSet<Albumuser> Albumusers { get; set; }
+
     public virtual DbSet<Category> Categories { get; set; }
+
+    public virtual DbSet<History> Histories { get; set; }
 
     public virtual DbSet<Singer> Singers { get; set; }
 
@@ -28,8 +30,6 @@ public partial class MusicWebContext : DbContext
     public virtual DbSet<Topic> Topics { get; set; }
 
     public virtual DbSet<UserWebMusic> UserWebMusics { get; set; }
-
-    public virtual DbSet<UserWithSong> UserWithSongs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -51,6 +51,7 @@ public partial class MusicWebContext : DbContext
                 .HasMaxLength(200)
                 .HasColumnName("alias");
             entity.Property(e => e.CreatedDate).HasColumnType("date");
+            entity.Property(e => e.Iduser).HasColumnName("iduser");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
 
             entity.HasMany(d => d.IdCategories).WithMany(p => p.IdAlbums)
@@ -92,6 +93,25 @@ public partial class MusicWebContext : DbContext
                     });
         });
 
+        modelBuilder.Entity<Albumuser>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__albumuse__3213E83FB1134762");
+
+            entity.ToTable("albumuser");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Idalbum).HasColumnName("idalbum");
+            entity.Property(e => e.Idsong).HasColumnName("idsong");
+
+            entity.HasOne(d => d.IdalbumNavigation).WithMany(p => p.Albumusers)
+                .HasForeignKey(d => d.Idalbum)
+                .HasConstraintName("FK__albumuser__idalb__47A6A41B");
+
+            entity.HasOne(d => d.IdsongNavigation).WithMany(p => p.Albumusers)
+                .HasForeignKey(d => d.Idsong)
+                .HasConstraintName("FK__albumuser__idson__489AC854");
+        });
+
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__category__3213E83F3DC5CB31");
@@ -104,6 +124,30 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.CategoryName).HasMaxLength(100);
             entity.Property(e => e.CreatedDate).HasColumnType("date");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
+        });
+
+        modelBuilder.Entity<History>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__history__3213E83F9524EAC5");
+
+            entity.ToTable("history");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Countlisten).HasColumnName("countlisten");
+            entity.Property(e => e.Idsong).HasColumnName("idsong");
+            entity.Property(e => e.Iduser).HasColumnName("iduser");
+            entity.Property(e => e.Listendate)
+                .HasColumnType("date")
+                .HasColumnName("listendate");
+            entity.Property(e => e.Listened).HasColumnName("listened");
+
+            entity.HasOne(d => d.IdsongNavigation).WithMany(p => p.Histories)
+                .HasForeignKey(d => d.Idsong)
+                .HasConstraintName("FK__history__idsong__3D2915A8");
+
+            entity.HasOne(d => d.IduserNavigation).WithMany(p => p.Histories)
+                .HasForeignKey(d => d.Iduser)
+                .HasConstraintName("FK__history__iduser__3C34F16F");
         });
 
         modelBuilder.Entity<Singer>(entity =>
@@ -231,26 +275,6 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .HasColumnName("password");
-        });
-
-        modelBuilder.Entity<UserWithSong>(entity =>
-        {
-            entity.HasKey(e => new { e.Iduser, e.Idsong }).HasName("PK__UserWith__740AC515298787E5");
-
-            entity.ToTable("UserWithSong");
-
-            entity.Property(e => e.Iduser)
-                .HasMaxLength(300)
-                .HasColumnName("iduser");
-            entity.Property(e => e.Idsong).HasColumnName("idsong");
-            entity.Property(e => e.Status)
-                .HasMaxLength(100)
-                .HasColumnName("status");
-
-            entity.HasOne(d => d.IdsongNavigation).WithMany(p => p.UserWithSongs)
-                .HasForeignKey(d => d.Idsong)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__UserWithS__idson__534D60F1");
         });
 
         OnModelCreatingPartial(modelBuilder);

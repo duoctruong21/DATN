@@ -37,11 +37,13 @@ public partial class Song
 
     public string? Downloadsong { get; set; }
 
+    public virtual ICollection<Albumuser> Albumusers { get; set; } = new List<Albumuser>();
+
+    public virtual ICollection<History> Histories { get; set; } = new List<History>();
+
     public virtual Album? IdAlbumNavigation { get; set; }
 
     public virtual Singer? IdSingerNavigation { get; set; }
-
-    public virtual ICollection<UserWithSong> UserWithSongs { get; set; } = new List<UserWithSong>();
 
     public virtual ICollection<Album> IdAlbums { get; set; } = new List<Album>();
 }

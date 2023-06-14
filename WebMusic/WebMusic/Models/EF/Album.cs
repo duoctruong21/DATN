@@ -19,6 +19,10 @@ public partial class Album
 
     public string? Alias { get; set; }
 
+    public int? Iduser { get; set; }
+
+    public virtual ICollection<Albumuser> Albumusers { get; set; } = new List<Albumuser>();
+
     public virtual ICollection<Song> Songs { get; set; } = new List<Song>();
 
     public virtual ICollection<Category> IdCategories { get; set; } = new List<Category>();

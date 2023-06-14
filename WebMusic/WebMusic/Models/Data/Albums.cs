@@ -9,5 +9,7 @@
         public string? AlbumDescription { get; set; }
 
         public IFormFile? FileImg { get; set; }
+
+        public int? iduser { get; set;}
     }
 }

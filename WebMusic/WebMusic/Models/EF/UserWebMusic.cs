@@ -18,4 +18,6 @@ public partial class UserWebMusic
     public string? LastName { get; set; }
 
     public string? LinkAvatar { get; set; }
+
+    public virtual ICollection<History> Histories { get; set; } = new List<History>();
 }

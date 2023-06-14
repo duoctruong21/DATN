@@ -127,6 +127,7 @@ namespace WebMusic.Controllers
             item.CreatedDate = DateTime.Now;
             item.ModifiedDate = DateTime.Now;
             item!.AlbumName = album.AlbumName;
+            item.Iduser = album.iduser != null ? album.iduser : null;
             item!.AlbumDescription = album.AlbumDescription;
             item!.Alias = item.AlbumName != null ? FormatAlias.RemoveDiacritics(item.AlbumName!) : "";
             _context.Albums.Add(item);

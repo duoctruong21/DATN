@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using WebMusic.Models;
 using WebMusic.Models.Data;
 using WebMusic.Models.EF;
 
@@ -163,6 +164,92 @@ namespace WebMusic.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("/history/{id}")]
+        public async Task<IActionResult> history(int id)
+        {
+            var items = _context.Histories.Where(x=>x.Iduser == id);
+            
+            if(items != null)
+            {
+                List<SongItem> listsonghistory = (
+                from songhistory in items
+                join song in _context.Songs on songhistory.Idsong equals song.Id
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                from albums in albumItem.DefaultIfEmpty()
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = albums.AlbumName,
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id,
+                    mp3 = song.Filesong,
+                    date = (songhistory.Listendate != null ? songhistory.Listendate : null)
+                }).OrderByDescending(x=>x.date).ToList();
+                return Ok(listsonghistory);
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("/albumuser/{id}")]
+        public async Task<IActionResult> albumuser(int id)
+        {
+            var items = _context.Albums.Where(x => x.Iduser == id);
+            if (items != null)
+            {
+                List<SongItem> listsonghistory = (
+                from songhistory in items
+                join songAlbum in _context.Albumusers on songhistory.Id equals songAlbum.Idalbum
+                join song in _context.Songs on songAlbum.Idsong equals song.Id
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                from albums in albumItem.DefaultIfEmpty()
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = albums.AlbumName,
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id,
+                    mp3 = song.Filesong
+                }).ToList();
+                return Ok(listsonghistory);
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("/albumusername/{id}")]
+        public async Task<IActionResult> albumusername(int id)
+        {
+            var items = _context.Albums.Where(x => x.Iduser == id);
+            if (items != null)
+            {
+                List<SongItem> listsonghistory = new List<SongItem>();
+                foreach(var item in items)
+                {
+                    SongItem song = new SongItem();
+                    song.albumUserName = item.AlbumName;
+                    song.idAlbum = item.Id;
+                    song.fileImg = item.AlbumImg;
+                    song.linkalbum = item.Alias;
+                    listsonghistory.Add(song);
+                }
+                return Ok(listsonghistory);
+            }
+            return BadRequest();
         }
 
         private bool UserWebMusicExists(int id)
