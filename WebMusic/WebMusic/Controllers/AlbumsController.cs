@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace WebMusic.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class AlbumsController : ControllerBase
     {
         private readonly MusicWebContext _context;
@@ -28,6 +30,7 @@ namespace WebMusic.Controllers
 
         // GET: api/Albums
         [HttpGet]
+
         public async Task<ActionResult<IEnumerable<Album>>> GetAlbums()
         {
             if (_context.Albums == null)
@@ -35,6 +38,16 @@ namespace WebMusic.Controllers
                 return NotFound();
             }
             return await _context.Albums.ToListAsync();
+        }
+
+        [HttpGet("/albumTop6")]
+        public async Task<ActionResult<IEnumerable<Album>>> GetAlbumsTop5()
+        {
+            if (_context.Albums == null)
+            {
+                return NotFound();
+            }
+            return await _context.Albums.Take(6).ToListAsync();
         }
 
         // GET: api/Albums/5
@@ -77,7 +90,7 @@ namespace WebMusic.Controllers
             item!.AlbumName = album.AlbumName;
             item!.AlbumDescription = album.AlbumDescription;
             item!.ModifiedDate = DateTime.Now;
-            item!.Alias = item.AlbumName != null ? FormatAlias.RemoveDiacritics(album.AlbumName!):"";
+            item!.Alias = item.AlbumName != null ? FormatAlias.RemoveDiacritics(album.AlbumName!) : "";
             try
             {
                 await _context.SaveChangesAsync();
@@ -114,12 +127,30 @@ namespace WebMusic.Controllers
             item.CreatedDate = DateTime.Now;
             item.ModifiedDate = DateTime.Now;
             item!.AlbumName = album.AlbumName;
+            item.Iduser = album.iduser != null ? album.iduser : null;
             item!.AlbumDescription = album.AlbumDescription;
-            item!.Alias = item.AlbumName != null? FormatAlias.RemoveDiacritics(item.AlbumName!):"";
+            item!.Alias = item.AlbumName != null ? FormatAlias.RemoveDiacritics(item.AlbumName!) : "";
             _context.Albums.Add(item);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAlbum", new { id = item.Id }, item);
+        }
+
+        [HttpPost("/addsongtoalbum")]
+        public async Task<ActionResult<Albumuser>> addsonginalbum([FromForm] Albums album)
+        {
+            if (_context.Albums == null)
+            {
+                return Problem("Entity set 'MusicWebContext.Albums'  is null.");
+            }
+            var albumsong = _context.Albums.FirstOrDefault(x => x.Id == album.Id);
+            var item = new Albumuser();
+            item!.Idalbum = album.Id;
+            item!.Idsong = album.idSong;
+            _context.Albumusers.Add(item);
+            _context.SaveChanges();
+            return Ok(item);
+
         }
 
         // DELETE: api/Albums/5

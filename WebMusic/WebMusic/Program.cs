@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Net.Http;
 using System.Text;
+using WebMusic.Common;
+using WebMusic.Models.Data;
 using WebMusic.Models.EF;
 
 
@@ -28,8 +31,6 @@ builder.Services.AddAuthenticationCore();
 builder.Services.AddDbContext<MusicWebContext>(option =>option.UseSqlServer(builder.Configuration.GetConnectionString("MusicWeb")));
 
 
-builder.Services.AddIdentity<MusicUser, IdentityRole>()
-    .AddEntityFrameworkStores<MusicWebContext>().AddDefaultTokenProviders();
 
 /* firebase*/
 builder.Services.AddSession(option =>
@@ -40,6 +41,7 @@ builder.Services.AddSession(option =>
 });
 
 builder.Services.AddControllersWithViews();
+//builder.Services.AddScoped<AccountUser>();
 
 
 
@@ -78,9 +80,11 @@ app.UseCors(option => option.AllowAnyHeader()
 );
 
 app.UseHttpsRedirection();
-app.UseAuthentication();;
+
+
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

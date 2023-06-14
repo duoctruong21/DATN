@@ -2,6 +2,23 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "AngleSharp/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.1",
+          "System.Text.Encoding.CodePages": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AngleSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AngleSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "AutoMapper/12.0.1": {
         "type": "package",
         "dependencies": {
@@ -277,6 +294,19 @@
           }
         }
       },
+      "HtmlAgilityPack/1.11.46": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "related": ".deps.json;.pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "related": ".deps.json;.pdb;.xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -410,11 +440,11 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Identity.UI/6.0.15": {
+      "Microsoft.AspNetCore.Identity.UI/6.0.16": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.FileProviders.Embedded": "6.0.15",
-          "Microsoft.Extensions.Identity.Stores": "6.0.15"
+          "Microsoft.Extensions.FileProviders.Embedded": "6.0.16",
+          "Microsoft.Extensions.Identity.Stores": "6.0.16"
         },
         "compile": {
           "lib/net6.0/Microsoft.AspNetCore.Identity.UI.dll": {
@@ -1629,7 +1659,7 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Embedded/6.0.15": {
+      "Microsoft.Extensions.FileProviders.Embedded/6.0.16": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "6.0.0"
@@ -2147,7 +2177,7 @@
           "System.Security.Principal.Windows": "5.0.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {
+          "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {
             "related": ".xml"
           }
         },
@@ -2195,6 +2225,85 @@
         },
         "runtime": {
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
+        }
+      },
+      "NAudio/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "NAudio.Asio": "2.1.0",
+          "NAudio.Core": "2.1.0",
+          "NAudio.Midi": "2.1.0",
+          "NAudio.Wasapi": "2.1.0",
+          "NAudio.WinMM": "2.1.0"
+        },
+        "compile": {
+          "lib/net6.0/NAudio.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/NAudio.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "NAudio.Asio/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.7.0",
+          "NAudio.Core": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/NAudio.Asio.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NAudio.Asio.dll": {}
+        }
+      },
+      "NAudio.Core/2.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NAudio.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NAudio.Core.dll": {}
+        }
+      },
+      "NAudio.Midi/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "NAudio.Core": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/NAudio.Midi.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NAudio.Midi.dll": {}
+        }
+      },
+      "NAudio.Wasapi/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "NAudio.Core": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/NAudio.Wasapi.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NAudio.Wasapi.dll": {}
+        }
+      },
+      "NAudio.WinMM/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.7.0",
+          "NAudio.Core": "2.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/NAudio.WinMM.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NAudio.WinMM.dll": {}
         }
       },
       "NETStandard.Library/1.6.1": {
@@ -2587,6 +2696,21 @@
             "assetType": "native",
             "rid": "ubuntu.16.10-x64"
           }
+        }
+      },
+      "Selenium.WebDriver/4.9.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net6.0/WebDriver.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/WebDriver.dll": {}
+        },
+        "build": {
+          "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
       "Swashbuckle.AspNetCore/6.2.3": {
@@ -4242,6 +4366,22 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "YoutubeExplode/6.2.15": {
+        "type": "package",
+        "dependencies": {
+          "AngleSharp": "1.0.1"
+        },
+        "compile": {
+          "lib/net5.0/YoutubeExplode.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/YoutubeExplode.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "YoutubeSearch.dll/1.1.0": {
         "type": "package",
         "compile": {
@@ -4254,6 +4394,29 @@
     }
   },
   "libraries": {
+    "AngleSharp/1.0.1": {
+      "sha512": "uIezZhHZqWEb4zw/D5Xnskqb/sivIFwfWcUX2srPWTE10IYahfrdhWTIk859BpEmPmxSlMoL+S0JimFTaWGaHA==",
+      "type": "package",
+      "path": "anglesharp/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "anglesharp.1.0.1.nupkg.sha512",
+        "anglesharp.nuspec",
+        "lib/net461/AngleSharp.dll",
+        "lib/net461/AngleSharp.xml",
+        "lib/net472/AngleSharp.dll",
+        "lib/net472/AngleSharp.xml",
+        "lib/net6.0/AngleSharp.dll",
+        "lib/net6.0/AngleSharp.xml",
+        "lib/net7.0/AngleSharp.dll",
+        "lib/net7.0/AngleSharp.xml",
+        "lib/netstandard2.0/AngleSharp.dll",
+        "lib/netstandard2.0/AngleSharp.xml",
+        "logo.png"
+      ]
+    },
     "AutoMapper/12.0.1": {
       "sha512": "hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
       "type": "package",
@@ -4552,6 +4715,54 @@
         "lib/netstandard2.1/Google.Cloud.Storage.V1.xml"
       ]
     },
+    "HtmlAgilityPack/1.11.46": {
+      "sha512": "dLMn4EVfJBHWmWK4Uh0XGD76FPLHI0qr2Tm0s1m/xmgiHb1JUb9zB8AzO8HtrkBBlMN6JfCUBYddhqC0hZNR+g==",
+      "type": "package",
+      "path": "htmlagilitypack/1.11.46",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "htmlagilitypack.1.11.46.nupkg.sha512",
+        "htmlagilitypack.nuspec",
+        "lib/Net35/HtmlAgilityPack.dll",
+        "lib/Net35/HtmlAgilityPack.pdb",
+        "lib/Net35/HtmlAgilityPack.xml",
+        "lib/Net40-client/HtmlAgilityPack.dll",
+        "lib/Net40-client/HtmlAgilityPack.pdb",
+        "lib/Net40-client/HtmlAgilityPack.xml",
+        "lib/Net40/HtmlAgilityPack.XML",
+        "lib/Net40/HtmlAgilityPack.dll",
+        "lib/Net40/HtmlAgilityPack.pdb",
+        "lib/Net45/HtmlAgilityPack.XML",
+        "lib/Net45/HtmlAgilityPack.dll",
+        "lib/Net45/HtmlAgilityPack.pdb",
+        "lib/NetCore45/HtmlAgilityPack.XML",
+        "lib/NetCore45/HtmlAgilityPack.dll",
+        "lib/NetCore45/HtmlAgilityPack.pdb",
+        "lib/netstandard1.3/HtmlAgilityPack.deps.json",
+        "lib/netstandard1.3/HtmlAgilityPack.dll",
+        "lib/netstandard1.3/HtmlAgilityPack.pdb",
+        "lib/netstandard1.3/HtmlAgilityPack.xml",
+        "lib/netstandard1.6/HtmlAgilityPack.deps.json",
+        "lib/netstandard1.6/HtmlAgilityPack.dll",
+        "lib/netstandard1.6/HtmlAgilityPack.pdb",
+        "lib/netstandard1.6/HtmlAgilityPack.xml",
+        "lib/netstandard2.0/HtmlAgilityPack.deps.json",
+        "lib/netstandard2.0/HtmlAgilityPack.dll",
+        "lib/netstandard2.0/HtmlAgilityPack.pdb",
+        "lib/netstandard2.0/HtmlAgilityPack.xml",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.XML",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
+        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.XML",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
+        "lib/uap10.0/HtmlAgilityPack.XML",
+        "lib/uap10.0/HtmlAgilityPack.dll",
+        "lib/uap10.0/HtmlAgilityPack.pdb",
+        "lib/uap10.0/HtmlAgilityPack.pri"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -4703,10 +4914,10 @@
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Identity.UI/6.0.15": {
-      "sha512": "9FJksl408/RYSDTXqIMfKuNZib4XmY7a2uf5QaA81nIjJijenre1uS0fzTkYhupV6kAp8TTUM6ZbriQlhl25Yg==",
+    "Microsoft.AspNetCore.Identity.UI/6.0.16": {
+      "sha512": "OJtN0ZmzzNzGvvGfiiU9KBJSlgYbXXl2rUTUpTrDaCActu3aI4SIfCwWwZD3PiooWpHHFFENn734lhE40z1tAA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.identity.ui/6.0.15",
+      "path": "microsoft.aspnetcore.identity.ui/6.0.16",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4721,7 +4932,7 @@
         "buildTransitive/Microsoft.AspNetCore.Identity.UI.targets",
         "lib/net6.0/Microsoft.AspNetCore.Identity.UI.dll",
         "lib/net6.0/Microsoft.AspNetCore.Identity.UI.xml",
-        "microsoft.aspnetcore.identity.ui.6.0.15.nupkg.sha512",
+        "microsoft.aspnetcore.identity.ui.6.0.16.nupkg.sha512",
         "microsoft.aspnetcore.identity.ui.nuspec",
         "staticwebassets/V4/css/site.css",
         "staticwebassets/V4/favicon.ico",
@@ -6093,10 +6304,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.FileProviders.Embedded/6.0.15": {
-      "sha512": "fNV1oBar6qI+WAvVTLXnLwVffWMkrRn+kuwvMt1tv+dwRuL3QQEq4Df2gnzJI+WbcBvN8AjWiM3Or7ohieEDdQ==",
+    "Microsoft.Extensions.FileProviders.Embedded/6.0.16": {
+      "sha512": "Fg/mXIVAzupubfCeb921apO5C27tJi+/4efF2hNtA7larh7OvpstuX7/QpvvmPVQSm3BjSrBwPmObfl4W3OyTA==",
       "type": "package",
-      "path": "microsoft.extensions.fileproviders.embedded/6.0.15",
+      "path": "microsoft.extensions.fileproviders.embedded/6.0.16",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6111,7 +6322,7 @@
         "lib/net6.0/Microsoft.Extensions.FileProviders.Embedded.xml",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.xml",
-        "microsoft.extensions.fileproviders.embedded.6.0.15.nupkg.sha512",
+        "microsoft.extensions.fileproviders.embedded.6.0.16.nupkg.sha512",
         "microsoft.extensions.fileproviders.embedded.nuspec",
         "tasks/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.Manifest.Task.dll"
       ]
@@ -7279,6 +7490,94 @@
         "mono.texttemplating.nuspec"
       ]
     },
+    "NAudio/2.1.0": {
+      "sha512": "iamDtIq4Tcq6BDEMatX7Wj6KI7rscECS72ZejjnL9RK8BgfrVRH2RlhlQVNxXNp9Up1eFESEiCILNBo7//Rr0g==",
+      "type": "package",
+      "path": "naudio/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/NAudio.dll",
+        "lib/net472/NAudio.xml",
+        "lib/net6.0-windows7.0/NAudio.dll",
+        "lib/net6.0-windows7.0/NAudio.xml",
+        "lib/net6.0/NAudio.dll",
+        "lib/net6.0/NAudio.xml",
+        "lib/netcoreapp3.1/NAudio.dll",
+        "lib/netcoreapp3.1/NAudio.xml",
+        "license.txt",
+        "naudio-icon.png",
+        "naudio.2.1.0.nupkg.sha512",
+        "naudio.nuspec"
+      ]
+    },
+    "NAudio.Asio/2.1.0": {
+      "sha512": "YMXffgqPTsQIjmXYyzLrXSpQZzC7ZH49mmdXaPW3o/5S+AhFKZeOrwUA2fkvphQdGhryObbZnPAq+u8uABkH5A==",
+      "type": "package",
+      "path": "naudio.asio/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NAudio.Asio.dll",
+        "naudio-icon.png",
+        "naudio.asio.2.1.0.nupkg.sha512",
+        "naudio.asio.nuspec"
+      ]
+    },
+    "NAudio.Core/2.1.0": {
+      "sha512": "0iowfmolibU4KxjaC/s7lox/BeDg76UVvXtCuCzRiNpylVndqsxXxp+bVWFrpv0KzQDIKLxZrnDmYENlAI0u9g==",
+      "type": "package",
+      "path": "naudio.core/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NAudio.Core.dll",
+        "naudio-icon.png",
+        "naudio.core.2.1.0.nupkg.sha512",
+        "naudio.core.nuspec"
+      ]
+    },
+    "NAudio.Midi/2.1.0": {
+      "sha512": "m2ZunnyZ1p7OoAMh1scHRVle+GiFuIRrzkcxZJREUFHje8O2hcMGya3ZAjD+dV2FTcrbqNQUc4kJy9LOTuydUw==",
+      "type": "package",
+      "path": "naudio.midi/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NAudio.Midi.dll",
+        "naudio-icon.png",
+        "naudio.midi.2.1.0.nupkg.sha512",
+        "naudio.midi.nuspec"
+      ]
+    },
+    "NAudio.Wasapi/2.1.0": {
+      "sha512": "Zp/8l79aYQEu7/HfzXWVpqyIwRUPgsvCj/Qx+pR6ykJxvwjqOoUfMiEG9US1wW4d7PEzT5ZBIL+cp90t6HNNiw==",
+      "type": "package",
+      "path": "naudio.wasapi/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NAudio.Wasapi.dll",
+        "lib/uap10.0.18362/NAudio.Wasapi.dll",
+        "lib/uap10.0.18362/NAudio.Wasapi.pri",
+        "naudio-icon.png",
+        "naudio.wasapi.2.1.0.nupkg.sha512",
+        "naudio.wasapi.nuspec"
+      ]
+    },
+    "NAudio.WinMM/2.1.0": {
+      "sha512": "lUU5C+XNzKhFUIEafA/nJpbtjksFtbUd033fs27KeHlOM0r6rQFF3l75dqxg+rWkGu81MfkBbYrNpH9p8qmtBA==",
+      "type": "package",
+      "path": "naudio.winmm/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NAudio.WinMM.dll",
+        "naudio-icon.png",
+        "naudio.winmm.2.1.0.nupkg.sha512",
+        "naudio.winmm.nuspec"
+      ]
+    },
     "NETStandard.Library/1.6.1": {
       "sha512": "WcSp3+vP+yHNgS8EV5J7pZ9IRpeDuARBPN28by8zqff1wJQXm26PVU8L3/fYLBJVU7BtDyqNVWq2KlCVvSSR4A==",
       "type": "package",
@@ -7720,6 +8019,31 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "Selenium.WebDriver/4.9.1": {
+      "sha512": "GSBwNvJMtSGplGxkx8JLv55DxW5PTwTnRniD0q9G4PA7tcCVa3Hg/8/Jf6C3GDd+2DXWepQlBUR6GsIICHnBkw==",
+      "type": "package",
+      "path": "selenium.webdriver/4.9.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Selenium.WebDriver.targets",
+        "buildTransitive/Selenium.WebDriver.targets",
+        "images/icon.png",
+        "lib/net45/WebDriver.dll",
+        "lib/net46/WebDriver.dll",
+        "lib/net47/WebDriver.dll",
+        "lib/net48/WebDriver.dll",
+        "lib/net5.0/WebDriver.dll",
+        "lib/net6.0/WebDriver.dll",
+        "lib/netstandard2.0/WebDriver.dll",
+        "lib/netstandard2.1/WebDriver.dll",
+        "manager/linux/selenium-manager",
+        "manager/macos/selenium-manager",
+        "manager/windows/selenium-manager.exe",
+        "selenium.webdriver.4.9.1.nupkg.sha512",
+        "selenium.webdriver.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.2.3": {
@@ -11830,6 +12154,28 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "YoutubeExplode/6.2.15": {
+      "sha512": "gVDBWJA90SQAlns5ZiEc51H5RY2GPCNpVY/7gxfTmvaf8y30yCwc/ZgduYsPtVFvgFUyGVYsQTpVKDZz295xbg==",
+      "type": "package",
+      "path": "youtubeexplode/6.2.15",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "favicon.png",
+        "lib/net461/YoutubeExplode.dll",
+        "lib/net461/YoutubeExplode.xml",
+        "lib/net5.0/YoutubeExplode.dll",
+        "lib/net5.0/YoutubeExplode.xml",
+        "lib/netcoreapp3.1/YoutubeExplode.dll",
+        "lib/netcoreapp3.1/YoutubeExplode.xml",
+        "lib/netstandard2.0/YoutubeExplode.dll",
+        "lib/netstandard2.0/YoutubeExplode.xml",
+        "lib/netstandard2.1/YoutubeExplode.dll",
+        "lib/netstandard2.1/YoutubeExplode.xml",
+        "youtubeexplode.6.2.15.nupkg.sha512",
+        "youtubeexplode.nuspec"
+      ]
+    },
     "YoutubeSearch.dll/1.1.0": {
       "sha512": "HIewHh+oCd0kz/LJr/uEUl5W5zOtCTtccQIBE5DlCt9AG+7C9ibtm12ix8YW/qUV0hBttDpHAJ0PAAS+FoRP/Q==",
       "type": "package",
@@ -11853,15 +12199,19 @@
       "FirebaseStorage.net >= 1.0.3",
       "Google.Apis.YouTube.v3 >= 1.60.0.3043",
       "Google.Cloud.Storage.V1 >= 4.4.0",
+      "HtmlAgilityPack >= 1.11.46",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.15",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.16",
-      "Microsoft.AspNetCore.Identity.UI >= 6.0.15",
+      "Microsoft.AspNetCore.Identity.UI >= 6.0.16",
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.13",
+      "NAudio >= 2.1.0",
+      "Selenium.WebDriver >= 4.9.1",
       "Swashbuckle.AspNetCore >= 6.2.3",
+      "YoutubeExplode >= 6.2.15",
       "YoutubeSearch.dll >= 1.1.0"
     ]
   },
@@ -11936,6 +12286,10 @@
             "target": "Package",
             "version": "[4.4.0, )"
           },
+          "HtmlAgilityPack": {
+            "target": "Package",
+            "version": "[1.11.46, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[6.0.15, )"
@@ -11946,7 +12300,7 @@
           },
           "Microsoft.AspNetCore.Identity.UI": {
             "target": "Package",
-            "version": "[6.0.15, )"
+            "version": "[6.0.16, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -11972,9 +12326,21 @@
             "target": "Package",
             "version": "[6.0.13, )"
           },
+          "NAudio": {
+            "target": "Package",
+            "version": "[2.1.0, )"
+          },
+          "Selenium.WebDriver": {
+            "target": "Package",
+            "version": "[4.9.1, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.2.3, )"
+          },
+          "YoutubeExplode": {
+            "target": "Package",
+            "version": "[6.2.15, )"
           },
           "YoutubeSearch.dll": {
             "target": "Package",
