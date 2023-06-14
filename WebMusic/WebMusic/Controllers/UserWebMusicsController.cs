@@ -166,6 +166,25 @@ namespace WebMusic.Controllers
             return NoContent();
         }
 
+        [HttpPost("/historied")]
+        public async Task<ActionResult<History>> posthistory([FromForm] histories history)
+        {
+            if (_context.Histories == null)
+            {
+                return Problem("Entity set 'MusicWebContext.Histories'  is null.");
+            }
+            History item = new History();
+            item.Idsong = history.Idsong;
+            item.Iduser = history.Iduser;
+            item.Listendate = DateTime.Now;
+            var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
+            item.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
+            _context.Histories.Add(item );
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetHistory", new { id = item.Id }, history);
+        }
+
         [HttpGet("/history/{id}")]
         public async Task<IActionResult> history(int id)
         {
@@ -192,21 +211,22 @@ namespace WebMusic.Controllers
                     idSinger = song.IdSinger,
                     idSong = song.Id,
                     mp3 = song.Filesong,
+                    id = songhistory.Id,
                     date = (songhistory.Listendate != null ? songhistory.Listendate : null)
-                }).OrderByDescending(x=>x.date).ToList();
+                }).OrderByDescending(x=>x.id).ToList();
                 return Ok(listsonghistory);
             }
             return BadRequest();
         }
 
-        [HttpGet("/albumuser/{id}")]
-        public async Task<IActionResult> albumuser(int id)
+        [HttpGet("/albumuser/{alias}/{id}")]
+        public async Task<IActionResult> albumuser(string alias,int id)
         {
             var items = _context.Albums.Where(x => x.Iduser == id);
             if (items != null)
             {
                 List<SongItem> listsonghistory = (
-                from songhistory in items
+                from songhistory in items where songhistory.Alias == alias
                 join songAlbum in _context.Albumusers on songhistory.Id equals songAlbum.Idalbum
                 join song in _context.Songs on songAlbum.Idsong equals song.Id
                 join singer in _context.Singers on song.IdSinger equals singer.Id
@@ -225,7 +245,7 @@ namespace WebMusic.Controllers
                     idSinger = song.IdSinger,
                     idSong = song.Id,
                     mp3 = song.Filesong
-                }).ToList();
+                }).Distinct().ToList();
                 return Ok(listsonghistory);
             }
             return BadRequest();
@@ -234,18 +254,21 @@ namespace WebMusic.Controllers
         [HttpGet("/albumusername/{id}")]
         public async Task<IActionResult> albumusername(int id)
         {
-            var items = _context.Albums.Where(x => x.Iduser == id);
+            var items = _context.Albums.Where(x => x.Iduser == id).ToList();
             if (items != null)
             {
                 List<SongItem> listsonghistory = new List<SongItem>();
                 foreach(var item in items)
                 {
+                    var alumsong = _context.Albumusers.Where(x => x.Idalbum == item.Id).Distinct().ToList();
                     SongItem song = new SongItem();
                     song.albumUserName = item.AlbumName;
                     song.idAlbum = item.Id;
                     song.fileImg = item.AlbumImg;
                     song.linkalbum = item.Alias;
+                    song.count = alumsong != null ? alumsong.Select(x => x.Idsong).Distinct().Count() : 0;
                     listsonghistory.Add(song);
+
                 }
                 return Ok(listsonghistory);
             }

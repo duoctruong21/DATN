@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nEu+vnrOFZMbNUCBS6sxeixikUJo5Y0TVfQ54mOFE2s=",
+  "Hash": "lLTSjw0QJfDvp/N1yCm21XA7gaeeN2kx1/xF2ZKjYAE=",
   "Source": "WebMusic",
   "BasePath": "_content/WebMusic",
   "Mode": "Default",
@@ -1375,6 +1375,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Screenshot (19).png"
+    },
+    {
+      "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Screenshot (3).png",
+      "SourceId": "WebMusic",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\",
+      "BasePath": "_content/WebMusic",
+      "RelativePath": "images/Screenshot (3).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Screenshot (3).png"
     },
     {
       "Identity": "D:\\.Net\\duoctruong21\\DATN\\WebMusic\\WebMusic\\wwwroot\\images\\Screenshot (6).png",

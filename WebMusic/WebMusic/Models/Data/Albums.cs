@@ -11,5 +11,6 @@
         public IFormFile? FileImg { get; set; }
 
         public int? iduser { get; set;}
+        public int? idSong { get; set;}
     }
 }

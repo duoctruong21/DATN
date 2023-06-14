@@ -136,6 +136,23 @@ namespace WebMusic.Controllers
             return CreatedAtAction("GetAlbum", new { id = item.Id }, item);
         }
 
+        [HttpPost("/addsongtoalbum")]
+        public async Task<ActionResult<Albumuser>> addsonginalbum([FromForm] Albums album)
+        {
+            if (_context.Albums == null)
+            {
+                return Problem("Entity set 'MusicWebContext.Albums'  is null.");
+            }
+            var albumsong = _context.Albums.FirstOrDefault(x => x.Id == album.Id);
+            var item = new Albumuser();
+            item!.Idalbum = album.Id;
+            item!.Idsong = album.idSong;
+            _context.Albumusers.Add(item);
+            _context.SaveChanges();
+            return Ok(item);
+
+        }
+
         // DELETE: api/Albums/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAlbum(int id)
