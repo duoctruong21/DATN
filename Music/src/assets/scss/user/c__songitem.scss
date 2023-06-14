@@ -41,7 +41,7 @@
             &__info {
                 margin-top: 20px;
                 width: 100%;
-                & a {
+                & a, p {
                     text-decoration: none;
                     display: block;
                     margin-bottom: 10px;
@@ -59,7 +59,6 @@
                     }
                 }
     
-                
             }
         }
 }

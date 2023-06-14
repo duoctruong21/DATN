@@ -7,16 +7,17 @@ import ListSongItem from "./ListSongItem";
 
 function SearchIndex() {
   const [songs, setSong] = useState([]);
-  const { content } = useParams();
   const history = useNavigate();
-  const url = `https://localhost:7122/search/${content}`;
 
+  const { content } = useParams();
+  const url = `https://localhost:7122/search/${content}`;
+  console.log(content)
   useEffect(() => {
     axios
       .get(url)
       .then((response) => setSong(response.data))
       .catch();
-  }, []);
+  }, [content]);
 
   const [songytbs, setSongytb] = useState([]);
   //const urlytb = `https://localhost:7122/searchusingapiytb/${content}`;
@@ -32,6 +33,7 @@ function SearchIndex() {
     <div className="home">
       <div className="main">
         <ListSongItem dataSongItem={songs} />
+        
         {/* <ListSongItem dataSongItem={songytbs} /> */}
       </div>
     </div>

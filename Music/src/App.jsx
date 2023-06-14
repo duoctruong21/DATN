@@ -31,6 +31,7 @@ import EditSong from "./components/admin/song/EditSong.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SearchIndex from "./components/user/menuleft/SearchIndex.jsx";
+import MenuAdmin from "./components/user/menu/menleftAdmin.jsx"
 
 function App() {
   const urlSong = "https://localhost:7122/api/Songs";
@@ -110,6 +111,22 @@ function App() {
           path="/playsong"
           element={<IndexPlaysong />}
         />
+        <Route
+          path="/admin/topic"
+          element={<MenuAdmin />}
+        />
+        <Route
+          path="/admin/album"
+          element={<MenuAdmin />}
+        />
+        <Route
+          path="/admin/song"
+          element={<MenuAdmin />}
+        />
+        <Route
+          path="/admin/singer"
+          element={<MenuAdmin />}
+        />
       </Routes>
       <div className="app__main">
         <Routes>
@@ -155,6 +172,7 @@ function App() {
             path="/admin/topic"
             element={<IndexTopic />}
           />
+
           <Route
             path="/admin/song"
             element={<IndexSong />}

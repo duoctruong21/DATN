@@ -19,12 +19,14 @@ function Login({ onLogin }) {
       .then((response) => {
         const data = response.data;
         setToken(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         localStorage.setItem("token", data.token);
-        history('/home')
+        history("/home");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
+        alert("thông tin tài khoản không chính xác");
       });
   };
 
@@ -56,7 +58,7 @@ function Login({ onLogin }) {
               />
             </div>
             <div>
-                <a href="/home">back</a>
+              <a href="/home">back</a>
               <div>
                 <a href="/register">Register</a>
                 <button value="submit">Login</button>

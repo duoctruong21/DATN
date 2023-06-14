@@ -11,10 +11,10 @@ function MenuTop(props) {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const data = props.dataLogin;
-    console.log(data);
+    // const data = props.dataLogin;
+    // console.log(data);
 
-    console.log(props.dataLogin);
+    // console.log(props.dataLogin);
   }, []);
 
   useEffect(() => {
@@ -28,11 +28,11 @@ function MenuTop(props) {
         })
         .catch();
     }
-  },[]);
+  },[token]);
 
   const logout = () => {
     localStorage.removeItem("token");
-    history("/home");
+    history.push("/home");
   };
 
   return (
@@ -56,7 +56,11 @@ function MenuTop(props) {
             ) : (
               <ul className="menuTop__Main__block__login">
                 <li>
-                  <a onClick={logout}>{user.lastName + " " + user.firstName}</a>
+                  <a
+                    href="http://localhost:5173/home"
+                    onClick={logout}>
+                    {user.lastName + " " + user.firstName}
+                  </a>
                 </li>
               </ul>
             )}

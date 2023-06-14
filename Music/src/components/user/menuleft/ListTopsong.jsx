@@ -39,7 +39,7 @@ function ListTopsong() {
       <SongBar dataSongBar={songs} />
       
       <Footer />
-      <PlaySong dataForm ={songs} />
+      {/* <PlaySong dataForm ={songs} /> */}
     </div>
   );
 }

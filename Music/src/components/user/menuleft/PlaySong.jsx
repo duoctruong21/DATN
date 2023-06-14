@@ -8,40 +8,54 @@ function PlaySong(props) {
   //const urlSong = "https://localhost:7122/ranked-song";
   const [songs, setSong] = useState([]);
   const [Song, handleSetSong] = useState("");
+  const [Songname, handleSetSongname] = useState("");
   const [playing, setPlaying] = useState(0);
   const [isPlaying, setIsPlaying] = useState(0);
   const [id, setId] = useState(0);
   const [loadSong, setLoadSong] = useState(false);
+  const [firstplaysong, setfirstplaysong] = useState([])
+  const token = localStorage.getItem("token");
+
 
   // get data from different components
   useEffect(() => {
     setIsPlaying(props.idPlaying);
+    setfirstplaysong(props.firstsong);
     setSong(props.dataForm);
     setPlaying(props.idPlaying);
-    setLoadSong(props.load)
-  }, [props.dataForm, props.idPlaying, props.load]);
+    setLoadSong(props.load);
+  }, [props.dataForm, props.idPlaying, props.load, props.firstsong]);
 
-  // axios
-  // .get(urlSong)
-  // .then((response) => {
-  //   setSong(response.data);
-  // })
-  // .catch((error) => console.log());
   const handleClickNext = (idsong) => {
     console.log(idsong);
-    setLoadSong(false)
+    setLoadSong(false);
 
     songs.map((song, index) => {
       if (index == songs.findIndex((song) => song.idSong == idsong) + 1) {
         handleSetSong(songs[index]);
         setIsPlaying(Song.idSong);
-
         console.log(Song.idSong);
         console.log(index);
+        const datasong = new FormData();
+        datasong.append("iduser", token);
+        datasong.append("idsong", songs[index].idSong);
+        console.log(Song.idSong);
+        axios
+          .post(`https://localhost:7122/historied`, datasong, {
+            headers: {
+              "Content-Type": "multipart/fromdata",
+            },
+          })
+          .then(() => {
+            alert("");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     });
+    
   };
-
   const handleClickPre = (idsong) => {
     setLoadSong(false);
 
@@ -54,21 +68,39 @@ function PlaySong(props) {
 
           console.log(Song.idSong);
           console.log(index);
+          console.log(loadSong);
+          const datasong = new FormData();
+          datasong.append("iduser", token);
+          datasong.append("idsong", songs[index].idSong);
+          console.log(Song.idSong);
+          axios
+            .post(`https://localhost:7122/historied`, datasong, {
+              headers: {
+                "Content-Type": "multipart/fromdata",
+              },
+            })
+            .then(() => {
+              alert("");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
       }
     });
+    
   };
 
   let playingSong = songs.findIndex(
     (song) => song.idSong.toString() == props.idPlaying.toString()
   );
 
-  console.log("gia tri:"+isPlaying);
+  console.log("gia tri:" + isPlaying);
   let songFirst = songs != null ? songs[playingSong] : null;
 
   //const songFirst = songs[0];
   //console.log(songFirst.mp3)
-  //console.log(Song);
+  console.log(Song);
 
   return (
     <div className="playsong">
@@ -77,8 +109,10 @@ function PlaySong(props) {
         <div className="playsong__main">
           <AudioPlayer
             src={
-              Song == null
-                ? ""
+              loadSong == true
+                ? songFirst.mp3
+                : Song == null
+                ? "2"
                 : Song.mp3 == undefined
                 ? songFirst != null
                   ? songFirst.mp3
@@ -90,11 +124,27 @@ function PlaySong(props) {
             onClickNext={() =>
               handleClickNext(loadSong == true ? props.idPlaying : Song.idSong)
             }
+            customAdditionalControls={[
+              <p style={{position: "fixed"}}>
+                {loadSong == true
+                  ? songFirst.songName
+                  : Song == null
+                  ? "2"
+                  : Song.songName == undefined
+                  ? songFirst != null
+                    ? songFirst.songName
+                    : ""
+                  : Song.songName}
+              </p>,
+            ]}
             onClickPrevious={() =>
               handleClickPre(
                 //Song.mp3 == undefined ? songFirst.idSong : Song.idSong
-                loadSong == true ? props.idPlaying  : Song.idSong
+                loadSong == true ? props.idPlaying : Song.idSong
               )
+            }
+            onEnded={() =>
+              handleClickNext(loadSong == true ? props.idPlaying : Song.idSong)
             }
             autoPause
           />

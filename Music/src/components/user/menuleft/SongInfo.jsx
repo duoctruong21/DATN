@@ -9,12 +9,20 @@ function SongInfo() {
   const { alias } = useParams();
   const urlSong = `https://localhost:7122/song/${alias}`;
   const [song, setSong] = useState([]);
-  useEffect(()=>{
+  const [songRecomnend, setSongRecommend] = useState([]);
+  const urlrecommend = `https://localhost:7122/recommend/${alias}`;
+  useEffect(() => {
     axios
       .get(urlSong)
       .then((response) => setSong(response.data))
       .catch((error) => console.log(error));
-  },[])
+  }, []);
+  useEffect(() => {
+    axios
+      .get(urlrecommend)
+      .then((response) => setSongRecommend(response.data))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div className="songinfo">
       <div className="songinfo__wapper">
@@ -44,7 +52,7 @@ function SongInfo() {
               <h2>Bài hát liên quan</h2>
             </div>
             <div className="songinfo__wapper__main__song__list">
-              {/* <SongBar dataSongBar ={song}/> */}
+              <SongBar dataSonginfo={song} dataSongBar={songRecomnend} />
             </div>
             {/* <div className="songinfo__wapper__main__song__seemore">
               <a href="/song-singer">See more</a>
