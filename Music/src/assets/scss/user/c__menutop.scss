@@ -31,7 +31,7 @@
         &__block{
             flex-grow: 2;
             display: flex;
-            justify-content: space-between;
+            justify-content: end;
             align-items: center;
 
             &__search{
@@ -89,4 +89,107 @@
             }
         }
     }
+}
+
+@media (max-width: 500px) {
+    .search-responsive{
+        margin-top: 40px;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        &:hover{
+            width: 420px;
+        }
+    }
+    .menuTop {
+            width: 500px;
+            position: fixed;
+            z-index: 11;
+            background-color: #121212;
+        
+            //border-bottom: 1px solid #fff;
+            &__wapper {
+                // background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
+                box-sizing: border-box;
+                width: inherit;
+            }
+
+            &__Main {
+                display: flex;
+                justify-content: space-between;
+                &__logo {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 100px;
+                    margin-left: 50px;
+                    & h2 {
+                        font-size: 20px;
+                        font-weight: 700;
+                        color: #fff;
+                        text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+                    }
+                }
+    
+                &__block {
+    
+                    &__search {
+                        display: flex;
+                        align-items: center;
+                        position: absolute;
+                        left: 0;
+                        width: inherit;
+                        & input {
+                            width: inherit;
+                            height: 40px;
+                            font-size: 20px;
+                            font-family: Sono;
+                            outline: none;
+                            border: none;
+                            border-radius: 50px;
+                            padding-left: 10px;
+                            box-sizing: border-box;
+                        }
+    
+                        & button {
+                            display: block;
+                            position: absolute;
+                            background-color: rgba(0, 0, 0, 0);
+                            border: 0;
+                            right: -7px;
+                            top: -2px;
+                            cursor: pointer;
+    
+                            & svg {
+                                width: 30px;
+                                padding: 6px;
+                                border-radius: 50%;
+                            }
+                        }
+    
+    
+                    }
+    
+                    &__login {
+                        display: flex;
+    
+                        & li {
+    
+                            &:first-child {
+                                margin-right: 10px;
+                            }
+    
+                            & a {
+                                text-decoration: none;
+                                //padding: 10px 20px;
+                                border-radius: 50px;
+                                background-color: rgba(0, 0, 0, 0.5);
+                                color: #fff;
+    
+    
+                            }
+                        }
+                    }
+                }
+            }
+        }
 }

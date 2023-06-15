@@ -1,3 +1,6 @@
+.menuLeft-responsive-btn{
+    display: none;
+}
 .menuleft {
     box-sizing: border-box;
     max-width: 300px;
@@ -39,6 +42,77 @@
             &:hover{
                 background-color: rgba($color: #353434, $alpha: 0.8);
                 color: #823333;
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .menuLeft-responsive{
+        width: 500px;
+    }
+    .menuLeft-responsive-btn {
+        display: block;
+        position: fixed;
+        z-index: 20;
+        top: 63px;
+        left: 440px;
+        & svg{
+            width: 20px;
+            height: 20px;
+        }           
+    }
+    .menuLeft-responsive:hover {
+        .menuleft {
+                display: block !important;
+            }
+    }
+    .menuleft {
+        display: none;
+        box-sizing: border-box;
+        max-width: 500px;
+        margin-top: 80px;
+        width: 500px;
+        position: fixed;
+        right: 0;
+        z-index: 10;
+        //border-right: 1px solid #fff;
+        background-color: #000;
+        &__wapper{
+            // background: linear-gradient(to bottom right, #313235, #ae8b7d, #502929, #20B2AA, #9370DB);
+            height: inherit;
+            overflow: hidden;
+        }
+
+        &__main{
+
+        }
+
+        &__list{
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-top: 80px;
+            & li{
+                width: inherit;
+                box-sizing: border-box;
+                cursor: pointer;
+                & a{
+                    box-sizing: border-box;
+                    display: block;
+                    padding: 25px 10px;
+                    text-decoration: none;
+                    color: #fff;
+                    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+                    font-size: 20px;
+                    width: inherit;
+                }
+
+                &:hover{
+                    background-color: rgba($color: #353434, $alpha: 0.8);
+                    color: #823333;
+                }
             }
         }
     }

@@ -21,6 +21,7 @@ function ListSinger() {
                 className="ListSinger__wapper__main__list__item"
                 key={index}>
                 <img
+                  className="ListSinger__wapper__main__list__item__img"
                   src={singer.fileimg}
                   alt={singer.singerName}
                 />

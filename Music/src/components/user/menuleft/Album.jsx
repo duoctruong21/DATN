@@ -36,14 +36,6 @@ function Album() {
       .catch();
   },[])
 
-  // phân trang
-  const [pageNumber, setPageNumber] = useState(0);
-  const songsPerPage = 10;
-  const pagesVisited = pageNumber * songsPerPage;
-  const pageCount = Math.ceil(songs.length / songsPerPage);
-  const handlePageClick = ({ selected }) => {
-    setPageNumber(selected);
-  };
 
   return (
     <div className="album">
@@ -56,17 +48,7 @@ function Album() {
             <SongBar dataSongBar={songs} />
           </div>
           <div className="album__wapper__main__page">
-            <ReactPaginate
-              previousLabel={"<"}
-              nextLabel={">"}
-              pageCount={pageCount}
-              onPageChange={handlePageClick}
-              containerClassName={"paginationBttns"}
-              previousLinkClassName={"previousBttn"}
-              nextLinkClassName={"nextBttn"}
-              disabledClassName={"paginationDisabled"}
-              activeClassName={"paginationActive"}
-            />
+
           </div>
         </div>
       </div>

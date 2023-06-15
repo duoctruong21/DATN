@@ -168,6 +168,17 @@ function SongBar(props) {
     e.preventDefault();
   };
 
+  const [check, setCheck] = useState(0)
+  const handlesCheck = (e)=>{
+    if(check != e){
+      setCheck(e)
+    }else{
+      setCheck(0)
+    }
+  }
+  const screenWidth = window.innerWidth;
+  const isCheck = screenWidth +100;
+
   return (
     <div>
       <div className="ListSongBar">
@@ -203,17 +214,36 @@ function SongBar(props) {
                     />
                     <div className="songBar__wapper__main__infoSong__info">
                       <a href={`/song/${song.linksong}`}>
-                        <h2 className="line1">{song.songName}</h2>
+                        {/* className={song.songName.split('').length >= 28?"line1":""} */}
+                        <h2 title={song.songName}>{song.songName}</h2>
                       </a>
                       <a href={`/singer/${song.linksinger}`}>
-                        <p className="line1">{song.singerName}</p>
+                        <p title={song.singerName}>{song.singerName}</p>
                       </a>
                     </div>
                   </div>
                   <div className="songBar__wapper__main__album">
                     <p>{song.albumName}</p>
                   </div>
-                  <div className="songBar__wapper__main__setting">
+                  <div className="songBar__wapper__main__responsive">
+                    <button onClick={() => handlesCheck(song.idSong)}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="1em"
+                        viewBox="0 0 128 512">
+                        <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div
+                    className="songBar__wapper__main__setting"
+                    style={
+                      screenWidth < isCheck
+                        ? check != song.idSong
+                          ? { display: "none" }
+                          : { display: "flex" }
+                        : ""
+                    }>
                     <button onClick={() => playSong(song.idSong)}>play</button>
 
                     {token != null ? (

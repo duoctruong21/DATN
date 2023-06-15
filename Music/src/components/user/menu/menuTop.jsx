@@ -42,8 +42,8 @@ function MenuTop(props) {
           <div className="menuTop__Main__logo">
             <h2>Music</h2>
           </div>
-          <div className="menuTop__Main__block">
             <SearchBar />
+          <div className="menuTop__Main__block">
             {token == null ? (
               <ul className="menuTop__Main__block__login">
                 <li>

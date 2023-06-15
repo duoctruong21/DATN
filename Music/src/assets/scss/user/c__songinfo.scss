@@ -85,3 +85,90 @@
 //     position: relative;
 //     width: 100%;
 // }
+
+@media (max-width:500px) {
+    .songinfo {
+
+        &__wapper {
+
+            &__main {
+                padding-top: 40px;
+                display: flex;
+                flex-direction: column;
+
+                &__info {
+                    width: inherit;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+
+                    & img {
+                        width: 200px;
+                    }
+
+                    & h2 {
+                        padding: 10px;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 20px;
+                        & a{
+                            text-decoration: none;
+                            color: #fff;
+                        }
+                    }
+
+                    & p {
+                        box-sizing: border-box;
+                        display: block;
+                        padding: 10px 40px;
+                        width: 100%;
+                        font-size: 15px;
+                        color: #fff;
+                        text-align: center;
+
+                        & a{
+                            text-decoration: none;
+                            color: #fff;
+                        }
+                    }
+
+                    &__playsong{
+                        box-sizing: border-box;
+                        display: block;
+                        padding: 0 20px;
+                        width: 100%;
+                    }
+
+                }
+
+                &__song {
+                    flex-grow: 2;
+
+                    &__title {
+                        display: flex;
+                        justify-content: center;
+                        padding: 10px 0;
+
+                        & h2 {
+                            color: #fff;
+                        }
+                    }
+
+                    &__seemore {
+                        text-align: right;
+
+                        & a {
+                            box-sizing: border-box;
+                            display: block;
+                            text-decoration: none;
+                            color: #fff;
+                            padding: 10px 20px;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

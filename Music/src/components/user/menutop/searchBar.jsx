@@ -22,7 +22,7 @@ function searchBar() {
     }
   };
   return (
-    <div>
+    <div className="search-responsive">
       <form
         className="menuTop__Main__block__search"
         onSubmit={search}>

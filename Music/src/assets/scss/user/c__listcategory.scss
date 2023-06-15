@@ -38,3 +38,47 @@
         }
     }
 }
+
+@media (max-width: 500px) {
+    .listcategory {
+            box-sizing: border-box;
+    
+            &__wapper {
+                padding: 0 20px;
+    
+    
+            }
+    
+            &__main {
+    
+    
+                &__header {
+                    width: inherit;
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #fff;
+    
+                    & a {
+                        text-decoration: none;
+                        color: #fff;
+                        font-size: 18px;
+                    }
+                }
+    
+                &__title {
+                    font-size: 25px;
+                    font-weight: 700;
+                    color: #fff;
+                }
+    
+                &__list {
+                    box-sizing: border-box;
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 10px 10px;
+                    flex-wrap: wrap;
+    
+                }
+            }
+        }
+}

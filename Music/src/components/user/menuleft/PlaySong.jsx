@@ -3,6 +3,7 @@ import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "../../../assets/scss/user/c__playsong.scss";
 import axios from "axios";
+import IndexPlaysong from "../playsong/indexPlaysong.jsx";
 
 function PlaySong(props) {
   //const urlSong = "https://localhost:7122/ranked-song";
@@ -13,9 +14,8 @@ function PlaySong(props) {
   const [isPlaying, setIsPlaying] = useState(0);
   const [id, setId] = useState(0);
   const [loadSong, setLoadSong] = useState(false);
-  const [firstplaysong, setfirstplaysong] = useState([])
+  const [firstplaysong, setfirstplaysong] = useState([]);
   const token = localStorage.getItem("token");
-
 
   // get data from different components
   useEffect(() => {
@@ -54,7 +54,6 @@ function PlaySong(props) {
           });
       }
     });
-    
   };
   const handleClickPre = (idsong) => {
     setLoadSong(false);
@@ -88,7 +87,6 @@ function PlaySong(props) {
         }
       }
     });
-    
   };
 
   let playingSong = songs.findIndex(
@@ -102,6 +100,14 @@ function PlaySong(props) {
   //console.log(songFirst.mp3)
   console.log(Song);
 
+  const [check, setCheck] = useState(false);
+  const checkIndexPlaying = () => {
+    if (check != true) {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  };
   return (
     <div className="playsong">
       <div className="playsong__wapper">
@@ -125,7 +131,9 @@ function PlaySong(props) {
               handleClickNext(loadSong == true ? props.idPlaying : Song.idSong)
             }
             customAdditionalControls={[
-              <p style={{position: "fixed"}}>
+              <a
+                style={{ position: "fixed" }}
+                onClick={checkIndexPlaying}>
                 {loadSong == true
                   ? songFirst.songName
                   : Song == null
@@ -135,7 +143,7 @@ function PlaySong(props) {
                     ? songFirst.songName
                     : ""
                   : Song.songName}
-              </p>,
+              </a>,
             ]}
             onClickPrevious={() =>
               handleClickPre(
@@ -149,6 +157,13 @@ function PlaySong(props) {
             autoPause
           />
         </div>
+      </div>
+      <div
+        className="check"
+        style={{ display: check == true ? "block" : "none" }}>
+        <IndexPlaysong
+          datasong={loadSong == true ? props.idPlaying : Song.idSong}
+        />
       </div>
     </div>
   );

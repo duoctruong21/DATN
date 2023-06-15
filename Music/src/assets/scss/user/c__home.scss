@@ -1,7 +1,12 @@
 .home{
     box-sizing: border-box;
     width: 100%;
-    height: auto;
     // background-color: rgba(0,0,0,0.9);
     
+}
+
+@media (max-width:500px){
+    .home{
+        width: inherit;
+    }
 }
