@@ -119,7 +119,27 @@ namespace WebMusic.Controllers
             {
                 return Problem("Entity set 'MusicWebContext.Albums'  is null.");
             }
+            var check = _context.Albums.FirstOrDefault(x => x.Alias.Contains(FormatAlias.RemoveDiacritics(album.AlbumName!)));
             var item = new Album();
+            int count = 1;
+
+            if (check == null)
+            {
+                item!.Alias = album.AlbumName != null ? FormatAlias.RemoveDiacritics(album.AlbumName!) : "";
+            }
+            else
+            {
+                foreach (var checkAlias in _context.Albums)
+                {
+                    if (checkAlias.Alias.Contains(FormatAlias.RemoveDiacritics(album.AlbumName!+" "+count))){
+                        count++;
+                    }
+                }
+                item!.Alias = album.AlbumName != null ? FormatAlias.RemoveDiacritics(album.AlbumName! + " " + count) : "";
+            }
+
+            
+
             if (album.FileImg != null)
             {
                 item.AlbumImg = await uploadFile.UploadImageAsync(album.FileImg);
@@ -129,11 +149,10 @@ namespace WebMusic.Controllers
             item!.AlbumName = album.AlbumName;
             item.Iduser = album.iduser != null ? album.iduser : null;
             item!.AlbumDescription = album.AlbumDescription;
-            item!.Alias = item.AlbumName != null ? FormatAlias.RemoveDiacritics(item.AlbumName!) : "";
             _context.Albums.Add(item);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAlbum", new { id = item.Id }, item);
+            return CreatedAtAction("GetAlbum", new { id = check.Id }, check);
         }
 
         [HttpPost("/addsongtoalbum")]
