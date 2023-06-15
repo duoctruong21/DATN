@@ -157,6 +157,31 @@ namespace WebMusic.Controllers
             return NoContent();
         }
 
+        [HttpGet("/playsong/{id}")]
+        public async Task<IActionResult> playsong(int id)
+        {
+            if (_context.Songs == null)
+            {
+                return NotFound();
+            }
+            var song = await _context.Songs.FindAsync(id);
+
+            SongItem item= new SongItem();
+            item.songName = song.SongName;
+            item.fileImg = song.Fileimg;
+            item.singerName = _context.Singers.Find(song.IdSinger).SingerName;
+            var album = song.IdAlbum != null ? _context.Albums.Find(song.IdAlbum).AlbumName:"";
+            item.albumName =  album;
+
+
+            if (song == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(item);
+        }
+
         private bool SongExists(int id)
         {
             return (_context.Songs?.Any(e => e.Id == id)).GetValueOrDefault();
