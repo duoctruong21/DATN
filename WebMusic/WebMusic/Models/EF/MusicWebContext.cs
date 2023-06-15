@@ -137,7 +137,7 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.Idsong).HasColumnName("idsong");
             entity.Property(e => e.Iduser).HasColumnName("iduser");
             entity.Property(e => e.Listendate)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .HasColumnName("listendate");
             entity.Property(e => e.Listened).HasColumnName("listened");
 

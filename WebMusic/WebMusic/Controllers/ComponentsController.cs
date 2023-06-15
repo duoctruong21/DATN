@@ -458,6 +458,7 @@ namespace WebMusic.Controllers
                     songitem.singerName = _context.Singers.Find(item.IdSinger).SingerName;
                     songitem.fileImg = item.Fileimg;
                     songitem.idSong = item.Id;
+                    songitem.linksinger = _context.Singers.Find(item.IdSinger).Alias;
                     listsongrecomment.Add(songitem);
                 }
                     

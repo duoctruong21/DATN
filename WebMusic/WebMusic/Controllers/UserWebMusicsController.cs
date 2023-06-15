@@ -173,16 +173,28 @@ namespace WebMusic.Controllers
             {
                 return Problem("Entity set 'MusicWebContext.Histories'  is null.");
             }
-            History item = new History();
-            item.Idsong = history.Idsong;
-            item.Iduser = history.Iduser;
-            item.Listendate = DateTime.Now;
-            var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
-            item.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
-            _context.Histories.Add(item );
+            var check = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
+            if(check != null)
+            {
+                check.Idsong = history.Idsong;
+                check.Listendate = DateTime.Now;
+                var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
+                check.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
+                _context.Histories.Update(check);
+            }
+            else
+            {
+                History item = new History();
+                item.Idsong = history.Idsong;
+                item.Iduser = history.Iduser;
+                item.Listendate = DateTime.Now;
+                var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
+                item.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
+                _context.Histories.Add(item);
+            }
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHistory", new { id = item.Id }, history);
+            return CreatedAtAction("GetHistory", new {  }, history);
         }
 
         [HttpGet("/history/{id}")]
@@ -213,7 +225,7 @@ namespace WebMusic.Controllers
                     mp3 = song.Filesong,
                     id = songhistory.Id,
                     date = (songhistory.Listendate != null ? songhistory.Listendate : null)
-                }).OrderByDescending(x=>x.id).ToList();
+                }).OrderByDescending(x=>x.date).ToList();
                 return Ok(listsonghistory);
             }
             return BadRequest();
@@ -244,9 +256,10 @@ namespace WebMusic.Controllers
                     idAlbum = song.IdAlbum,
                     idSinger = song.IdSinger,
                     idSong = song.Id,
-                    mp3 = song.Filesong
+                    mp3 = song.Filesong,
+                    id = songAlbum.Id
                 }).Distinct().ToList();
-                return Ok(listsonghistory);
+                return Ok(listsonghistory.OrderByDescending(x=>x.id));
             }
             return BadRequest();
         }
