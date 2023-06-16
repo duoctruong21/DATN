@@ -173,14 +173,17 @@ namespace WebMusic.Controllers
             {
                 return Problem("Entity set 'MusicWebContext.Histories'  is null.");
             }
-            var check = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
-            if(check != null)
+            var checkHistory = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
+            if(checkHistory != null)
             {
-                check.Idsong = history.Idsong;
-                check.Listendate = DateTime.Now;
+                checkHistory.Idsong = history.Idsong;
+                checkHistory.Listendate = DateTime.Now;
                 var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
-                check.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
-                _context.Histories.Update(check);
+                checkHistory.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
+                _context.Histories.Update(checkHistory);
+
+                
+
             }
             else
             {
@@ -191,6 +194,7 @@ namespace WebMusic.Controllers
                 var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
                 item.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
                 _context.Histories.Add(item);
+
             }
             await _context.SaveChangesAsync();
 
@@ -225,7 +229,7 @@ namespace WebMusic.Controllers
                     mp3 = song.Filesong,
                     id = songhistory.Id,
                     date = (songhistory.Listendate != null ? songhistory.Listendate : null)
-                }).OrderByDescending(x=>x.date).ToList();
+                }).OrderByDescending(x => x.date).ToList() ;
                 return Ok(listsonghistory);
             }
             return BadRequest();

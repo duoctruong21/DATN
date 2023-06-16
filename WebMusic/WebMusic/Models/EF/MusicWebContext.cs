@@ -190,9 +190,6 @@ public partial class MusicWebContext : DbContext
                 .HasColumnName("alias");
             entity.Property(e => e.CreatedBy).HasMaxLength(100);
             entity.Property(e => e.CreatedDate).HasColumnType("date");
-            entity.Property(e => e.Downloadsong)
-                .HasMaxLength(200)
-                .HasColumnName("downloadsong");
             entity.Property(e => e.Fileimg)
                 .HasMaxLength(400)
                 .HasColumnName("fileimg");
@@ -203,6 +200,9 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.IdSinger).HasColumnName("idSinger");
             entity.Property(e => e.LikeCount).HasColumnName("likeCount");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
+            entity.Property(e => e.RecentListendate)
+                .HasColumnType("datetime")
+                .HasColumnName("recentListendate");
             entity.Property(e => e.SongDescription)
                 .HasMaxLength(500)
                 .HasColumnName("songDescription");

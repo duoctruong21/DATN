@@ -35,7 +35,7 @@ public partial class Song
 
     public string? Alias { get; set; }
 
-    public string? Downloadsong { get; set; }
+    public DateTime? RecentListendate { get; set; }
 
     public virtual ICollection<Albumuser> Albumusers { get; set; } = new List<Albumuser>();
 
