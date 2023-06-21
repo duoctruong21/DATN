@@ -40,7 +40,8 @@ namespace WebMusic.Common
             {
                 string alias = word.linksong!.Replace('-', ' ');
                 string singer = word.linksinger!.Replace('-', ' ');
-                string strData = Regex.Replace(alias, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(singer, @"[^a-zA-Z0-9\s]", "");
+                string category = word.linkalbum!.Replace('-', ' ');
+                string strData = Regex.Replace(alias, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(singer, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(category, @"[^a-zA-Z0-9\s]", "");
                 //string strData = alias + " " + singer;
 
                 int idTemp = (int)word.idSong!;
@@ -72,17 +73,32 @@ namespace WebMusic.Common
                 }
             }*/
             //tính tf tần xuất chữ xuất hiện
-            for (int i = 0; i < list.Count; i++)
+            /*for (int i = 0; i < list.Count; i++)
             {
-                string keysong = list[i].linksong.Replace('-', ' ') + " " + list[i].linksinger.Replace('-', ' ');
+                string keysong = list[i].linksong.Replace('-', ' ');
+                string keysong1= list[i].linksinger.Replace('-', ' ');
+                string keysong2 = list[i].linkalbum.Replace('-', ' ');
                 //string keysong = songItem.Replace('-', ' ');
-                string key = Regex.Replace(keysong, @"[^a-zA-Z0-9\s]", "");
+                string key = Regex.Replace(keysong, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(keysong1, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(keysong2, @"[^a-zA-Z0-9\s]", "");
                 for (int j = 0; j < data.Count; j++)
                 {
                     double sum = CalculateTF(key, data[j]);
                     //double sum = CalculateTF("a f c d", "a b d f");
                     matrixs.Add(sum);
                 }
+            }*/
+
+
+            string keysong = list[setViTri[0]].linksong.Replace('-', ' ');
+            string keysong1 = list[setViTri[0]].linksinger.Replace('-', ' ');
+            string keysong2 = list[setViTri[0]].linkalbum.Replace('-', ' ');
+            //string keysong = songItem.Replace('-', ' ');
+            string key = Regex.Replace(keysong, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(keysong1, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(keysong2, @"[^a-zA-Z0-9\s]", "");
+            for (int j = 0; j < data.Count; j++)
+            {
+                double sum = CalculateTF(key, data[j]);
+                //double sum = CalculateTF("a f c d", "a b d f");
+                matrixs.Add(sum);
             }
 
             /*for (int k = 1; k <= list.Count; k++)
@@ -103,13 +119,13 @@ namespace WebMusic.Common
 
 
             // tính cosin
-            for (int j = 0; j < list.Count; j++)
+           /* for (int j = 0; j < list.Count; j++)
             {
                 double sum2 = 0;
                 int count = list.Count;
                 for (int i = 0; i < list.Count; i++)
                 {
-                    sum2 += matrixs[(setViTri[0]) * count + i] * matrixs[j * count + i];
+                    sum2 = matrixs[(setViTri[0]) * count + i] * matrixs[j * count + i];
                 }
                 if (sum2 > 0)
                 {
@@ -120,9 +136,9 @@ namespace WebMusic.Common
                 {
                     matrixCos.Add(sum2);
                 }
-                /*double cos = Math.Cos(sum2);
-                matrixCos.Add(cos);*/
-            }
+                *//*double cos = Math.Cos(sum2);
+                matrixCos.Add(cos);*//*
+            }*/
 
             /*for(int i = 0; i < matrixCos.Count; i++)
             {
@@ -133,9 +149,9 @@ namespace WebMusic.Common
             }*/
 
             List<KeyValuePair<int, double>> sortedList = new List<KeyValuePair<int, double>>();
-            for (int i = 0; i < matrixCos.Count; i++)
+            for (int i = 0; i < matrixs.Count; i++)
             {
-                sortedList.Add(new KeyValuePair<int, double>( i, matrixCos[i]));
+                sortedList.Add(new KeyValuePair<int, double>( i, matrixs[i]));
             }
 
             sortedList.Sort((a, b) => b.Value.CompareTo(a.Value));
@@ -172,6 +188,7 @@ namespace WebMusic.Common
 
             //in ra danh sach không trùng
             HashSet<string> title1 = new HashSet<string>();
+            title1.Clear();
 
             foreach (string word in words)
             {
@@ -182,6 +199,7 @@ namespace WebMusic.Common
             }
 
             HashSet<string> content1 = new HashSet<string>();
+            content1.Clear();
 
             foreach (string word in termWords)
             {
@@ -193,17 +211,17 @@ namespace WebMusic.Common
 
             double termCount = 0;
 
-            /*for (int i = 0; i < title1.Count ; i++)
+            /*for (int i = 0; i < words.Length; i++)
             {
-                for (int j = 0; j < content1.Count; j++)
+                for (int j = 0; j < termWords.Length; j++)
                 {
-                    if (title1[i] == content1[j])
+                    if (words[i] == termWords[j])
                     {
                         termCount++;
-                    }  
-                    
+                    }
+
                 }
-                
+
             }*/
             foreach (string titleWord in title1)
             {

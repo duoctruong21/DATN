@@ -421,13 +421,13 @@ namespace WebMusic.Controllers
             List<SongItem> items = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -445,8 +445,11 @@ namespace WebMusic.Controllers
             songplaying.linksong = songs.Alias;
             songplaying.idSinger = songs.IdSinger;
             songplaying.singerName = _context.Singers.Find(songs.IdSinger).SingerName;
+            songplaying.linksinger = _context.Singers.Find(songs.IdSinger).Alias;
             songplaying.fileImg = songs.Fileimg;
             songplaying.idSong = songs.Id;
+            songplaying.albumName = _context.Categories.Find(songs.Idcategory).CategoryName;
+            songplaying.linkalbum = _context.Categories.Find(songs.Idcategory).Alias;
             List<int> list = await recommnend.recommendSystem(songs.Alias, items);
             List<SongItem> listsongrecomment = new List<SongItem>();
             listsongrecomment.Add(songplaying);
@@ -464,6 +467,8 @@ namespace WebMusic.Controllers
                     songitem.fileImg = item.Fileimg;
                     songitem.idSong = item.Id;
                     songitem.linksinger = _context.Singers.Find(item.IdSinger).Alias;
+                    songitem.albumName = _context.Categories.Find(item.Idcategory).CategoryName;
+                    songitem.linkalbum = _context.Categories.Find(item.Idcategory).Alias;
                     listsongrecomment.Add(songitem);
                 }
 
@@ -474,8 +479,8 @@ namespace WebMusic.Controllers
             return Ok(listsongrecomment);
         }
 
-        [HttpPost("/updatecountsong/{id}")]
-        public async Task<IActionResult> updatesong (int id)
+        /*[HttpPost("/updatecountsong/{id}")]
+        public async Task<IActionResult> updatesong(int id)
         {
             var checkSong = _context.Songs.FirstOrDefault(x => x.Id == id);
             // cập nhật lượt nghe
@@ -494,13 +499,13 @@ namespace WebMusic.Controllers
             List<SongItem> listSong = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -544,13 +549,13 @@ namespace WebMusic.Controllers
             List<SongItem> listSong = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -584,6 +589,6 @@ namespace WebMusic.Controllers
                 }
             }
             return Ok(listsongrecomment);
-        }
+        }*/
     }
 }
