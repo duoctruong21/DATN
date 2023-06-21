@@ -21,6 +21,8 @@ public partial class MusicWebContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<CategoryWithSong> CategoryWithSongs { get; set; }
+
     public virtual DbSet<History> Histories { get; set; }
 
     public virtual DbSet<Singer> Singers { get; set; }
@@ -28,6 +30,8 @@ public partial class MusicWebContext : DbContext
     public virtual DbSet<Song> Songs { get; set; }
 
     public virtual DbSet<Topic> Topics { get; set; }
+
+    public virtual DbSet<Topicwithsong> Topicwithsongs { get; set; }
 
     public virtual DbSet<UserWebMusic> UserWebMusics { get; set; }
 
@@ -101,6 +105,7 @@ public partial class MusicWebContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Idalbum).HasColumnName("idalbum");
+            entity.Property(e => e.Idcategory).HasColumnName("idcategory");
             entity.Property(e => e.Idsong).HasColumnName("idsong");
 
             entity.HasOne(d => d.IdalbumNavigation).WithMany(p => p.Albumusers)
@@ -119,11 +124,33 @@ public partial class MusicWebContext : DbContext
             entity.ToTable("category");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Alias)
+                .HasMaxLength(200)
+                .HasColumnName("alias");
             entity.Property(e => e.CategoryDescription).HasMaxLength(500);
             entity.Property(e => e.CategoryImg).HasMaxLength(500);
             entity.Property(e => e.CategoryName).HasMaxLength(100);
             entity.Property(e => e.CreatedDate).HasColumnType("date");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
+        });
+
+        modelBuilder.Entity<CategoryWithSong>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__category__3213E83F8B2338B1");
+
+            entity.ToTable("categoryWithSong");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Idcategory).HasColumnName("idcategory");
+            entity.Property(e => e.Idsong).HasColumnName("idsong");
+
+            entity.HasOne(d => d.IdcategoryNavigation).WithMany(p => p.CategoryWithSongs)
+                .HasForeignKey(d => d.Idcategory)
+                .HasConstraintName("FK__categoryW__idcat__625A9A57");
+
+            entity.HasOne(d => d.IdsongNavigation).WithMany(p => p.CategoryWithSongs)
+                .HasForeignKey(d => d.Idsong)
+                .HasConstraintName("FK__categoryW__idson__634EBE90");
         });
 
         modelBuilder.Entity<History>(entity =>
@@ -198,6 +225,8 @@ public partial class MusicWebContext : DbContext
                 .HasColumnName("filesong");
             entity.Property(e => e.IdAlbum).HasColumnName("idAlbum");
             entity.Property(e => e.IdSinger).HasColumnName("idSinger");
+            entity.Property(e => e.Idcategory).HasColumnName("idcategory");
+            entity.Property(e => e.Idtopic).HasColumnName("idtopic");
             entity.Property(e => e.LikeCount).HasColumnName("likeCount");
             entity.Property(e => e.ModifiedDate).HasColumnType("date");
             entity.Property(e => e.RecentListendate)
@@ -218,6 +247,14 @@ public partial class MusicWebContext : DbContext
             entity.HasOne(d => d.IdSingerNavigation).WithMany(p => p.Songs)
                 .HasForeignKey(d => d.IdSinger)
                 .HasConstraintName("FK__song__idSinger__4CA06362");
+
+            entity.HasOne(d => d.IdcategoryNavigation).WithMany(p => p.Songs)
+                .HasForeignKey(d => d.Idcategory)
+                .HasConstraintName("FK__song__idcategory__4E53A1AA");
+
+            entity.HasOne(d => d.IdtopicNavigation).WithMany(p => p.Songs)
+                .HasForeignKey(d => d.Idtopic)
+                .HasConstraintName("FK__song__idtopic__4D5F7D71");
         });
 
         modelBuilder.Entity<Topic>(entity =>
@@ -235,25 +272,25 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.TopicDescription).HasMaxLength(500);
             entity.Property(e => e.TopicImg).HasMaxLength(500);
             entity.Property(e => e.TopicName).HasMaxLength(100);
+        });
 
-            entity.HasMany(d => d.IdCategories).WithMany(p => p.IdTopics)
-                .UsingEntity<Dictionary<string, object>>(
-                    "TopicWithCategory",
-                    r => r.HasOne<Category>().WithMany()
-                        .HasForeignKey("IdCategory")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__topicWith__idCat__3C69FB99"),
-                    l => l.HasOne<Topic>().WithMany()
-                        .HasForeignKey("IdTopic")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__topicWith__idTop__3B75D760"),
-                    j =>
-                    {
-                        j.HasKey("IdTopic", "IdCategory").HasName("PK__topicWit__F3DDCA6E2B0F6DE9");
-                        j.ToTable("topicWithCategory");
-                        j.IndexerProperty<int>("IdTopic").HasColumnName("idTopic");
-                        j.IndexerProperty<int>("IdCategory").HasColumnName("idCategory");
-                    });
+        modelBuilder.Entity<Topicwithsong>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__topicwit__3213E83FD48995C6");
+
+            entity.ToTable("topicwithsong");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Idsong).HasColumnName("idsong");
+            entity.Property(e => e.Idtopic).HasColumnName("idtopic");
+
+            entity.HasOne(d => d.IdsongNavigation).WithMany(p => p.Topicwithsongs)
+                .HasForeignKey(d => d.Idsong)
+                .HasConstraintName("FK__topicwith__idson__671F4F74");
+
+            entity.HasOne(d => d.IdtopicNavigation).WithMany(p => p.Topicwithsongs)
+                .HasForeignKey(d => d.Idtopic)
+                .HasConstraintName("FK__topicwith__idtop__662B2B3B");
         });
 
         modelBuilder.Entity<UserWebMusic>(entity =>

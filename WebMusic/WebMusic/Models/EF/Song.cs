@@ -37,13 +37,25 @@ public partial class Song
 
     public DateTime? RecentListendate { get; set; }
 
+    public int? Idtopic { get; set; }
+
+    public int? Idcategory { get; set; }
+
     public virtual ICollection<Albumuser> Albumusers { get; set; } = new List<Albumuser>();
+
+    public virtual ICollection<CategoryWithSong> CategoryWithSongs { get; set; } = new List<CategoryWithSong>();
 
     public virtual ICollection<History> Histories { get; set; } = new List<History>();
 
     public virtual Album? IdAlbumNavigation { get; set; }
 
     public virtual Singer? IdSingerNavigation { get; set; }
+
+    public virtual Category? IdcategoryNavigation { get; set; }
+
+    public virtual Topic? IdtopicNavigation { get; set; }
+
+    public virtual ICollection<Topicwithsong> Topicwithsongs { get; set; } = new List<Topicwithsong>();
 
     public virtual ICollection<Album> IdAlbums { get; set; } = new List<Album>();
 }

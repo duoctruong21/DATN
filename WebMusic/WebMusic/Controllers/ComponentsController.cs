@@ -487,10 +487,10 @@ namespace WebMusic.Controllers
             return Ok();
         }
 
-       /* [HttpGet("/recommenduser/{id}")]
+        [HttpGet("/recommenduser/{id}")]
         public async Task<IActionResult> recommenduser(int id)
         {
-            var items = _context.Histories.Where(x => x.Iduser == id).OrderByDescending(x=>x.Listendate).OrderByDescending(x=>x.Countlisten).Take(3).ToList();
+            var items = _context.Histories.Where(x => x.Iduser == id).OrderByDescending(x => x.Listendate).OrderByDescending(x => x.Countlisten).Take(3).ToList();
             List<SongItem> listSong = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
@@ -513,7 +513,7 @@ namespace WebMusic.Controllers
             List<SongItem> listsongrecomment = new List<SongItem>();
             foreach (var item in items)
             {
-                var alias = _context.Songs.FirstOrDefault(x=>x.Id == item.Idsong);
+                var alias = _context.Songs.FirstOrDefault(x => x.Id == item.Idsong);
                 List<int> list = await recommnend.recommendSystem(alias.Alias, listSong);
                 for (int i = 0; i < 2; i++)
                 {
@@ -584,6 +584,6 @@ namespace WebMusic.Controllers
                 }
             }
             return Ok(listsongrecomment);
-        }*/
+        }
     }
 }

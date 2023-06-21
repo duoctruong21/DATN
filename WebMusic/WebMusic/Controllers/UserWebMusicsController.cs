@@ -181,9 +181,6 @@ namespace WebMusic.Controllers
                 var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
                 checkHistory.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
                 _context.Histories.Update(checkHistory);
-
-                
-
             }
             else
             {
@@ -212,16 +209,16 @@ namespace WebMusic.Controllers
                 from songhistory in items
                 join song in _context.Songs on songhistory.Idsong equals song.Id
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
-                from albums in albumItem.DefaultIfEmpty()
+                join category in _context.Categories on song.Idcategory equals category.Id into cateItem
+                from cate in cateItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = cate.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
-                    linkalbum = albums.Alias,
+                    linkalbum = cate.Alias,
                     linksinger = singer.Alias,
                     idAlbum = song.IdAlbum,
                     idSinger = song.IdSinger,
@@ -244,10 +241,13 @@ namespace WebMusic.Controllers
                 List<SongItem> listsonghistory = (
                 from songhistory in items where songhistory.Alias == alias
                 join songAlbum in _context.Albumusers on songhistory.Id equals songAlbum.Idalbum
+                join category in _context.Categories on songAlbum.Idcategory equals category.Id into categoryItem
                 join song in _context.Songs on songAlbum.Idsong equals song.Id
                 join singer in _context.Singers on song.IdSinger equals singer.Id
                 join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
+                from categories in categoryItem.DefaultIfEmpty()
+
                 select new SongItem
                 {
                     songName = song.SongName,

@@ -33,7 +33,7 @@ namespace WebMusic.Controllers
             {
                 return NotFound();
             }
-            return await _context.Topics.ToListAsync();
+            return await _context.Topics.Take(10).ToListAsync();
         }
 
         // GET: api/Topics/5

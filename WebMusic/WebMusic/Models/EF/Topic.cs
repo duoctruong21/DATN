@@ -19,5 +19,7 @@ public partial class Topic
 
     public string? Alias { get; set; }
 
-    public virtual ICollection<Category> IdCategories { get; set; } = new List<Category>();
+    public virtual ICollection<Song> Songs { get; set; } = new List<Song>();
+
+    public virtual ICollection<Topicwithsong> Topicwithsongs { get; set; } = new List<Topicwithsong>();
 }
