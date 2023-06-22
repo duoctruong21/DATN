@@ -10,7 +10,7 @@ function SearchIndex() {
   const history = useNavigate();
 
   const { content } = useParams();
-  const url = `https://localhost:7122/search/${content}`;
+  const url = `https://localhost:7122/searchrecommend/${content}`;
   console.log(content)
   useEffect(() => {
     axios

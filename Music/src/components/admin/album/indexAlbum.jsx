@@ -18,7 +18,7 @@ function IndexAlbum() {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   // pagedlist
   const [pageNumber, setPageNumber] = useState(0);

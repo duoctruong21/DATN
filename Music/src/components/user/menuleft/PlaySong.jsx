@@ -160,8 +160,20 @@ function PlaySong(props) {
             }
             customAdditionalControls={[
               <a
+                className="line3"
                 style={{ position: "fixed" }}
-                onClick={checkIndexPlaying}>
+                onClick={checkIndexPlaying}
+                title={
+                  loadSong == true
+                    ? songFirst.songName
+                    : Song == null
+                    ? "2"
+                    : Song.songName == undefined
+                    ? songFirst != null
+                      ? songFirst.songName
+                      : ""
+                    : Song.songName
+                }>
                 {loadSong == true
                   ? songFirst.songName
                   : Song == null

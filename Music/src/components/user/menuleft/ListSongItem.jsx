@@ -38,12 +38,21 @@ function ListSongItem(props) {
                   alt={song.songName}
                 />
                 <div className="SongItem__item__info">
-                  <a href={`/song/${song.linksong}`} title={song.songName} >{song.songName}</a>
+                  <a
+                    href={`/song/${song.linksong}`}
+                    title={song.songName}
+                    className="line1">
+                    {song.songName}
+                  </a>
                   <a href={`/album/${song.linkalbum}`}>
                     <p>{song.albumName}</p>
                   </a>
                   <a href={`/singer/${song.linksinger}`}>
-                    <p title={song.singerName}>{song.singerName}</p>
+                    <p
+                      className="line1"
+                      title={song.singerName}>
+                      {song.singerName}
+                    </p>
                   </a>
                 </div>
               </div>

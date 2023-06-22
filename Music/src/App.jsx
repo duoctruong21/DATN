@@ -115,12 +115,16 @@ function App() {
           path="/playsong"
           element={<IndexPlaysong />}
         />
-        <Route
+        {/* <Route
           path="/admin/topic"
           element={<MenuAdmin />}
         />
         <Route
           path="/admin/album"
+          element={<MenuAdmin />}
+        />
+        <Route
+          path="/admin/category"
           element={<MenuAdmin />}
         />
         <Route
@@ -130,7 +134,7 @@ function App() {
         <Route
           path="/admin/singer"
           element={<MenuAdmin />}
-        />
+        /> */}
       </Routes>
       <div className="app__main">
         <Routes>
@@ -175,8 +179,11 @@ function App() {
             path={`/topic/:alias`}
             element={<TopicInfo />}
           />
+        </Routes>
           {/* Admin */}
-          <Route
+          {token ==6?(
+            <Routes>
+              <Route
             path="/admin/topic"
             element={<IndexTopic />}
           />
@@ -233,7 +240,8 @@ function App() {
             path="/admin/song/edit/:id"
             element={<EditSong />}
           />
-        </Routes>
+            </Routes>
+          ):""}
       </div>
     </div>
   );

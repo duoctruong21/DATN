@@ -19,6 +19,9 @@ function menuLeft() {
             <li>
               <a href="/admin/song">Song</a>
             </li>
+            <li>
+              <a href="/admin/category">Category</a>
+            </li>
           </ul>
         </div>
       </div>

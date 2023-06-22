@@ -27,8 +27,11 @@ function SongBar(props) {
     setPageNumber(selected);
   };
 
+  const [idcheck,setidcheck]= useState(0)
+
   const [mp3, setMp3] = useState("");
   const playSong = (id) => {
+    setidcheck(id);
     setLoadSong(true);
     setCheck(0);
     songs.forEach((song, index) => {
@@ -311,7 +314,7 @@ function SongBar(props) {
           ))}
       </div>
       <div className="listtopsong__wapper__page">
-        {songs.length < 10 ? (
+        {songs.length < 11 ? (
           ""
         ) : (
           <ReactPaginate
@@ -327,12 +330,14 @@ function SongBar(props) {
           />
         )}
       </div>
-      <PlaySong
-        firstsong={songInfo}
-        dataForm={songs}
-        idPlaying={mp3}
-        load={loadSong}
-      />
+      <div style={{display: idcheck !=0?"block":"none" }}>
+        <PlaySong
+          firstsong={songInfo}
+          dataForm={songs}
+          idPlaying={mp3}
+          load={loadSong}
+        />
+      </div>
     </div>
   );
 }

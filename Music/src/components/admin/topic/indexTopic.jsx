@@ -18,7 +18,7 @@ function IndexTopic() {
       .catch((error) => {
         console.log(error);
       });
-  });
+  },[]);
   // pagedlist
   const [pageNumber, setPageNumber] = useState(0);
   const songsPerPage = 6;

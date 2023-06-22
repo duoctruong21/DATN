@@ -52,7 +52,9 @@ function menuLeft() {
         <div className="menuleft__wapper">
           <div className="menuleft__main">
             {token != null ? (
-              <ul className="menuleft__list">
+              <ul
+                className="menuleft__list"
+                style={{ display: token == 6 ? "none" : "block" }}>
                 <li>
                   <a onClick={onclickhome}>Home</a>
                 </li>
@@ -78,7 +80,7 @@ function menuLeft() {
             )}
             <ul
               className="menuleft__list"
-              style={{ display: "none" }}>
+              style={{ display: token != 6 ? "none" : "block" }}>
               <li>
                 <a href="/admin/topic">Topic</a>
               </li>
@@ -90,6 +92,9 @@ function menuLeft() {
               </li>
               <li>
                 <a href="/admin/song">Song</a>
+              </li>
+              <li>
+                <a href="/admin/category">Category</a>
               </li>
             </ul>
           </div>

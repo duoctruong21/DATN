@@ -1,0 +1,57 @@
+.Infouser{
+    position: fixed;
+    right: 28%;
+    background-color: #fff;
+    width: 600px;
+    display: flex;
+
+    &__img {
+        & img{
+            width: 200px;
+        } 
+    }
+
+    &__control{
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        & label{
+            font-size: 1rem;
+        }
+
+        & input{
+            font-size: 1rem;
+        }
+
+        & button {
+            border: none;
+            background-color: rgb(179, 247, 247);
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #000;
+            font-family: Sono;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        &:last-child{
+            justify-content: center;
+        }
+    }
+}
+
+.close-user{
+    position: fixed;
+    left: 580px;
+    &-btn {
+        position: absolute;
+        z-index: 10;
+        top: 10px;
+        border: none;
+        background-color: red;
+        color: #fff;
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

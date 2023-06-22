@@ -17,10 +17,10 @@ function IndexSong() {
       .catch((error) => {
         console.log(error);
       });
-  });
+  },[]);
   //pagedlist
   const [pageNumber, setPageNumber] = useState(0);
-  const songsPerPage = 10;
+  const songsPerPage = 5;
   const pagesVisited = pageNumber * songsPerPage;
   const pageCount = Math.ceil(Songs.length / songsPerPage);
   const handlePageClick = ({ selected }) => {

@@ -70,10 +70,11 @@ function home() {
       {token == null ? (
         ""
       ) : checknote.note == null ? (
-        <div className="Recommned-post-category" >
+        <div className="Recommned-post-category">
           <form
             className="Recommned-post-category__form"
             action="">
+              <h2>Category. You Like</h2>
             {category.map((item, index) => (
               <a
                 key={index}

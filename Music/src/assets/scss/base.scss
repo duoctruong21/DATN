@@ -88,8 +88,21 @@ table {
 .line1 {
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
+    //animation: line1 10s linear infinite; 
+}
+.line3 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 600px;
+    //animation: line1 10s linear infinite; 
+}
+
+.line2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
     animation: line1 10s linear infinite;
-    
 }
 
 @keyframes line1 {
