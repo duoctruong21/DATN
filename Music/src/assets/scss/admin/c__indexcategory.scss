@@ -1,0 +1,41 @@
+.index {
+    height: calc(100vh - 73px);
+    background-color: #fff;
+    padding: 10px 0 0 0;
+    box-sizing: border-box;
+
+    &__wapper {
+
+        &__main {
+            padding: 0 5px;
+            display: flex;
+            
+            &__form {
+                width: calc(1236px - 800px);
+            }
+            &__table {
+                flex-grow: 2;
+            }
+
+            &__tablesong{
+                width: calc(1236px - 600px);
+                & div{
+                    color: #000;
+                }
+
+            }
+            &__tablesong1{
+                width: calc(1236px / 2 - 10px);
+                & div{
+                    color: #000;
+                }
+
+                &:first-child{
+                    border: 1px solid #000;
+                }                
+                
+            }
+        }
+    }
+}
+

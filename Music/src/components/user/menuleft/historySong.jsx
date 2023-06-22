@@ -6,14 +6,17 @@ import Footer from "./Footer";
 import axios from "axios";
 
 function HistorySong() {
-  const [item,setItem] = useState([])
+  const [item, setItem] = useState([]);
   const token = localStorage.getItem("token");
   const urlhistory = "https://localhost:7122/history";
 
-  useEffect(()=>{
-    axios.get(`${urlhistory}/${token}`).then((response)=>setItem(response.data)).catch()
-  },[token])
-
+  useEffect(() => {
+    axios
+        .get(`${urlhistory}/${token}`)
+        .then((response) => setItem(response.data))
+        .catch();
+    
+  }, [token]);
 
   return (
     <div className="historysong">
@@ -27,9 +30,7 @@ function HistorySong() {
       <div className="historysong__wapper__song">
         <SongBar dataSongBar={item} />
       </div>
-      <div className="historysong__wapper__page">
-
-      </div>
+      <div className="historysong__wapper__page"></div>
       <Footer />
     </div>
   );

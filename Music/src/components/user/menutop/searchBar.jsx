@@ -21,6 +21,30 @@ function searchBar() {
       console.log("1");
     }
   };
+
+  // 
+  const [check, setCheck] = useState(false)
+  const handleCheck = () =>{
+    if(check != true){
+      setCheck(true);
+    }else{
+      setCheck(false);
+    }
+  }
+  // recommend
+  const [searchs, setSearchs] = useState([])
+  const [content, setContent] = useState("")
+  const handleschange = (e)=>{
+    setContent(e)
+  }
+  useEffect(() => {
+    axios
+      .get(`https://localhost:7122/recommend-search/${content}`)
+      .then((response) => setSearchs(response.data))
+      .catch();
+  }, [content]);
+  console.log(searchs)
+
   return (
     <div className="search-responsive">
       <form
@@ -30,9 +54,13 @@ function searchBar() {
           type="text"
           id="content"
           name="content"
+          onClick={handleCheck}
+          autocomplete="off"
+          onChange={(e) => handleschange(e.target.value)}
         />
         <button
           value="submit"
+          onClick={handleCheck}
           href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +69,17 @@ function searchBar() {
           </svg>
         </button>
       </form>
+      <div
+        className="menuTop__Main__block__search__content"
+        style={{ display: check == true ? "flex" : "none" }}>
+        {searchs.map((value) => (
+          <a
+            className="menuTop__Main__block__search__key"
+            href={`/song/${value.alias}`}>
+            {value.name}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }

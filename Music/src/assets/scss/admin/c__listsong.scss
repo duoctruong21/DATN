@@ -1,0 +1,95 @@
+.Listsong {
+    height: calc(100vh - 73px);
+    overflow: hidden;
+    overflow-y: scroll;
+
+    &__thead {
+        position: fixed;
+
+    }
+
+    &__tbody {
+        position: relative;
+        top: 30px;
+        right: 0;
+    }
+
+    &__th--checkbox {
+        width: 20px;
+    }
+
+    &__th--stt {
+        width: 20px;
+    }
+
+    &__th--title {
+        width: 620px;
+    }
+
+    &__th--image {
+        width: 40px;
+    }
+
+    &__th--modified {
+        width: 160px;
+    }
+
+    &__th--manage {
+        width: 200px;
+    }
+
+    //csss the td trong table
+    &__td--checkbox {
+        width: 20px;
+    }
+
+    &__td--stt {
+        width: 50px;
+    }
+
+    &__td--title {
+        width: 620px;
+        color: #000;
+    }
+
+    &__td--image {
+        & img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+    }
+
+    &__td--modified {
+        width: 160px;
+        color: #000;
+    }
+
+    &__td--manage {
+        display: flex;
+        justify-content: center;
+
+        & a {
+            display: block;
+            text-decoration: none;
+            background-color: rgb(0, 183, 255);
+            color: #fff;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            margin-right: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        & button {
+            background-color: red;
+            color: #fff;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            margin-right: 5px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+}

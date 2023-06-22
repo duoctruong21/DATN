@@ -5,6 +5,55 @@
     
 }
 
+.Recommned-post-category{
+    position: fixed;
+    top: 150px;
+    z-index: 40;
+    width: 1000px;
+    height: 400px;
+    background-color: #fff;
+
+    &__form{
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__name{
+        text-decoration: none;
+        font-size: 1.5rem;
+        display: block;
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin: 5px;
+        color:black;
+        background-color: rgba(75, 134, 123, 0.5);
+
+        &:hover{
+            background-color: rgba(75, 134, 123, 1);
+        }
+    }
+    &__ok{
+        position: absolute;
+        bottom: 10px;
+        right: 45%;
+        border: none;
+        background-color: green;
+        font-size: 1.5rem;
+        color: #fff;
+        font-family: Sono;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+}
+
+.active-category {
+    background-color: rgba(75, 134, 123, 1);
+}
+
+
+
 @media (max-width:500px){
     .home{
         width: inherit;

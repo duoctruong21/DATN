@@ -4,7 +4,7 @@ import axios from "axios";
 
 function ListTopic() {
   const [listItems, setListItems] = useState([]);
-  const url = "https://localhost:7122/albumTop6";
+  const url = "https://localhost:7122/api/Topics";
   useEffect(() => {
     axios
       .get(url)
@@ -57,9 +57,9 @@ function ListTopic() {
             <li
               key={index}
               ref={index === 0 ? firstItemRef : null}>
-              <a href="#">
+              <a href={`/topic/${item.alias}`}>
                 <img
-                  src={item.albumImg}
+                  src={item.topicImg}
                   alt=""
                 />
               </a>

@@ -13,7 +13,7 @@ function ListSinger() {
       <div className="ListSinger__wapper">
         <div className="ListSinger__wapper__main">
           <div className="ListSinger__wapper__main__header">
-            <h2>Ca sĩ nỗi bậc</h2>
+            <h2>Hot singer</h2>
           </div>
           <div className="ListSinger__wapper__main__list">
             {singers.map((singer, index) => (

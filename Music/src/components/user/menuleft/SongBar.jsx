@@ -30,6 +30,7 @@ function SongBar(props) {
   const [mp3, setMp3] = useState("");
   const playSong = (id) => {
     setLoadSong(true);
+    setCheck(0);
     songs.forEach((song, index) => {
       if (id === song.idSong) {
         setMp3(song.idSong);
@@ -41,18 +42,30 @@ function SongBar(props) {
     datasong.append("iduser", token);
     datasong.append("idsong", id);
     console.log(id + " " + token);
-    axios
-      .post(`https://localhost:7122/historied`, datasong, {
-        headers: {
-          "Content-Type": "multipart/fromdata",
-        },
-      })
-      .then(() => {
-        alert("");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      axios
+        .post(`https://localhost:7122/updatecountsong/${songs[index].idSong}`)
+        .then(() => {
+          // alert("");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch {}
+    try {
+      axios
+        .post(`https://localhost:7122/historied`, datasong, {
+          headers: {
+            "Content-Type": "multipart/fromdata",
+          },
+        })
+        .then(() => {
+          // alert("");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch {}
   };
   function downloadMusic(link, fileName) {
     axios

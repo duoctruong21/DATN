@@ -64,7 +64,23 @@
                     }
                 }
 
-                
+                &__content{
+                    position: absolute;
+                    background-color: #fff;
+                    width: 400px;
+                    display: flex;
+                    flex-direction: column;
+                }
+                &__key{
+                    display: block;
+                    padding: 10px 20px;
+                    color: #121212;
+                    text-decoration: none;
+                    font-size: 1rem;
+                    &:hover{
+                        background-color: rgba(0, 0, 0, 0.5);
+                    }
+                }
             }
 
             &__login{

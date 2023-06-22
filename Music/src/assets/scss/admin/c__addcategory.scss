@@ -1,0 +1,82 @@
+.addcategory {
+    border-right: 1px solid #000;
+    &__wapper {
+
+        &__main {
+
+            &__title {
+                padding: 20px 40px;
+                font-size: 30px;
+                text-align: center;
+            }
+
+            &__form {
+                padding: 0 10px;
+
+                &__control {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 5px 0;
+                    font-size: 20px;
+
+                    & label {
+                        display: block;
+                        width: 200px;
+                    }
+
+                    & input {
+                        width: 100%;
+                        font-size: 20px;
+                        outline: none;
+                        font-family: Sono;
+                    }
+                    & img {
+                        width: 100px;
+                        height: 100px;
+                        object-fit: cover;
+                    }
+
+                    .ck.ck-toolbar>.ck-toolbar__items {
+                        z-index: 0;
+                    }
+                }
+
+                &__confirm {
+                    display: flex;
+                    justify-content: end;
+                    padding-top: 10px;
+                    box-sizing: border-box;
+
+                    & button {
+                        padding: 10px 20px;
+                        font-size: 20px;
+                        font-family: Sono;
+                        border: none;
+                        border-radius: 30px;
+                        color: #fff;
+                        background-color: green;
+                    }
+
+                    & a {
+                        display: block;
+                        text-decoration: none;
+                        color: #fff;
+                        padding: 10px 20px;
+                        border-radius: 30px;
+                        background-color: red;
+                        font-size: 20px;
+                        margin-right: 10px;
+                    }
+                }
+
+                & .ck.ck-editor,
+                .css-b62m3t-container {
+                    box-sizing: border-box;
+                    max-width: 986px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../../../assets/scss/user/c__menuleft.scss";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function menuLeft() {
   const token = localStorage.getItem("token");
   const [user, setUser] = useState("");
+
+
 
   if (token != null) {
     useEffect(() => {
@@ -20,6 +23,19 @@ function menuLeft() {
     }, [token]);
   }
 
+  const history = useNavigate()
+  const onclickhistory = ()=>{
+    history("/your-history");
+  }
+  const onclickhome = () => {
+    history("/home");
+  };
+  const onclicklib = () => {
+    history("/your-library");
+  };
+  const onclicktop = () => {
+    history("/top-song");
+  };
 
 
   return (
@@ -38,25 +54,25 @@ function menuLeft() {
             {token != null ? (
               <ul className="menuleft__list">
                 <li>
-                  <a href="/home">Home</a>
+                  <a onClick={onclickhome}>Home</a>
                 </li>
                 <li>
-                  <a href="/your-library">Your library</a>
+                  <a onClick={onclicklib}>Your library</a>
                 </li>
                 <li>
-                  <a href="/your-history">History</a>
+                  <a onClick={onclickhistory}>History</a>
                 </li>
                 <li>
-                  <a href="/top-song">Top song</a>
+                  <a onClick={onclicktop}>Top song</a>
                 </li>
               </ul>
             ) : (
               <ul className="menuleft__list">
                 <li>
-                  <a href="/home">Home</a>
+                  <a onClick={onclickhome}>Home</a>
                 </li>
                 <li>
-                  <a href="/top-song">Top song</a>
+                  <a onClick={onclicktop}>Top song</a>
                 </li>
               </ul>
             )}

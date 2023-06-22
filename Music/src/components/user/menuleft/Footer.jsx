@@ -7,7 +7,7 @@ function Footer() {
         <div className='footer__wapper'>
             <div className='footer__main'>
                 <div className='footer__main__info'>
-                    <p>Creater: Truong Duoc</p>
+                    <p></p>
                 </div>
             </div>
         </div>

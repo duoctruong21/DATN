@@ -40,18 +40,32 @@ function PlaySong(props) {
         datasong.append("iduser", token);
         datasong.append("idsong", songs[index].idSong);
         console.log(Song.idSong);
-        axios
-          .post(`https://localhost:7122/historied`, datasong, {
-            headers: {
-              "Content-Type": "multipart/fromdata",
-            },
-          })
-          .then(() => {
-            alert("");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        try {
+          axios
+            .post(
+              `https://localhost:7122/updatecountsong/${songs[index].idSong}`
+            )
+            .then(() => {
+              // alert("");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } catch {}
+        try {
+          axios
+            .post(`https://localhost:7122/historied`, datasong, {
+              headers: {
+                "Content-Type": "multipart/fromdata",
+              },
+            })
+            .then(() => {
+              // alert("");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } catch {console.log("0");}
       }
     });
   };
@@ -72,18 +86,32 @@ function PlaySong(props) {
           datasong.append("iduser", token);
           datasong.append("idsong", songs[index].idSong);
           console.log(Song.idSong);
-          axios
-            .post(`https://localhost:7122/historied`, datasong, {
-              headers: {
-                "Content-Type": "multipart/fromdata",
-              },
-            })
-            .then(() => {
-              alert("");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          try {
+            axios
+              .post(
+                `https://localhost:7122/updatecountsong/${songs[index].idSong}`
+              )
+              .then(() => {
+                // alert("");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } catch {}
+          try {
+            axios
+              .post(`https://localhost:7122/historied`, datasong, {
+                headers: {
+                  "Content-Type": "multipart/fromdata",
+                },
+              })
+              .then(() => {
+                // alert("");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } catch {console.log("1")}
         }
       }
     });

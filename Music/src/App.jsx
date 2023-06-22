@@ -31,7 +31,11 @@ import EditSong from "./components/admin/song/EditSong.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SearchIndex from "./components/user/menuleft/SearchIndex.jsx";
-import MenuAdmin from "./components/user/menu/menleftAdmin.jsx"
+import MenuAdmin from "./components/user/menu/menleftAdmin.jsx";
+import IndexCategory from "./components/admin/category/IndexCategory.jsx";
+import AddSongToCategory from "./components/admin/category/AddSongToCategory.jsx";
+import TopicInfo from "./components/user/menuleft/TopicInfo.jsx"
+
 
 function App() {
   const urlSong = "https://localhost:7122/api/Songs";
@@ -167,6 +171,10 @@ function App() {
             path={`/album/:alias`}
             element={<Album />}
           />
+          <Route
+            path={`/topic/:alias`}
+            element={<TopicInfo />}
+          />
           {/* Admin */}
           <Route
             path="/admin/topic"
@@ -200,6 +208,14 @@ function App() {
           <Route
             path="/admin/album/add"
             element={<AddAlbum />}
+          />
+          <Route
+            path="/admin/category"
+            element={<IndexCategory />}
+          />
+          <Route
+            path="/admin/category/:id"
+            element={<AddSongToCategory />}
           />
           <Route
             path="/admin/singer/add"

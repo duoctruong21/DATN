@@ -12,14 +12,14 @@ function ListCategory() {
     axios.get(url).then((respose) => {
       setItemSong(respose.data);
     });
-  },[]);
+  }, []);
 
   return (
     <div className="listcategory">
       <div className="listcategory__wapper">
         <div className="listcategory__main">
           <div className="listcategory__main__header">
-            <h2 className="listcategory__main__title">Hot</h2>
+            <h2 className="listcategory__main__title">Hot song</h2>
             <a href="/list-hot-song">See more</a>
           </div>
           <ListSongItem dataSongItem={itemSong} />
