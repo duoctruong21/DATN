@@ -590,6 +590,63 @@ namespace WebMusic.Controllers
             }
             return Ok();
         }
+        [HttpGet("/searchrecommend/{content}")]
+        public async Task<IActionResult> recommendsearchs(string content)
+        {
+            try
+            {
+                List<SongItem> items = (
+                from song in _context.Songs
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
+                from albums in albumItem.DefaultIfEmpty()
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = albums.CategoryName,
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id,
+                    mp3 = song.Filesong
+                }).OrderByDescending(x => x.idSong).ToList();
+
+                var convertContent = FormatAlias.ConvertToEnglish(content);
+
+                List<int> list = await recommnend.recommend_content(content, items);
+                List<SongItem> listsongrecomment = new List<SongItem>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = _context.Songs.Find(list[i]);
+                    if (item != null)
+                    {
+                        SongItem songitem = new SongItem();
+                        songitem.songName = item!.SongName;
+                        songitem.mp3 = item.Filesong;
+                        songitem.linksong = item.Alias;
+                        songitem.idSinger = item.IdSinger;
+                        songitem.singerName = _context.Singers.Find(item.IdSinger).SingerName;
+                        songitem.fileImg = item.Fileimg;
+                        songitem.idSong = item.Id;
+                        songitem.linksinger = _context.Singers.Find(item.IdSinger).Alias;
+                        songitem.albumName = _context.Categories.Find(item.Idcategory).CategoryName;
+                        songitem.linkalbum = _context.Categories.Find(item.Idcategory).Alias;
+                        listsongrecomment.Add(songitem);
+                    }
+
+                }
+                return Ok(listsongrecomment.Take(20));
+            }
+            catch
+            {
+
+            }
+            return Ok();
+        }
 
         [HttpPost("/updatecountsong/{id}")]
         public async Task<IActionResult> updatesong(int id)
@@ -608,7 +665,9 @@ namespace WebMusic.Controllers
         public async Task<IActionResult> recommenduser(int id)
         {
             var items = _context.Histories.Where(x => x.Iduser == id).OrderByDescending(x => x.Listendate).OrderByDescending(x => x.Countlisten).Take(3).ToList();
-            List<SongItem> listSong = await (
+            if(items.Count != 0)
+            {
+                List<SongItem> listSong = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
                 join category in _context.Categories on song.Idcategory equals category.Id into albumItem
@@ -627,34 +686,36 @@ namespace WebMusic.Controllers
                     idSong = song.Id,
                     mp3 = song.Filesong
                 }).OrderByDescending(x => x.idSong).ToListAsync();
-            List<SongItem> listsongrecomment = new List<SongItem>();
-            string content = "";
-            foreach (var item in items)
-            {
-                content += _context.Songs.Find(item.Idsong).SongName + " " + _context.Categories.Find(_context.Songs.Find(item.Idsong).Idcategory).CategoryName + " " + _context.Singers.Find(_context.Songs.Find(item.Idsong).IdSinger).SingerName + " ";
-            }
-            List<int> list = await recommnend.recommend_content(content, listSong);
-            for (int i = 0; i < list.Count; i++)
-            {
-                var song = _context.Songs.FirstOrDefault(x => x.Id == list[i]);
-                if (song != null)
+                List<SongItem> listsongrecomment = new List<SongItem>();
+                string content = "";
+                foreach (var item in items)
                 {
-                    SongItem songitem = new SongItem();
-                    songitem.songName = song!.SongName;
-                    songitem.mp3 = song.Filesong;
-                    songitem.linksong = song.Alias;
-                    songitem.idSinger = song.IdSinger;
-                    songitem.singerName = _context.Singers.Find(song.IdSinger).SingerName;
-                    songitem.fileImg = song.Fileimg;
-                    songitem.idSong = song.Id;
-                    songitem.linksinger = _context.Singers.Find(song.IdSinger).Alias;
-                    songitem.albumName = _context.Categories.Find(song.Idcategory).CategoryName;
-                    songitem.linkalbum = _context.Categories.Find(song.Idcategory).Alias;
-                    listsongrecomment.Add(songitem);
+                    content += _context.Songs.Find(item.Idsong).SongName + " " + _context.Categories.Find(_context.Songs.Find(item.Idsong).Idcategory).CategoryName + " " + _context.Singers.Find(_context.Songs.Find(item.Idsong).IdSinger).SingerName + " ";
                 }
+                List<int> list = await recommnend.recommend_content(content, listSong);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var song = _context.Songs.FirstOrDefault(x => x.Id == list[i]);
+                    if (song != null)
+                    {
+                        SongItem songitem = new SongItem();
+                        songitem.songName = song!.SongName;
+                        songitem.mp3 = song.Filesong;
+                        songitem.linksong = song.Alias;
+                        songitem.idSinger = song.IdSinger;
+                        songitem.singerName = _context.Singers.Find(song.IdSinger).SingerName;
+                        songitem.fileImg = song.Fileimg;
+                        songitem.idSong = song.Id;
+                        songitem.linksinger = _context.Singers.Find(song.IdSinger).Alias;
+                        songitem.albumName = _context.Categories.Find(song.Idcategory).CategoryName;
+                        songitem.linkalbum = _context.Categories.Find(song.Idcategory).Alias;
+                        listsongrecomment.Add(songitem);
+                    }
 
+                }
+                return Ok(listsongrecomment.Take(5));
             }
-            return Ok(listsongrecomment.Take(5));
+            return BadRequest();
         }
 
         [HttpGet("/recommendtopsong")]
@@ -695,7 +756,7 @@ namespace WebMusic.Controllers
                 if (song != null)
                 {
                     SongItem songitem = new SongItem();
-                    songitem.songName = song!.SongName;
+                    songitem.songName = song.SongName;
                     songitem.mp3 = song.Filesong;
                     songitem.linksong = song.Alias;
                     songitem.idSinger = song.IdSinger;

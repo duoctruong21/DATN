@@ -53,7 +53,7 @@ namespace WebMusic.Controllers
                     var item = new UserMusic();
                     //item.token = new JwtSecurityTokenHandler().WriteToken(token);
                     item.token = items.Id.ToString();
-                    item.name = items.LastName + " " + items.FirstName;
+                    //item.name = items.LastName + " " + items.FirstName;
                     item.email = items.Gmail;
                     return Ok(item);
                 }
@@ -307,6 +307,22 @@ namespace WebMusic.Controllers
                 return Ok(listsonghistory);
             }
             return BadRequest();
+        }
+
+        [HttpPost("/changeInfoUser")]
+        public async Task<IActionResult> infouser(UserMusic user)
+        {
+            var item = _context.UserWebMusics.Find(user.id);
+            if (item != null)
+            {
+                item.FirstName = user.first;
+                item.LastName = user.last;
+                item.Password = user.password;
+                _context.Update(item);
+            }
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         private bool UserWebMusicExists(int id)
