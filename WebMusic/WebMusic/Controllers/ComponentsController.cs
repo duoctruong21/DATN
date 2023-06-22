@@ -21,6 +21,9 @@ using System.Text.Json;
 using System.Text;
 using System.IO.Compression;
 using Microsoft.AspNetCore.Html;
+using AngleSharp.Browser.Dom;
+using OpenQA.Selenium;
+using Firebase.Auth;
 
 namespace WebMusic.Controllers
 {
@@ -46,13 +49,13 @@ namespace WebMusic.Controllers
                 List<SongItem> items = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join album in _context.Categories on song.Idcategory equals album.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -78,12 +81,12 @@ namespace WebMusic.Controllers
             {
                 var items = await (from singer in _context.Singers
                                    join song in _context.Songs on singer.Id equals song.IdSinger
-                                   join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                                   join album in _context.Categories on song.Idcategory equals album.Id into albumItem
                                    from albums in albumItem.DefaultIfEmpty()
                                    where singer.Id == item.Id
                                    select new SingerInfo
                                    {
-                                       albumName = albums.AlbumName,
+                                       albumName = albums.CategoryName,
                                        songName = song.SongName,
                                        singerName = singer.SingerName,
                                        linkalbum = albums.Alias,
@@ -108,13 +111,13 @@ namespace WebMusic.Controllers
                 List<SongItem> items = await (
                 from song in item
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join album in _context.Categories on song.Idcategory equals album.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -174,13 +177,13 @@ namespace WebMusic.Controllers
                 List<SongItem> items = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join album in _context.Categories on song.Idcategory equals album.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -188,8 +191,11 @@ namespace WebMusic.Controllers
                     idAlbum = song.IdAlbum,
                     idSinger = song.IdSinger,
                     idSong = song.Id,
-                    mp3 = song.Filesong
-                }).ToListAsync();
+                    mp3 = song.Filesong,
+                    count = song.ListenCount,
+                    date = song.RecentListendate
+                 
+                }).OrderByDescending(x=>x.date).OrderByDescending(x => x.count).Take(100).ToListAsync();
                 return items;
             }
             catch (Exception ex)
@@ -206,13 +212,13 @@ namespace WebMusic.Controllers
                 List<SongItem> items = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join album in _context.Categories on song.Idcategory equals album.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -237,15 +243,15 @@ namespace WebMusic.Controllers
             {
                 var songs = _context.Songs.Where(x => x.IdSinger == id);
                 List<SongBySinger> items = await (from song in songs
-                                                  join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                                                  join album in _context.Categories on song.Idcategory equals album.Id into albumItem
                                                   from albums in albumItem.DefaultIfEmpty()
                                                   select new SongBySinger
                                                   {
                                                       songName = song.SongName,
                                                       aliasSong = song.Alias,
                                                       aliasAlbum = albums.Alias,
-                                                      albumName = albums.AlbumName,
-                                                      imgalbum = albums.AlbumImg,
+                                                      albumName = albums.CategoryName,
+                                                      imgalbum = albums.CategoryImg,
                                                       imgSong = song.Fileimg,
                                                       mp3 = song.Filesong
                                                   }).ToListAsync();
@@ -267,7 +273,7 @@ namespace WebMusic.Controllers
             var search = FormatAlias.ConvertToEnglish(content);
             List<SongItem> items = await (from song in _context.Songs
                                           join singer in _context.Singers on song.IdSinger equals singer.Id
-                                          join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                                          join album in _context.Categories on song.Idcategory equals album.Id into albumItem
                                           from albums in albumItem.DefaultIfEmpty()
                                           where (song.SongName!.Contains(search) == true || singer.SingerName!.Contains(search) == true)
                                           select new SongItem
@@ -277,7 +283,7 @@ namespace WebMusic.Controllers
                                               linksong = song.Alias,
                                               linkalbum = albums.Alias,
                                               linksinger = singer.Alias,
-                                              albumName = albums.AlbumName,
+                                              albumName = albums.CategoryName,
                                               fileImg = song.Fileimg,
                                               mp3 = song.Filesong
                                           }).ToListAsync();
@@ -416,13 +422,13 @@ namespace WebMusic.Controllers
             List<SongItem> items = await (
                 from song in _context.Songs
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = albums.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
                     linkalbum = albums.Alias,
@@ -440,14 +446,18 @@ namespace WebMusic.Controllers
             songplaying.linksong = songs.Alias;
             songplaying.idSinger = songs.IdSinger;
             songplaying.singerName = _context.Singers.Find(songs.IdSinger).SingerName;
+            songplaying.linksinger = _context.Singers.Find(songs.IdSinger).Alias;
             songplaying.fileImg = songs.Fileimg;
             songplaying.idSong = songs.Id;
-            List<int> list = await recommnend.recommendSystem(songs.Alias, items);
+            songplaying.albumName = _context.Categories.Find(songs.Idcategory).CategoryName;
+            songplaying.linkalbum = _context.Categories.Find(songs.Idcategory).Alias;
+
+            List<int> list = await recommnend.recommendSystem(songs.Id, items);
             List<SongItem> listsongrecomment = new List<SongItem>();
             listsongrecomment.Add(songplaying);
-            for (int i =0; i< 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                var item = _context.Songs.FirstOrDefault(x=>x.Id==list[i]);
+                var item = _context.Songs.FirstOrDefault(x => x.Id == list[i]);
                 if (item != null && songs.Id != item.Id)
                 {
                     SongItem songitem = new SongItem();
@@ -459,14 +469,247 @@ namespace WebMusic.Controllers
                     songitem.fileImg = item.Fileimg;
                     songitem.idSong = item.Id;
                     songitem.linksinger = _context.Singers.Find(item.IdSinger).Alias;
+                    songitem.albumName = _context.Categories.Find(item.Idcategory).CategoryName;
+                    songitem.linkalbum = _context.Categories.Find(item.Idcategory).Alias;
                     listsongrecomment.Add(songitem);
                 }
-                    
+
             }
-            
+
 
 
             return Ok(listsongrecomment);
+        }
+
+        [HttpGet("/recommend-first-login/{id}")]
+        public async Task<IActionResult> recommendfirstlogin(int id)
+        {
+            try
+            {
+                var user = _context.UserWebMusics.Find(id);
+                List<SongItem> items = (
+                from song in _context.Songs
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
+                from albums in albumItem.DefaultIfEmpty()
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = albums.CategoryName,
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id,
+                    mp3 = song.Filesong
+                }).OrderByDescending(x => x.idSong).ToList();
+                if (user != null)
+                {
+                    List<int> list = await recommnend.recommend_content(user.Note, items);
+                    List<SongItem> listsongrecomment = new List<SongItem>();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        var item = _context.Songs.Find(list[i]);
+                        if (item != null)
+                        {
+                            SongItem songitem = new SongItem();
+                            songitem.songName = item!.SongName;
+                            songitem.mp3 = item.Filesong;
+                            songitem.linksong = item.Alias;
+                            songitem.idSinger = item.IdSinger;
+                            songitem.singerName = _context.Singers.Find(item.IdSinger).SingerName;
+                            songitem.fileImg = item.Fileimg;
+                            songitem.idSong = item.Id;
+                            songitem.linksinger = _context.Singers.Find(item.IdSinger).Alias;
+                            songitem.albumName = _context.Categories.Find(item.Idcategory).CategoryName;
+                            songitem.linkalbum = _context.Categories.Find(item.Idcategory).Alias;
+                            listsongrecomment.Add(songitem);
+                        }
+
+                    }
+                    return Ok(listsongrecomment.Take(5));
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+        [HttpGet("/recommend-search/{content}")]
+        public async Task<IActionResult> recommendsearch(string content)
+        {
+            try
+            {
+                List<SongItem> items = (
+                from song in _context.Songs
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
+                from albums in albumItem.DefaultIfEmpty()
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = albums.CategoryName,
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id,
+                    mp3 = song.Filesong
+                }).OrderByDescending(x => x.idSong).ToList();
+
+                var convertContent = FormatAlias.ConvertToEnglish(content);
+
+                List<int> list = await recommnend.recommend_content(convertContent, items);
+                List<Searchrecommend> listsongrecomment = new List<Searchrecommend>();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var item = _context.Songs.Find(list[i]);
+                    if (item != null)
+                    {
+                        Searchrecommend result = new Searchrecommend();
+                        result.name = item.SongName + " "+ _context.Singers.FirstOrDefault(x=>x.Id==item.IdSinger)!.SingerName + " " + _context.Categories.FirstOrDefault(x => x.Id == item.Idcategory)!.CategoryName;
+                        result.alias = item.Alias;
+                        listsongrecomment.Add(result);
+
+                    }
+
+                }
+                return Ok(listsongrecomment.Take(5));
+            }
+            catch
+            {
+
+            }
+            return Ok();
+        }
+
+        [HttpPost("/updatecountsong/{id}")]
+        public async Task<IActionResult> updatesong(int id)
+        {
+            var checkSong = _context.Songs.FirstOrDefault(x => x.Id == id);
+            // cập nhật lượt nghe
+            var recentlisten = _context.Songs.FirstOrDefault(x => x.Id == id);
+            checkSong.RecentListendate = DateTime.Now;
+            checkSong.ListenCount = recentlisten != null ? recentlisten.ListenCount + 1 : 1;
+            _context.Songs.Update(checkSong);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpGet("/recommenduser/{id}")]
+        public async Task<IActionResult> recommenduser(int id)
+        {
+            var items = _context.Histories.Where(x => x.Iduser == id).OrderByDescending(x => x.Listendate).OrderByDescending(x => x.Countlisten).Take(3).ToList();
+            List<SongItem> listSong = await (
+                from song in _context.Songs
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
+                from albums in albumItem.DefaultIfEmpty()
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = albums.CategoryName,
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id,
+                    mp3 = song.Filesong
+                }).OrderByDescending(x => x.idSong).ToListAsync();
+            List<SongItem> listsongrecomment = new List<SongItem>();
+            string content = "";
+            foreach (var item in items)
+            {
+                content += _context.Songs.Find(item.Idsong).SongName + " " + _context.Categories.Find(_context.Songs.Find(item.Idsong).Idcategory).CategoryName + " " + _context.Singers.Find(_context.Songs.Find(item.Idsong).IdSinger).SingerName + " ";
+            }
+            List<int> list = await recommnend.recommend_content(content, listSong);
+            for (int i = 0; i < list.Count; i++)
+            {
+                var song = _context.Songs.FirstOrDefault(x => x.Id == list[i]);
+                if (song != null)
+                {
+                    SongItem songitem = new SongItem();
+                    songitem.songName = song!.SongName;
+                    songitem.mp3 = song.Filesong;
+                    songitem.linksong = song.Alias;
+                    songitem.idSinger = song.IdSinger;
+                    songitem.singerName = _context.Singers.Find(song.IdSinger).SingerName;
+                    songitem.fileImg = song.Fileimg;
+                    songitem.idSong = song.Id;
+                    songitem.linksinger = _context.Singers.Find(song.IdSinger).Alias;
+                    songitem.albumName = _context.Categories.Find(song.Idcategory).CategoryName;
+                    songitem.linkalbum = _context.Categories.Find(song.Idcategory).Alias;
+                    listsongrecomment.Add(songitem);
+                }
+
+            }
+            return Ok(listsongrecomment.Take(5));
+        }
+
+        [HttpGet("/recommendtopsong")]
+        public async Task<IActionResult> recommendtopsong()
+        {
+            var items = _context.Songs.OrderByDescending(x => x.RecentListendate).OrderByDescending(x => x.ListenCount).Take(3).ToList();
+            List<SongItem> listSong = await (
+                from song in _context.Songs
+                join singer in _context.Singers on song.IdSinger equals singer.Id
+                join category in _context.Categories on song.Idcategory equals category.Id into albumItem
+                from albums in albumItem.DefaultIfEmpty()
+                select new SongItem
+                {
+                    songName = song.SongName,
+                    singerName = singer.SingerName,
+                    albumName = albums.CategoryName,
+                    fileImg = song.Fileimg,
+                    linksong = song.Alias,
+                    linkalbum = albums.Alias,
+                    linksinger = singer.Alias,
+                    idAlbum = song.IdAlbum,
+                    idSinger = song.IdSinger,
+                    idSong = song.Id,
+                    mp3 = song.Filesong
+                }).OrderByDescending(x => x.idSong).ToListAsync();
+            List<SongItem> listsongrecomment = new List<SongItem>();
+            string content = "";
+            foreach (var item in items)
+            {
+                content += _context.Songs.Find(item.Id).SongName + " " + _context.Categories.Find(_context.Songs.Find(item.Id).Idcategory).CategoryName + " " + _context.Singers.Find(_context.Songs.Find(item.Id).IdSinger).SingerName + " ";
+
+            }
+
+            List<int> list = await recommnend.recommend_content(content, listSong);
+            for (int i = 0; i < list.Count; i++)
+            {
+                var song = _context.Songs.FirstOrDefault(x => x.Id == list[i]);
+                if (song != null)
+                {
+                    SongItem songitem = new SongItem();
+                    songitem.songName = song!.SongName;
+                    songitem.mp3 = song.Filesong;
+                    songitem.linksong = song.Alias;
+                    songitem.idSinger = song.IdSinger;
+                    songitem.singerName = _context.Singers.Find(song.IdSinger).SingerName;
+                    songitem.fileImg = song.Fileimg;
+                    songitem.idSong = song.Id;
+                    songitem.linksinger = _context.Singers.Find(song.IdSinger).Alias;
+                    songitem.albumName = _context.Categories.Find(song.Idcategory).CategoryName;
+                    songitem.linkalbum = _context.Categories.Find(song.Idcategory).Alias;
+                    listsongrecomment.Add(songitem);
+                }
+
+            }
+            return Ok(listsongrecomment.Take(5));
         }
     }
 }

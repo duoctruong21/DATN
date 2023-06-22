@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
+using WebMusic.Models.Data;
 using WebMusic.Models.EF;
 
 namespace WebMusic.Controllers
@@ -94,23 +95,87 @@ namespace WebMusic.Controllers
 
         // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("{FileImg}")]
-        public async Task<ActionResult<Category>> PostCategory([FromForm] Category category, [FromRoute] IFormFile FileImg)
+        [HttpPost]
+        public async Task<ActionResult> PostCategory([FromForm] Item item)
         {
             if (_context.Categories == null)
             {
                 return Problem("Entity set 'MusicWebContext.Categories'  is null.");
             }
-            if (FileImg != null)
+            var checkCategory = _context.Categories.FirstOrDefault(x=>x.Id == item.id);
+            if(checkCategory == null)
             {
-                category.CategoryImg = await uploadFile.UploadImageAsync(FileImg);
+                var check = _context.Categories.FirstOrDefault(x => x.Alias.Contains(FormatAlias.RemoveDiacritics(item.name!)));
+                var category = new Category();
+                int count = 1;
+
+                if (check == null)
+                {
+                    category!.Alias = item.name != null ? FormatAlias.RemoveDiacritics(item.name!) : "";
+                }
+                else
+                {
+                    foreach (var checkAlias in _context.Categories)
+                    {
+                        string checkname = item.name! + " " + count.ToString();
+                        if (checkAlias.Alias.Contains(FormatAlias.RemoveDiacritics(checkname)))
+                        {
+                            count++;
+                        }
+                    }
+                    category!.Alias = item.name != null ? FormatAlias.RemoveDiacritics(item.name! + " " + count.ToString()) : "";
+                }
+                if (item.img != null)
+                {
+                    category.CategoryImg = await uploadFile.UploadImageAsync(item.img);
+                }
+                else
+                {
+                    category.CategoryImg = "https://cdn-icons-png.flaticon.com/512/3460/3460797.png";
+                }
+                category.CategoryName = item.name;
+                category.CreatedDate = DateTime.Now;
+                category.ModifiedDate = DateTime.Now;
+
+                _context.Categories.Add(category);
             }
-            category.CreatedDate = DateTime.Now;
-            category.ModifiedDate = DateTime.Now;
-            _context.Categories.Add(category);
+            else
+            {
+                var check = _context.Categories.FirstOrDefault(x => x.Alias.Contains(FormatAlias.RemoveDiacritics(item.name!)));
+                int count = 1;
+
+                if (check == null)
+                {
+                    checkCategory!.Alias = item.name != null ? FormatAlias.RemoveDiacritics(item.name!) : "";
+                }
+                else
+                {
+                    foreach (var checkAlias in _context.Categories)
+                    {
+                        string checkname = item.name! + " " + count.ToString();
+                        if (checkAlias.Alias.Contains(FormatAlias.RemoveDiacritics(checkname)))
+                        {
+                            count++;
+                        }
+                    }
+                    checkCategory!.Alias = item.name != null ? FormatAlias.RemoveDiacritics(item.name! + " " + count.ToString()) : "";
+                }
+                if (item.img != null)
+                {
+                    checkCategory.CategoryImg = await uploadFile.UploadImageAsync(item.img);
+                }
+                else
+                {
+                    checkCategory.CategoryImg = "https://cdn-icons-png.flaticon.com/512/3460/3460797.png";
+                }
+                checkCategory.CategoryName = item.name;
+                checkCategory.ModifiedDate = DateTime.Now;
+
+                _context.Categories.Update(checkCategory);
+            }
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+            return Ok();
         }
 
         // DELETE: api/Categories/5
@@ -131,6 +196,23 @@ namespace WebMusic.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("/addsongincategory")]
+        public async Task<ActionResult> addsongbycategory( AddSongbyCategory category)
+        {
+            if(category != null)
+            {
+
+                Albumuser albumuser = new Albumuser();
+
+                for(int i =0; i < category.list.Count; i++)
+                {
+                    // lấy bài hát và album
+
+                }
+            }
+            return Ok(category);
         }
 
         private bool CategoryExists(int id)

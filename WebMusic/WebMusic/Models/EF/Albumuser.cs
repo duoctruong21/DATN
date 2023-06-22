@@ -11,6 +11,8 @@ public partial class Albumuser
 
     public int? Idsong { get; set; }
 
+    public int? Idcategory { get; set; }
+
     public virtual Album? IdalbumNavigation { get; set; }
 
     public virtual Song? IdsongNavigation { get; set; }

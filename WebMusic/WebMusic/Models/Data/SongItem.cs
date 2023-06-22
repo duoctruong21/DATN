@@ -2,6 +2,7 @@
 {
     public class SongItem
     {
+        public string? topicname { get; set; }
         public string? songName { get; set; }
         public string? singerName { get; set; }
         public string? albumName { get; set; }

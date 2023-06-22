@@ -17,7 +17,11 @@ public partial class Category
 
     public DateTime? ModifiedDate { get; set; }
 
-    public virtual ICollection<Album> IdAlbums { get; set; } = new List<Album>();
+    public string? Alias { get; set; }
 
-    public virtual ICollection<Topic> IdTopics { get; set; } = new List<Topic>();
+    public virtual ICollection<CategoryWithSong> CategoryWithSongs { get; set; } = new List<CategoryWithSong>();
+
+    public virtual ICollection<Song> Songs { get; set; } = new List<Song>();
+
+    public virtual ICollection<Album> IdAlbums { get; set; } = new List<Album>();
 }

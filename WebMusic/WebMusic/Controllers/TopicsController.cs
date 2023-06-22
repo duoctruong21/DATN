@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebMusic.Common;
+using WebMusic.Models;
 using WebMusic.Models.Data;
 using WebMusic.Models.EF;
 
@@ -33,7 +34,38 @@ namespace WebMusic.Controllers
             {
                 return NotFound();
             }
-            return await _context.Topics.ToListAsync();
+            return await _context.Topics.Take(10).ToListAsync();
+        }
+        [HttpGet("/topics/{alias}")]
+        public async Task<ActionResult<IEnumerable<Album>>> GetAllAlbumByAlias(string alias)
+        {
+            var items = await _context.Topics.FirstOrDefaultAsync(x => x.Alias!.Contains(alias));
+            List<SongItem> list = (from topic in _context.Topics
+                                   where topic.Alias == alias
+                                   join songtopic in _context.Topicwithsongs on topic.Id equals songtopic.Idtopic
+                                   join song in _context.Songs on songtopic.Idsong equals song.Id
+                                   join singer in _context.Singers on song.IdSinger equals singer.Id
+                                   join category in _context.Categories on song.Idcategory equals category.Id
+                                   select new SongItem
+                                   {
+                                       songName = song.SongName,
+                                       singerName = singer.SingerName,
+                                       albumName = category.CategoryName,
+                                       fileImg = song.Fileimg,
+                                       linksong = song.Alias,
+                                       linkalbum = category.Alias,
+                                       linksinger = singer.Alias,
+                                       idAlbum = song.IdAlbum,
+                                       idSinger = song.IdSinger,
+                                       idSong = song.Id,
+                                       mp3 = song.Filesong,
+                                       topicname = topic.TopicName
+                                   }).ToList();
+            if (items != null)
+            {
+                return Ok(list);
+            }
+            return BadRequest();
         }
 
         // GET: api/Topics/5

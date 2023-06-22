@@ -166,21 +166,30 @@ namespace WebMusic.Controllers
             return NoContent();
         }
 
-        [HttpPost("/historied")]
-        public async Task<ActionResult<History>> posthistory([FromForm] histories history)
+        [HttpPost("/categoryfirstuser/{id}/{content}")]
+        public async Task<IActionResult> addnote (int id, string content)
         {
-            if (_context.Histories == null)
+            var user = _context.UserWebMusics.Find(id);
+            if(user != null)
             {
-                return Problem("Entity set 'MusicWebContext.Histories'  is null.");
+                user.Note = content;
+                _context.UserWebMusics.Update(user);
+                await _context.SaveChangesAsync();
+                return Ok();
             }
-            var check = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
-            if(check != null)
+            return BadRequest();
+        }
+
+        [HttpPost("/historied")]
+        public async Task<IActionResult> posthistory([FromForm] histories history)
+        {
+            var checkHistory = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
+            if(checkHistory != null)
             {
-                check.Idsong = history.Idsong;
-                check.Listendate = DateTime.Now;
+                checkHistory.Listendate = DateTime.Now;
                 var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
-                check.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
-                _context.Histories.Update(check);
+                checkHistory.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
+                _context.Histories.Update(checkHistory);
             }
             else
             {
@@ -191,33 +200,38 @@ namespace WebMusic.Controllers
                 var countsong = _context.Histories.FirstOrDefault(x => x.Idsong == history.Idsong);
                 item.Countlisten = countsong != null ? countsong.Countlisten + 1 : 1;
                 _context.Histories.Add(item);
+
             }
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHistory", new {  }, history);
+            return Ok();
         }
 
         [HttpGet("/history/{id}")]
         public async Task<IActionResult> history(int id)
         {
-            var items = _context.Histories.Where(x=>x.Iduser == id);
-            
-            if(items != null)
+            //var items =
+
+            /*if(items != null)
             {
-                List<SongItem> listsonghistory = (
-                from songhistory in items
+                
+            }*/
+            try
+            {
+                List<SongItem> listsonghistory = await (
+                from songhistory in _context.Histories.Where(x => x.Iduser == id)
                 join song in _context.Songs on songhistory.Idsong equals song.Id
                 join singer in _context.Singers on song.IdSinger equals singer.Id
-                join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
-                from albums in albumItem.DefaultIfEmpty()
+                join category in _context.Categories on song.Idcategory equals category.Id into cateItem
+                from cate in cateItem.DefaultIfEmpty()
                 select new SongItem
                 {
                     songName = song.SongName,
                     singerName = singer.SingerName,
-                    albumName = albums.AlbumName,
+                    albumName = cate.CategoryName,
                     fileImg = song.Fileimg,
                     linksong = song.Alias,
-                    linkalbum = albums.Alias,
+                    linkalbum = cate.Alias,
                     linksinger = singer.Alias,
                     idAlbum = song.IdAlbum,
                     idSinger = song.IdSinger,
@@ -225,10 +239,14 @@ namespace WebMusic.Controllers
                     mp3 = song.Filesong,
                     id = songhistory.Id,
                     date = (songhistory.Listendate != null ? songhistory.Listendate : null)
-                }).OrderByDescending(x=>x.date).ToList();
+                }).OrderByDescending(x => x.date).ToListAsync();
                 return Ok(listsonghistory);
             }
-            return BadRequest();
+            catch
+            {
+                return BadRequest();
+
+            }
         }
 
         [HttpGet("/albumuser/{alias}/{id}")]
@@ -240,10 +258,13 @@ namespace WebMusic.Controllers
                 List<SongItem> listsonghistory = (
                 from songhistory in items where songhistory.Alias == alias
                 join songAlbum in _context.Albumusers on songhistory.Id equals songAlbum.Idalbum
+                join category in _context.Categories on songAlbum.Idcategory equals category.Id into categoryItem
                 join song in _context.Songs on songAlbum.Idsong equals song.Id
                 join singer in _context.Singers on song.IdSinger equals singer.Id
                 join album in _context.Albums on song.IdAlbum equals album.Id into albumItem
                 from albums in albumItem.DefaultIfEmpty()
+                from categories in categoryItem.DefaultIfEmpty()
+
                 select new SongItem
                 {
                     songName = song.SongName,
