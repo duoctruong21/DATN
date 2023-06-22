@@ -309,6 +309,9 @@ public partial class MusicWebContext : DbContext
             entity.Property(e => e.LinkAvatar)
                 .HasMaxLength(200)
                 .HasColumnName("linkAvatar");
+            entity.Property(e => e.Note)
+                .HasMaxLength(300)
+                .HasColumnName("note");
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .HasColumnName("password");

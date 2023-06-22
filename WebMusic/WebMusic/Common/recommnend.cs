@@ -15,9 +15,9 @@ namespace WebMusic.Common
         {
             _context = context;
         }
-        public static async Task<List<int>> recommendSystem(string songItem, List<SongItem> list)
+        public static async Task<List<int>> recommendSystem(int id, List<SongItem> list)
         {
-            var items = list.FirstOrDefault(x => x.linksong.Contains(songItem));
+            var items = list.FirstOrDefault(x=>x.idSong==id);
             StringBuilder data_str = new StringBuilder();
             List<string> data = new List<string>();
             List<int> setId = new List<int>();
@@ -158,8 +158,11 @@ namespace WebMusic.Common
 
             foreach (var item in sortedList)
             {
-                idkq.Add(setId[item.Key]);
-                matrixCos7.Add(item.Value);
+                if(item.Value > 0)
+                {
+                    idkq.Add(setId[item.Key]);
+                }
+                //matrixCos7.Add(item.Value);
             }
 
             /*List<KeyValuePair<double, int>> sortedList = new List<KeyValuePair<double, int>>();
@@ -246,8 +249,66 @@ namespace WebMusic.Common
                 return tf;
             }
 
-            
         }
 
+
+        public static async Task<List<int>> recommend_content(string content, List<SongItem> list)
+        {
+            StringBuilder data_str = new StringBuilder();
+            List<string> data = new List<string>();
+            List<int> setId = new List<int>();
+
+
+            List<double> matrixs = new List<double>();
+            List<double> matrixCos = new List<double>();
+            List<double> matrixCos7 = new List<double>();
+
+
+            List<int> setViTri = new List<int>();
+            List<int> idkq = new List<int>();
+
+            // xử lý dữ liệu
+            foreach (var word in list)
+            {
+                string alias = word.linksong!.Replace('-', ' ');
+                string singer = word.linksinger!.Replace('-', ' ');
+                string category = word.linkalbum!.Replace('-', ' ');
+                string strData = Regex.Replace(alias, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(singer, @"[^a-zA-Z0-9\s]", "") + " " + Regex.Replace(category, @"[^a-zA-Z0-9\s]", "");
+                //string strData = alias + " " + singer;
+
+                int idTemp = (int)word.idSong!;
+                data.Add(strData);
+                setId.Add(idTemp);
+
+            }
+
+            string keysong = FormatAlias.ConvertToEnglish(content);
+            //string keysong = songItem.Replace('-', ' ');
+            string key = Regex.Replace(keysong, @"[^a-zA-Z0-9\s]", "");
+            for (int j = 0; j < data.Count; j++)
+            {
+                double sum = CalculateTF(key, data[j]);
+                matrixs.Add(sum);
+            }
+            // sắp xếp
+            List<KeyValuePair<int, double>> sortedList = new List<KeyValuePair<int, double>>();
+            for (int i = 0; i < matrixs.Count; i++)
+            {
+                sortedList.Add(new KeyValuePair<int, double>(i, matrixs[i]));
+            }
+
+            sortedList.Sort((a, b) => b.Value.CompareTo(a.Value));
+
+            foreach (var item in sortedList)
+            {
+                if(item.Value > 0)
+                {
+                    idkq.Add(setId[item.Key]);
+                }
+                //matrixCos7.Add(item.Value);
+            }
+
+            return idkq;
+        }
     }
 }
