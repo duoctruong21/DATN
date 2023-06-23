@@ -9,7 +9,8 @@ function Login({ onLogin }) {
   const history = useNavigate();
   const [token, setToken] = useState([]);
 
-  const loginUrl = "https://localhost:7122/login";
+  const loginUrl = "http://truongduoc027-001-site1.dtempurl.com/login";
+  // const loginUrl = "https://localhost:7122/login";
   const login = async (event) => {
     event.preventDefault();
     const username = event.target.elements.email.value;

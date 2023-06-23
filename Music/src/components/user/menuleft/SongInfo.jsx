@@ -7,10 +7,12 @@ import axios from "axios";
 
 function SongInfo() {
   const { alias } = useParams();
-  const urlSong = `https://localhost:7122/song/${alias}`;
+  const urlSong = `http://truongduoc027-001-site1.dtempurl.com/song/${alias}`;
+  // const urlSong = `https://localhost:7122/song/${alias}`;
   const [song, setSong] = useState([]);
   const [songRecomnend, setSongRecommend] = useState([]);
-  const urlrecommend = `https://localhost:7122/recommend/${alias}`;
+  const urlrecommend = `http://truongduoc027-001-site1.dtempurl.com/recommend/${alias}`;
+  // const urlrecommend = `https://localhost:7122/recommend/${alias}`;
   useEffect(() => {
     axios
       .get(urlSong)

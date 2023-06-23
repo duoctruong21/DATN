@@ -7,7 +7,8 @@ import PlaySong from "./PlaySong";
 
 function ListTopsong() {
   // lấy dữ liệu
-  const urlSong = "https://localhost:7122/ranked-song";
+  // const urlSong = "https://localhost:7122/ranked-song";
+  const urlSong = "http://truongduoc027-001-site1.dtempurl.com/ranked-song";
   const [songs, setSong] = useState([]);
   const [idSong, setIdSong] = useState(0);
 

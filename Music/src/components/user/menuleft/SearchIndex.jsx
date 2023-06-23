@@ -10,7 +10,8 @@ function SearchIndex() {
   const history = useNavigate();
 
   const { content } = useParams();
-  const url = `https://localhost:7122/searchrecommend/${content}`;
+  const url = `http://truongduoc027-001-site1.dtempurl.com/searchrecommend/${content}`;
+  //const url = `https://localhost:7122/searchrecommend/${content}`;
   console.log(content)
   useEffect(() => {
     axios

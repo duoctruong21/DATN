@@ -27,6 +27,7 @@
                     cursor: pointer;
                     box-sizing: border-box;
                     text-align: center;
+                    
 
                     &__img {
                         width: 150px;
@@ -39,7 +40,6 @@
                         & a {
                             text-decoration: none;
                             color: #fff;
-                            font-weight: 700;
                         }
                     }
                 }

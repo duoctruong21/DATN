@@ -9,7 +9,8 @@ import PlaySong from "./PlaySong";
 
 function SingerInfo() {
   const { alias } = useParams();
-  const urlSinger = `https://localhost:7122/singer/${alias}`;
+  const urlSinger = `http://truongduoc027-001-site1.dtempurl.com/singer/${alias}`;
+  //const urlSinger = `https://localhost:7122/singer/${alias}`;
   const [songs, setSong] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

@@ -47,7 +47,8 @@ function SongBar(props) {
     console.log(id + " " + token);
     try {
       axios
-        .post(`https://localhost:7122/updatecountsong/${songs[index].idSong}`)
+        //.post(`https://localhost:7122/updatecountsong/${songs[index].idSong}`)
+        .post(`http://truongduoc027-001-site1.dtempurl.com/updatecountsong/${songs[index].idSong}`)
         .then(() => {
           // alert("");
         })
@@ -57,7 +58,8 @@ function SongBar(props) {
     } catch {}
     try {
       axios
-        .post(`https://localhost:7122/historied`, datasong, {
+        .post(`http://truongduoc027-001-site1.dtempurl.com/historied`, datasong, {
+        // .post(`https://localhost:7122/historied`, datasong, {
           headers: {
             "Content-Type": "multipart/fromdata",
           },
@@ -93,7 +95,8 @@ function SongBar(props) {
   const [ListAlbum, setListAlbum] = useState([]);
   const [formVisible, setFormVisible] = useState(false);
 
-  const urlalbum = "https://localhost:7122/albumusername";
+  const urlalbum = "http://truongduoc027-001-site1.dtempurl.com/albumusername";
+  // const urlalbum = "https://localhost:7122/albumusername";
   useEffect(() => {
     if (token != null) {
       axios
@@ -128,7 +131,8 @@ function SongBar(props) {
   const handleimg = (e) => {
     setImg(e);
   };
-  const albumUrl = "https://localhost:7122/api/Albums";
+  const albumUrl = "http://truongduoc027-001-site1.dtempurl.com/api/Albums";
+  // const albumUrl = "https://localhost:7122/api/Albums";
 
   const addalbum = (e) => {
     e.preventDefault();
@@ -154,7 +158,8 @@ function SongBar(props) {
   };
 
   // thêm bài hat vao album
-  const songAlbum = "https://localhost:7122/addsongtoalbum";
+  const songAlbum = "http://truongduoc027-001-site1.dtempurl.com/addsongtoalbum";
+  // const songAlbum = "https://localhost:7122/addsongtoalbum";
   const [id_album, setId_album] = useState(0);
   const [id_song, setId_song] = useState(0);
   const handlesId = (a, b) => {

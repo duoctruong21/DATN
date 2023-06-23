@@ -12,7 +12,8 @@ function Infouser(props) {
   const [close, setClose] = useState(false);
   useEffect(() => {
     axios
-      .get(`https://localhost:7122/api/UserWebMusics/${token}`)
+      .get(`http://truongduoc027-001-site1.dtempurl.com/api/UserWebMusics/${token}`)
+      // .get(`https://localhost:7122/api/UserWebMusics/${token}`)
       .then((response) => {
         setUser(response.data);
         const datauser = response.data;
@@ -58,7 +59,8 @@ function Infouser(props) {
       password: pass,
     };
     axios
-      .post(`https://localhost:7122/changeInfoUser`, datauser)
+      .post(`http://truongduoc027-001-site1.dtempurl.com/changeInfoUser`, datauser)
+      // .post(`https://localhost:7122/changeInfoUser`, datauser)
       .then(() => {
         alert("success");
         setCheck(false);

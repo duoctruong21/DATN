@@ -4,7 +4,8 @@ import axios from "axios";
 
 function ListTopic() {
   const [listItems, setListItems] = useState([]);
-  const url = "https://localhost:7122/api/Topics";
+  const url = "http://truongduoc027-001-site1.dtempurl.com/api/Topics";
+  // const url = "https://localhost:7122/api/Topics";
   useEffect(() => {
     axios
       .get(url)
@@ -62,6 +63,7 @@ function ListTopic() {
                   src={item.topicImg}
                   alt=""
                 />
+                <h2 className="listtopic__main__title">{item.topicName}</h2>
               </a>
             </li>
           ))}

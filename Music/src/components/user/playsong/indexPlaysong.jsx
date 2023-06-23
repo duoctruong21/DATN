@@ -13,7 +13,8 @@ function indexPlaysong(props) {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7122/playsong/${props.datasong}`)
+      .get(`http://truongduoc027-001-site1.dtempurl.com/playsong/${props.datasong}`)
+      // .get(`https://localhost:7122/playsong/${props.datasong}`)
       .then((response) => setSongPlay(response.data))
       .catch();
   }, [props.datasong]);

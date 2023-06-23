@@ -5,7 +5,8 @@ import PlaySong from "./PlaySong";
 import ListSongItem from "./ListSongItem";
 
 function ListCategory() {
-  const url = "https://localhost:7122/home";
+  //const url = "https://localhost:7122/home";
+  const url = "http://truongduoc027-001-site1.dtempurl.com/home";
   const [itemSong, setItemSong] = useState([]);
 
   useEffect(() => {

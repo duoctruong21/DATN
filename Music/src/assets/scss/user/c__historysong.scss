@@ -14,5 +14,14 @@
                 color: #fff;
             }
         }
+        &__song{
+            &__name{
+                padding: 10px;              
+                color: #fff;
+                text-align: center;
+                align-items: center;
+                font-size: 2rem;
+            }
+        }
     }
 }

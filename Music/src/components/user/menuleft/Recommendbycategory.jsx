@@ -4,7 +4,7 @@ import "../../../assets/scss/user/c__listcategory.scss";
 import SongBar from "./SongBar";
 import axios from "axios";
 
-function Recommnedbycategory() {
+function Recommnedbycategory(props) {
   const token = localStorage.getItem("token");
   console.log(token);
 
@@ -12,16 +12,18 @@ function Recommnedbycategory() {
   useEffect(() => {
     if (token == null) {
       axios
-        .get(`https://localhost:7122/recommendtopsong`)
+        .get(`http://truongduoc027-001-site1.dtempurl.com/recommendtopsong`)
+        // .get(`https://localhost:7122/recommendtopsong`)
         .then((response) => setSong(response.data))
         .catch();
     } else {
       axios
-        .get(`https://localhost:7122/recommend-first-login/${token}`)
+        // .get(`https://localhost:7122/recommend-first-login/${token}`)
+        .get(`http://truongduoc027-001-site1.dtempurl.com/recommend-first-login/${token}`)
         .then((response) => setSong(response.data))
         .catch();
     }
-  }, [token]);
+  }, [props.dataLoad,token]);
   console.log(song);
   return (
     <div className="listcategory">

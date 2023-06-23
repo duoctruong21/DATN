@@ -11,7 +11,8 @@ function Album() {
   const { alias } = useParams();
   const token = localStorage.getItem("token");
 
-  const urlAlbum = `https://localhost:7122/topics/${alias}`;
+  const urlAlbum = `http://truongduoc027-001-site1.dtempurl.com/topics/${alias}`;
+  // const urlAlbum = `https://localhost:7122/topics/${alias}`;
   const [songs, setSong] = useState([]);
   const [name, setName] = useState("");
   const [id, setId] = useState(0);
@@ -20,9 +21,8 @@ function Album() {
       .get(urlAlbum)
       .then((response) => {
         const dataSong = response.data;
-        setSong(dataSong)
+        setSong(dataSong);
         setName(dataSong[0].topicname);
-
       })
       .catch();
   }, []);

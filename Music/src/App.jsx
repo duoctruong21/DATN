@@ -38,9 +38,12 @@ import TopicInfo from "./components/user/menuleft/TopicInfo.jsx"
 
 
 function App() {
-  const urlSong = "https://localhost:7122/api/Songs";
-  const urlSinger = "https://localhost:7122/api/Singers";
-  const urlAlbum = "https://localhost:7122/api/Albums";
+  // const urlSong = "https://localhost:7122/api/Songs";
+  // const urlSinger = "https://localhost:7122/api/Singers";
+  // const urlAlbum = "https://localhost:7122/api/Albums";
+  const urlSong = "http://truongduoc027-001-site1.dtempurl.com/api/Songs";
+  const urlSinger = "http://truongduoc027-001-site1.dtempurl.com/api/Singers";
+  const urlAlbum = "http://truongduoc027-001-site1.dtempurl.com/api/Albums";
   const [songs, setSong] = useState([]);
   const [singers, setSinger] = useState([]);
   const [albums, setAlbum] = useState([]);
@@ -140,6 +143,10 @@ function App() {
         <Routes>
           {/* user */}
           <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
             path="/home"
             element={<Home />}
           />
@@ -180,68 +187,70 @@ function App() {
             element={<TopicInfo />}
           />
         </Routes>
-          {/* Admin */}
-          {token ==6?(
-            <Routes>
-              <Route
-            path="/admin/topic"
-            element={<IndexTopic />}
-          />
+        {/* Admin */}
+        {token == 6 ? (
+          <Routes>
+            <Route
+              path="/admin/topic"
+              element={<IndexTopic />}
+            />
 
-          <Route
-            path="/admin/song"
-            element={<IndexSong />}
-          />
-          <Route
-            path="/admin/singer"
-            element={<IndexSinger />}
-          />
-          <Route
-            path="/admin/album"
-            element={<IndexAlbum />}
-          />
-          <Route
-            path="/admin/topic/add"
-            element={<AddTopic />}
-          />
-          <Route
-            path="/admin/topic/edit/:id"
-            element={<EditTopic />}
-          />
-          <Route
-            path="/admin/album/edit/:id"
-            element={<EditAlbum />}
-          />
-          <Route
-            path="/admin/album/add"
-            element={<AddAlbum />}
-          />
-          <Route
-            path="/admin/category"
-            element={<IndexCategory />}
-          />
-          <Route
-            path="/admin/category/:id"
-            element={<AddSongToCategory />}
-          />
-          <Route
-            path="/admin/singer/add"
-            element={<AddSinger />}
-          />
-          <Route
-            path="/admin/singer/edit/:id"
-            element={<EditSinger />}
-          />
-          <Route
-            path="/admin/song/add"
-            element={<AddSong />}
-          />
-          <Route
-            path="/admin/song/edit/:id"
-            element={<EditSong />}
-          />
-            </Routes>
-          ):""}
+            <Route
+              path="/admin/song"
+              element={<IndexSong />}
+            />
+            <Route
+              path="/admin/singer"
+              element={<IndexSinger />}
+            />
+            <Route
+              path="/admin/album"
+              element={<IndexAlbum />}
+            />
+            <Route
+              path="/admin/topic/add"
+              element={<AddTopic />}
+            />
+            <Route
+              path="/admin/topic/edit/:id"
+              element={<EditTopic />}
+            />
+            <Route
+              path="/admin/album/edit/:id"
+              element={<EditAlbum />}
+            />
+            <Route
+              path="/admin/album/add"
+              element={<AddAlbum />}
+            />
+            <Route
+              path="/admin/category"
+              element={<IndexCategory />}
+            />
+            <Route
+              path="/admin/category/:id"
+              element={<AddSongToCategory />}
+            />
+            <Route
+              path="/admin/singer/add"
+              element={<AddSinger />}
+            />
+            <Route
+              path="/admin/singer/edit/:id"
+              element={<EditSinger />}
+            />
+            <Route
+              path="/admin/song/add"
+              element={<AddSong />}
+            />
+            <Route
+              path="/admin/song/edit/:id"
+              element={<EditSong />}
+            />
+          </Routes>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

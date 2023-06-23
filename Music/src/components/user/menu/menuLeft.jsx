@@ -12,8 +12,11 @@ function menuLeft() {
   if (token != null) {
     useEffect(() => {
       if (token != null) {
-        const urlUser = "https://localhost:7122/api/UserWebMusics";
-        axios
+        //const urlUser = "https://localhost:7122/api/UserWebMusics";
+        const urlUser =
+          "http://truongduoc027-001-site1.dtempurl.com/api/UserWebMusics";
+        //truongduoc027-001-site1.dtempurl.com/
+        http: axios
           .get(`${urlUser}/${token}`)
           .then((response) => {
             setUser(response.data);

@@ -18,6 +18,20 @@
         overflow-y: scroll;
         overflow: hidden;
 
+        &__title{
+            position: absolute;
+            bottom: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            font-weight: 700;
+            width: 100%;
+            font-size: 3rem;
+            color: #000000;
+            text-shadow: rgb(0, 0, 0) 8px 0 10px;  
+            background-color: #ffd7d7;          
+        }
+
         &::-webkit-scrollbar {
             width: 10px;
         }
@@ -26,6 +40,7 @@
             padding: 20px 10px 20px 10px;
             opacity: 1;
             & a{
+                position: relative;
                 display: block;
                 height: inherit;
                 border-radius: 30px;

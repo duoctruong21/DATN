@@ -5,13 +5,35 @@
     
 }
 
+.title-category{
+    font-size: 3rem;
+    text-align: center;
+    padding: 10px 20px;
+    color: rgb(233, 196, 238);
+
+}
+
+.Recommned-post__wapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 39;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(225,225,225,0);
+}
+
 .Recommned-post-category{
     position: fixed;
+    left: 370px;
     top: 150px;
     z-index: 40;
     width: 1000px;
     height: 400px;
     background-color: #fff;
+    border-radius: 30px;
+    box-shadow: rgba(154, 237, 212, 0.25) 0px 50px 100px -20px, rgba(232, 147, 147, 0.3) 0px 30px 60px -30px, rgba(184, 220, 255, 0.35) 0px -2px 6px 0px inset;
+
 
     &__form{
         padding: 10px 20px;
@@ -29,6 +51,7 @@
         margin: 5px;
         color:black;
         background-color: rgba(75, 134, 123, 0.5);
+        cursor: pointer;
 
         &:hover{
             background-color: rgba(75, 134, 123, 1);
@@ -45,6 +68,7 @@
         font-family: Sono;
         padding: 10px 20px;
         border-radius: 20px;
+        cursor: pointer;
     }
 }
 

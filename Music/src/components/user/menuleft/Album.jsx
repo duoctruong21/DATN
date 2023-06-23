@@ -11,7 +11,8 @@ function Album() {
   const { alias } = useParams();
   const token = localStorage.getItem("token");
 
-  const urlAlbum = `https://localhost:7122/album/${alias}`;
+  //const urlAlbum = `https://localhost:7122/album/${alias}`;
+  const urlAlbum = `http://truongduoc027-001-site1.dtempurl.com/album/${alias}`;
   const [songs, setSong] = useState([]);
   const [name, setName] = useState("")
   const [id, setId] = useState(0);
@@ -26,7 +27,8 @@ function Album() {
         .catch();
   },[])
 
-  const urlSongByAlbum = `https://localhost:7122/albumuser/${alias}/${token}`;
+  //const urlSongByAlbum = `https://localhost:7122/albumuser/${alias}/${token}`;
+  const urlSongByAlbum = `http://truongduoc027-001-site1.dtempurl.com/${alias}/${token}`;
   useEffect(()=>{
     axios
       .get(urlSongByAlbum)

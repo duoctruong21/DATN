@@ -10,7 +10,8 @@ import PlaySong from "./PlaySong";
 
 function ListHotSong() {
   // lấy dữ liệu
-  const urlSong = "https://localhost:7122/list-hot-song"
+  const urlSong = "http://truongduoc027-001-site1.dtempurl.com/list-hot-song";
+  //const urlSong = "https://localhost:7122/list-hot-song"
   const [songs, setSong] = useState([])
 
   useEffect(()=>{

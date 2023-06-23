@@ -18,7 +18,10 @@ function MenuTop(props) {
   //const [users, setUsers] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://localhost:7122/api/UserWebMusics/${token}`)
+      .get(
+        `http://truongduoc027-001-site1.dtempurl.com/api/UserWebMusics/${token}`
+      )
+      //.get(`https://localhost:7122/api/UserWebMusics/${token}`)
       .then((response) => {
         setUser(response.data);
         const datauser = response.data;
@@ -74,9 +77,9 @@ function MenuTop(props) {
   const [close, setClose] = useState(false);
   const handleClose = (e) => {
     e.preventDefault();
-    if(close !=true){
+    if (close != true) {
       setClose(true);
-    }else{
+    } else {
       setClose(false);
     }
   };
@@ -92,22 +95,27 @@ function MenuTop(props) {
     setPass(e);
   };
 
-   const update = (e) => {
-     e.preventDefault();
-     const datauser = {
-       id: token,
-       last: lastName,
-       first: firstName,
-       password: pass,
-     };
-     axios
-       .post(`https://localhost:7122/changeInfoUser`, datauser)
-       .then(() => {
-         alert("success");
-         setChecks(false);
-       })
-       .catch();
-   };
+  const update = (e) => {
+    e.preventDefault();
+    const datauser = {
+      id: token,
+      last: lastName,
+      first: firstName,
+      password: pass,
+    };
+    axios
+
+      .post(
+        `http://ltruongduoc027-001-site1.dtempurl.com/changeInfoUser`,
+        datauser
+      )
+      //.post(`https://localhost:7122/changeInfoUser`, datauser)
+      .then(() => {
+        alert("success");
+        setChecks(false);
+      })
+      .catch();
+  };
 
   return (
     <div className="menuTop">
@@ -156,7 +164,7 @@ function MenuTop(props) {
             <a
               onClick={logout}
               className="menuTop__Main__block__link"
-              href="http://localhost:5173/home">
+              href="http://truongduoc027-001-site1.dtempurl.com/home">
               Đăng xuất
             </a>
           </div>

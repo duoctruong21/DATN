@@ -15,7 +15,8 @@ function Register() {
 
   const [user, setUer] = useState([]);
 
-  const url = "https://localhost:7122/api/UserWebMusics";
+  const url = "http://truongduoc027-001-site1.dtempurl.com/api/UserWebMusics";
+  // const url = "https://localhost:7122/api/UserWebMusics";
 
   useEffect(()=>{
     axios.get(url).then((response)=>{
@@ -35,7 +36,8 @@ function Register() {
       .post(url, data)
       .then((response) => {
         response.data;
-        history('/home')
+        alert("Create Account Success ")
+        history('/login')
       })
       .catch();
   };

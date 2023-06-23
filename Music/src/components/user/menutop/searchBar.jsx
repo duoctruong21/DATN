@@ -39,7 +39,8 @@ function searchBar() {
   }
   useEffect(() => {
     axios
-      .get(`https://localhost:7122/recommend-search/${content}`)
+      .get(`http://truongduoc027-001-site1.dtempurl.com/recommend-search/${content}`)
+      // .get(`https://localhost:7122/recommend-search/${content}`)
       .then((response) => setSearchs(response.data))
       .catch();
   }, [content]);

@@ -14,12 +14,14 @@ function Recommned() {
   useEffect(() => {
     if (token == null) {
       axios
-        .get(`https://localhost:7122/recommendtopsong`)
+        .get(`http://truongduoc027-001-site1.dtempurl.com/recommendtopsong`)
+        //.get(`https://localhost:7122/recommendtopsong`)
         .then((response) => setSong(response.data))
         .catch();
     } else {
       axios
-        .get(`https://localhost:7122/recommenduser/${token}`)
+        .get(`http://truongduoc027-001-site1.dtempurl.com/recommenduser/${token}`)
+        //.get(`https://localhost:7122/recommenduser/${token}`)
         .then((response) => setSong(response.data))
         .catch();
       // axios

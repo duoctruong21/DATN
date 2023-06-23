@@ -18,8 +18,10 @@ function LibrarySong() {
   const history = useNavigate();
 
   const token = localStorage.getItem("token");
-  const urlalbum = "https://localhost:7122/albumusername";
-  const albumUrl = "https://localhost:7122/api/Albums";
+  // const urlalbum = "https://localhost:7122/albumusername";
+  // const albumUrl = "https://localhost:7122/api/Albums";
+  const urlalbum = "http://truongduoc027-001-site1.dtempurl.com/albumusername";
+  const albumUrl = "http://truongduoc027-001-site1.dtempurl.com/api/Albums";
 
   const handleButtonClick = () => {
     if (formVisible != true) {

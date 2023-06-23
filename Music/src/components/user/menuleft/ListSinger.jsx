@@ -4,7 +4,8 @@ import axios from "axios";
 
 function ListSinger() {
     const [singers, setSinger] = useState([])
-    const url = "https://localhost:7122/singerTop5";
+    const url = "http://truongduoc027-001-site1.dtempurl.com/singerTop5";
+    // const url = "https://localhost:7122/singerTop5";
     useEffect(()=>{
         axios.get(url).then((response)=> setSinger(response.data)).catch()
     },[])

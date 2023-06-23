@@ -43,8 +43,11 @@ function PlaySong(props) {
         try {
           axios
             .post(
-              `https://localhost:7122/updatecountsong/${songs[index].idSong}`
+              `http://truongduoc027-001-site1.dtempurl.com/updatecountsong/${songs[index].idSong}`
             )
+            // .post(
+            //   `https://localhost:7122/updatecountsong/${songs[index].idSong}`
+            // )
             .then(() => {
               // alert("");
             })
@@ -54,7 +57,8 @@ function PlaySong(props) {
         } catch {}
         try {
           axios
-            .post(`https://localhost:7122/historied`, datasong, {
+            // .post(`https://localhost:7122/historied`, datasong, {
+            .post(`http://truongduoc027-001-site1.dtempurl.com/historied`, datasong, {
               headers: {
                 "Content-Type": "multipart/fromdata",
               },
@@ -89,7 +93,8 @@ function PlaySong(props) {
           try {
             axios
               .post(
-                `https://localhost:7122/updatecountsong/${songs[index].idSong}`
+                `http://truongduoc027-001-site1.dtempurl.com/updatecountsong/${songs[index].idSong}`
+                // `https://localhost:7122/updatecountsong/${songs[index].idSong}`
               )
               .then(() => {
                 // alert("");
@@ -100,7 +105,8 @@ function PlaySong(props) {
           } catch {}
           try {
             axios
-              .post(`https://localhost:7122/historied`, datasong, {
+              .post(`http://truongduoc027-001-site1.dtempurl.com/historied`, datasong, {
+              // .post(`https://localhost:7122/historied`, datasong, {
                 headers: {
                   "Content-Type": "multipart/fromdata",
                 },
