@@ -226,8 +226,9 @@ namespace WebMusic.Controllers
                     idAlbum = song.IdAlbum,
                     idSinger = song.IdSinger,
                     idSong = song.Id,
-                    mp3 = song.Filesong
-                }).ToListAsync();
+                    mp3 = song.Filesong,
+                    date = song.CreatedDate
+                }).OrderByDescending(x=>x.date).ToListAsync();
                 return items;
             }
             catch (Exception ex)
@@ -771,6 +772,23 @@ namespace WebMusic.Controllers
 
             }
             return Ok(listsongrecomment.Take(5));
+        }
+        // lọc công tác
+        [HttpGet("/recommedsystemuser")]
+        public async Task<IActionResult> recommenduser()
+        {
+            var items = _context.Histories.Distinct();
+            var songs = _context.Songs.ToList();
+            List<getdatauser> datauser = await (
+                from history in _context.Histories
+                select new getdatauser
+                {
+                    iduser = history.Iduser,
+                    idsong = history.Idsong
+                }).ToListAsync();
+            
+            var data = recommnend.recommendsystem(datauser, songs);
+            return Ok(data);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -309,6 +310,66 @@ namespace WebMusic.Common
             }
 
             return idkq;
+        }
+
+        // lọc cộng tác
+        public static async Task<List<int>> recommendsystem(List<getdatauser> datauser, List<Song> songs)
+        {
+            List<int> iduser = new List<int>();
+            List<int> idsong = new List<int>();
+            // dữ liệu người dùng
+            List<int> sumuser = new List<int>();
+            // dữ liệu của trang web
+            foreach(var item in songs)
+            {
+                idsong.Add((int)item.Id);
+            }
+
+            List<int> idusersong = new List<int>();
+
+
+            var groupedData = datauser.GroupBy(u => u.iduser);
+            foreach (var group in groupedData)
+            {
+                var userId = group.Key;
+                iduser.Add((int)userId);
+
+                foreach (var item in group)
+                {
+                    idusersong.Add((int)item.idsong);
+                    foreach (var id in idsong)
+                    {
+                        int sum = RecommendTF((int)item.idsong, id);
+                        sumuser.Add(sum);
+                    }
+                }
+            }
+
+            List<int> sumuser2 = new List<int>();
+
+            for (int i=0;i < iduser.Count; i++)
+            {
+                int count = idsong.Count;
+
+                int tf = 0;
+                for(int k = 0; k < idusersong.Count; k++)
+                {
+                    for (int j = 0; j < count; j++)
+                    {
+                        tf += sumuser[i * count + j] + sumuser[k * count + j];
+                    }
+                }
+                sumuser2.Add(tf);
+            }
+            
+
+
+            return sumuser2;
+        }
+
+        public static int RecommendTF(int idsonguser, int idsong)
+        {
+            return (idsonguser == idsong) ? 1 : 0;
         }
     }
 }

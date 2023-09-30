@@ -34,7 +34,7 @@ namespace WebMusic.Controllers
                 return NotFound();
             }
 
-            return await _context.Songs.Take(10).ToListAsync();
+            return await _context.Songs.OrderByDescending(x=>x.CreatedDate).ToListAsync();
         }
 
         // GET: api/Songs/5

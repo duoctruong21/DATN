@@ -35,7 +35,7 @@ namespace WebMusic.Controllers
         {
             var items =await _context.UserWebMusics.FirstOrDefaultAsync( x=>x.Gmail.Contains(userName));
             if(items != null) { 
-                if(passWord == items.Password)
+                if(passWord == items.Password && items.IsActive == true)
                 {
                     var authenClaims = new List<Claim>
                     {
@@ -69,7 +69,7 @@ namespace WebMusic.Controllers
           {
               return NotFound();
           }
-            return await _context.UserWebMusics.ToListAsync();
+            return await _context.UserWebMusics.Where(x=>x.IsActive == true).ToListAsync();
         }
 
         // GET: api/UserWebMusics/5
@@ -134,6 +134,7 @@ namespace WebMusic.Controllers
             var user = _context.UserWebMusics.FirstOrDefault(x => x.Gmail.Contains(userWebMusic.Gmail));
             if (user == null)
             {
+                userWebMusic.IsActive = true;
                 _context.UserWebMusics.Add(userWebMusic);
                 await _context.SaveChangesAsync();
                 return CreatedAtAction("GetUserWebMusic", new { id = userWebMusic.Id }, userWebMusic);
@@ -159,8 +160,8 @@ namespace WebMusic.Controllers
             {
                 return NotFound();
             }
-
-            _context.UserWebMusics.Remove(userWebMusic);
+            userWebMusic.IsActive = false;
+            _context.UserWebMusics.Update(userWebMusic);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -210,7 +211,7 @@ namespace WebMusic.Controllers
         [HttpGet("/history/{id}")]
         public async Task<IActionResult> history(int id)
         {
-            //var items =
+            var items = _context.Histories.Where(x=>x.Iduser==id).ToList();
 
             /*if(items != null)
             {
@@ -218,8 +219,8 @@ namespace WebMusic.Controllers
             }*/
             try
             {
-                List<SongItem> listsonghistory = await (
-                from songhistory in _context.Histories.Where(x => x.Iduser == id)
+                List<SongItem> listsonghistory = (
+                from songhistory in items
                 join song in _context.Songs on songhistory.Idsong equals song.Id
                 join singer in _context.Singers on song.IdSinger equals singer.Id
                 join category in _context.Categories on song.Idcategory equals category.Id into cateItem
@@ -239,7 +240,7 @@ namespace WebMusic.Controllers
                     mp3 = song.Filesong,
                     id = songhistory.Id,
                     date = (songhistory.Listendate != null ? songhistory.Listendate : null)
-                }).OrderByDescending(x => x.date).ToListAsync();
+                }).OrderByDescending(x => x.date).ToList();
                 return Ok(listsonghistory);
             }
             catch

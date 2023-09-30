@@ -43,7 +43,7 @@ namespace WebMusic.Controllers
             {
                 return NotFound();
             }
-            return await _context.Singers.Take(5).ToListAsync();
+            return await _context.Singers.OrderByDescending(x => x.ModifiedDate).Take(5).ToListAsync();
         }
 
         // GET: api/Singers/5
